@@ -163,6 +163,7 @@ public class SnOOPeGUI extends JFrame {
             System.exit(0);
         }
     }
+
     public static void main(String[] args) {
         SnOOPeGUI gui = new SnOOPeGUI();
         gui.setVisible(true);

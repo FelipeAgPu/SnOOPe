@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.io.File;
 
 public class GameModes extends JFrame {
-    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA;
+    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle;
     private JButton menuSingle,menuMulti,menuIA,menuVolver;
     private JButton singleColorCuerpo,singleColorCabeza,singleJugar,singleVolver;
     private JButton multiColorCuerpo1,multiColorCabeza1,multiColorCuerpo2,multiColorCabeza2,multiJugar,multiVolver;
@@ -17,6 +17,7 @@ public class GameModes extends JFrame {
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
     private Color colorCabeza1,colorCabeza2,colorCuerpo1,colorCuerpo2;
+    public PanelSnake snake;
 
     public GameModes(SnOOPeGUI gui){
         this.gui=gui;
@@ -179,6 +180,14 @@ public class GameModes extends JFrame {
 
     }
 
+    private void prepareElementosJuego(){
+        vistaJugarSingle = new JPanel();
+        this.gui.principal.add(vistaJugarSingle, "JuegoSingle");
+        vistaJugarSingle.setLayout(null);
+        vistaJugarSingle.setBounds(gui.width / 4, gui.height / 4,gui.width / 2, gui.height / 2);
+        vistaJugarSingle.setBackground(new Color(246, 246, 246));
+    }
+
     public void prepareAccionesMenu(){
         menuSingle.addActionListener(new ActionListener() {
             @Override
@@ -226,6 +235,12 @@ public class GameModes extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 volverGameMode();
+            }
+        });
+        singleJugar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crearJuegoSingle();
             }
         });
     }
@@ -320,7 +335,6 @@ public class GameModes extends JFrame {
         prepareElementosMenuSingle();
         prepareAccionesMenuSingle();
         this.gui.cd.show(gui.principal,"SinglePlayer");
-
     }
 
     private void multi(){
@@ -338,4 +352,57 @@ public class GameModes extends JFrame {
     private void volverPpal(){
         gui.cd.show(gui.principal, "MenuPpal");
     }
+
+    private void crearJuegoSingle(){
+        prepareElementosJuego();
+
+        snake = new PanelSnake(gui.principal.getHeight(), 20, 30);
+        vistaJugarSingle.add(snake, "Snake");
+        snake.setLayout(null);
+        snake.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+        snake.setOpaque(false);
+
+        PanelTablero tablero = new PanelTablero(gui.principal.getHeight(), 20, 30);
+        vistaJugarSingle.add(tablero, "Tablero");
+        tablero.setLayout(null);
+        tablero.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+
+        crearListenersKeys();
+
+        gui.cd.show(gui.principal, "JuegoSingle");
+    }
+
+    public void crearListenersKeys(){
+        KeyListener listener = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_UP){
+                    snake.cambiarDireccion("UP");
+                    System.out.println("UP");
+                }else if (e.getKeyCode()==KeyEvent.VK_DOWN){
+                    snake.cambiarDireccion("DOWN");
+                    System.out.println("DOWN");
+                }else if (e.getKeyCode()==KeyEvent.VK_RIGHT){
+                    snake.cambiarDireccion("RIGHT");
+                    System.out.println("RIGHT");
+                }else if (e.getKeyCode()==KeyEvent.VK_LEFT){
+                    snake.cambiarDireccion("LEFT");
+                    System.out.println("LEFT");
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+        requestFocus(true);
+        addKeyListener(listener);
+    }
+
 }
