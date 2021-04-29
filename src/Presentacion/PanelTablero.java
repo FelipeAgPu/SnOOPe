@@ -26,7 +26,4 @@ public class PanelTablero extends JPanel {
             }
         }
     }
-
-
-
 }

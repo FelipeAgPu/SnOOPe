@@ -10,9 +10,10 @@ import java.io.File;
 public class SnOOPeGUI extends JFrame {
 
     CardLayout cd;
-    JPanel principal, vistaMenuPrincipal;
+    JPanel principal, vistaMenuPrincipal, vistaJugarSingle;
+    PanelSnake snake;
     JMenuBar menuBar;
-    JMenuItem abrirMenu, guardarMenu,guardarComoMenu, salirMenu;
+    JMenuItem abrirMenu, guardarMenu, guardarComoMenu, salirMenu;
     JButton jugarBoton;
     GameModes gameMode;
     int width,height;
@@ -22,6 +23,7 @@ public class SnOOPeGUI extends JFrame {
         prepareElementos();
         prepareAcciones();
     }
+
     public void prepareElementos(){
         this.setTitle("SnOOPe");
 
@@ -41,6 +43,7 @@ public class SnOOPeGUI extends JFrame {
         prepareElementosMenu();
         cd.show(principal,"MenuPpal");
     }
+
     public void prepareElementosMenu(){
 
         //vista del Menu Principal
@@ -81,7 +84,6 @@ public class SnOOPeGUI extends JFrame {
         archivo.add(salirMenu);
     }
 
-
     public void prepareAcciones(){
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
@@ -103,6 +105,7 @@ public class SnOOPeGUI extends JFrame {
             }
         });
     }
+
     public void prepareAccionesMenuBarra(){
         //Acciones de las opciones de archivo
         abrirMenu.addActionListener(new ActionListener() {
@@ -136,7 +139,7 @@ public class SnOOPeGUI extends JFrame {
         cd.show(principal, "GameMode");
     }
 
-    public void abrir(){
+    private void abrir(){
         JFileChooser fc = new JFileChooser();
         int sel = fc.showOpenDialog(this);
 
@@ -157,11 +160,74 @@ public class SnOOPeGUI extends JFrame {
             JOptionPane.showMessageDialog(null,"Funcionalidad Guardar en construccion.\n Archivo a guardar : "+name);
         }
     }
-    public void salir(){
+
+    private void salir(){
         int res = JOptionPane.showConfirmDialog(this,"Desea salir?", "salir", JOptionPane.YES_NO_OPTION);
         if (res==JOptionPane.YES_OPTION){
             System.exit(0);
         }
+    }
+
+    public void jugarSingle(){
+        prepareElementosJuego();
+        prepareAccionesJuego();
+    }
+
+    private void prepareElementosJuego(){
+        vistaJugarSingle = new JPanel();
+        principal.add(vistaJugarSingle, "JuegoSingle");
+        vistaJugarSingle.setLayout(null);
+        vistaJugarSingle.setBounds(this.width / 4, this.height / 4,this.width / 2, this.height / 2);
+        vistaJugarSingle.setBackground(new Color(246, 246, 246));
+    }
+
+    private void prepareAccionesJuego(){
+        snake = new PanelSnake(principal.getHeight(), 20, 30);
+        vistaJugarSingle.add(snake, "Snake");
+        snake.setLayout(null);
+        snake.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+        snake.setOpaque(false);
+
+        PanelTablero tablero = new PanelTablero(principal.getHeight(), 20, 30);
+        vistaJugarSingle.add(tablero, "Tablero");
+        tablero.setLayout(null);
+        tablero.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+
+        keys();
+
+        cd.show(principal, "JuegoSingle");
+    }
+
+    private void keys(){
+        KeyListener listener = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println(e.getKeyCode());
+                if (e.getKeyCode() == KeyEvent.VK_W) {
+                    snake.snake.cambiarDireccion("UP");
+                } else if (e.getKeyCode() == KeyEvent.VK_S) {
+                    snake.snake.cambiarDireccion("DOWN");
+                } else if (e.getKeyCode() == KeyEvent.VK_D) {
+                    snake.snake.cambiarDireccion("RIGHT");
+                } else if (e.getKeyCode() == KeyEvent.VK_A) {
+                    snake.snake.cambiarDireccion("LEFT");
+                }
+            }
+        };
+        requestFocus(true);
+        addKeyListener(listener);
+    }
+
+    public void jugarMulti(){
+
     }
 
     public static void main(String[] args) {
