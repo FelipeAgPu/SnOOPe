@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Jugador extends Snake{
-    public Jugador(Color colorBody, Color colorHead, SnOOPe partida){
+    String nombre;
+    public Jugador(String nombre, Color colorBody, Color colorHead, SnOOPe partida){
         super(colorBody,colorHead, partida);
+        this.nombre = nombre;
     }
 
     @Override
@@ -31,6 +33,7 @@ public class Jugador extends Snake{
 
         int nuevoX = cabeza[0]+moveX;
         int nuevoY = cabeza[1]+moveY;
+
         //Tablero finito
         if (nuevoX>= partida.getnColumnas()){
             throw new SnOOPeException(SnOOPeException.GAME_OVER);
@@ -42,7 +45,10 @@ public class Jugador extends Snake{
         }else if (nuevoY<0){
             throw new SnOOPeException(SnOOPeException.GAME_OVER);
         }
+
         Integer[] nuevaCabeza = {nuevoX, nuevoY};
+
+        comer();
 
         this.snake.add(nuevaCabeza);
         this.snake.remove(0);

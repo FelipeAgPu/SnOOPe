@@ -3,6 +3,8 @@ package Aplicacion;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Snake{
     protected ArrayList<Integer[]> snake;
@@ -28,6 +30,27 @@ public class Snake{
 
     public void avanzar() throws SnOOPeException {
 
+    }
+
+    public void comer() throws SnOOPeException {
+        for (int i = 0; i < 2; i++) {
+            if (snake.get(snake.size() - 1)[0].equals(partida.getFrutas()[i].getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getFrutas()[i].getCoordenadas()[1])){
+                partida.getFrutas()[i].esComida(this);
+                partida.getFrutas()[i] = partida.crearFrutaAleatoria();
+
+                partida.getTimers()[i].cancel();
+                partida.getTimers()[i] = new Timer();
+                int finalI = i;
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        partida.getFrutas()[finalI] = partida.crearFrutaAleatoria();
+                    }
+                };
+                partida.getTimers()[i].schedule(task, 8000, 8000);
+
+            }
+        }
     }
 
     public void cambiarDireccion(String direccion){
@@ -60,26 +83,6 @@ public class Snake{
 
     public Color getColorHead() {
         return colorHead;
-    }
-
-    public void setColorHead(Color colorHead) {
-        this.colorHead = colorHead;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getNuevaDireccion() {
-        return nuevaDireccion;
-    }
-
-    public void setNuevaDireccion(String nuevaDireccion) {
-        this.nuevaDireccion = nuevaDireccion;
     }
 
     public SnOOPe getPartida() {

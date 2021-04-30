@@ -2,49 +2,108 @@ package Aplicacion;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SnOOPe {
     private int nFilas, nColumnas;
-    public ArrayList<Color> colores;
     private ArrayList<Snake> snakes;
+    private ArrayList<Color> colores;
+    private Fruta[] frutas;
+    private Timer[] timers;
+    private final String[] tiposFruta = {"Normal", "Arcoiris", "Dulce", "Veneno"};
 
     public SnOOPe(int rows, int columns){
         this.nFilas = rows;
         this.nColumnas = columns;
+        this.snakes = new ArrayList<>();
+        this.colores = new ArrayList<>();
+        colores.add(Color.RED);
+        colores.add(Color.BLUE);
+        colores.add(Color.CYAN);
+        colores.add(Color.ORANGE);
+        colores.add(Color.GREEN);
+
+        this.timers = new Timer[2];
+
+        this.frutas = new Fruta[2];
+        frutas[0] = crearFrutaAleatoria();
+        frutas[1] = crearFrutaAleatoria();
+
+        getTimers()[0] = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                getFrutas()[0] = crearFrutaAleatoria();
+            }
+        };
+        getTimers()[0].schedule(task, 8000, 8000);
+
+        getTimers()[1] = new Timer();
+        TimerTask task1 = new TimerTask() {
+            @Override
+            public void run() {
+                getFrutas()[1] = crearFrutaAleatoria();
+            }
+        };
+        getTimers()[1].schedule(task1, 8000,8000);
+
     }
 
     public void jugar(String nombre, Color colorHead, Color colorBody){
-        snakes.add(new Jugador(colorBody, colorHead, this));
+        snakes.add(new Jugador(nombre, colorBody, colorHead, this));
         colores.add(colorHead);
         colores.add(colorBody);
     }
 
-    /*
-    public void jugar(String nombre1, boolean isIa1, String nombre2, boolean isIa2){
+    public Fruta crearFrutaAleatoria(){
+        Fruta ans = null;
+        Random rn = new Random();
+        int x = rn.nextInt(4);
+        switch (tiposFruta[x]){
+            case "Normal":
+                ans = new Normal(this);
+                break;
+            case "Arcoiris":
+                ans = new Arcoiris(this);
+                break;
+            case "Dulce":
+                ans = new Dulce(this);
+                break;
+            case "Veneno":
+                ans = new Veneno(this);
+                break;
+        }
+        return ans;
+    }
 
-    }*/
 
     public int getnFilas() {
         return nFilas;
-    }
-
-    public void setnFilas(int nFilas) {
-        this.nFilas = nFilas;
     }
 
     public int getnColumnas() {
         return nColumnas;
     }
 
-    public void setnColumnas(int nColumnas) {
-        this.nColumnas = nColumnas;
-    }
-
     public ArrayList<Snake> getSnakes() {
         return snakes;
     }
 
-    public void setSnakes(ArrayList<Snake> snakes) {
-        this.snakes = snakes;
+    public void addSnakes(Snake snake) {
+        this.snakes.add(snake);
+    }
+
+    public ArrayList<Color> getColores() {
+        return colores;
+    }
+
+    public Fruta[] getFrutas() {
+        return frutas;
+    }
+
+    public Timer[] getTimers() {
+        return timers;
     }
 }

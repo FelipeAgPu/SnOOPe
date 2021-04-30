@@ -16,7 +16,8 @@ public class SnOOPeGUI extends JFrame {
     JMenuItem abrirMenu, guardarMenu, guardarComoMenu, salirMenu;
     JButton jugarBoton;
     GameModes gameMode;
-    int width,height;
+    int width,height, x, y;
+    SnOOPe snoope;
 
 
     public SnOOPeGUI(){
@@ -29,14 +30,18 @@ public class SnOOPeGUI extends JFrame {
 
         //Dimensiones de la pantalla para que quede centralizado y con dimensiones de 1/4 de la pantalla
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        this.width = (int) size.getWidth();
-        this.height = (int) size.getHeight();
-        this.setBounds(width / 4, height / 4,width / 2, height / 2);
+        this.width = (int) ((size.getWidth()/4)*3);
+        this.height = (int) ((size.getHeight()/4)*3);
+
+        this.x = (int) ((size.getWidth()/8));
+        this.y = (int) ((size.getHeight()/8));
+
+        this.setBounds(x, y, width, height);
 
         //Definimos el panel Principal para poder recorrer entre las diferentes vistas
         cd = new CardLayout();
         principal = new JPanel(cd);
-        principal.setBounds(width / 4, height / 4,width / 2, height / 2);
+        principal.setBounds(x, y, width, height);
         add(principal);
 
         prepareElementosMenuBarra();
@@ -50,7 +55,7 @@ public class SnOOPeGUI extends JFrame {
         vistaMenuPrincipal = new JPanel();
         principal.add(vistaMenuPrincipal, "MenuPpal");
         vistaMenuPrincipal.setLayout(null);
-        vistaMenuPrincipal.setBounds(this.width / 4, this.height / 4,this.width / 2,this.height / 2);
+        vistaMenuPrincipal.setBounds(x, y,width,height);
         vistaMenuPrincipal.setBackground(new Color(56, 87, 53));
 
         jugarBoton = new JButton("Jugar");
@@ -135,7 +140,8 @@ public class SnOOPeGUI extends JFrame {
     }
 
     private void jugar(){
-        gameMode = new GameModes(this);
+        snoope = new SnOOPe(20,30);
+        gameMode = new GameModes(this, this.snoope);
         cd.show(principal, "GameMode");
     }
 
@@ -177,16 +183,22 @@ public class SnOOPeGUI extends JFrame {
         vistaJugarSingle = new JPanel();
         principal.add(vistaJugarSingle, "JuegoSingle");
         vistaJugarSingle.setLayout(null);
-        vistaJugarSingle.setBounds(this.width / 4, this.height / 4,this.width / 2, this.height / 2);
+        vistaJugarSingle.setBounds(x, y,width, height);
         vistaJugarSingle.setBackground(new Color(246, 246, 246));
     }
 
     private void prepareAccionesJuego(){
-        snake = new PanelSnake(principal.getHeight(), 20, 30);
+        snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes().get(0));
         vistaJugarSingle.add(snake, "Snake");
         snake.setLayout(null);
         snake.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
         snake.setOpaque(false);
+
+        PanelFruta fruta = new PanelFruta(principal.getHeight(), 20, 30, snoope);
+        vistaJugarSingle.add(fruta, "Fruta");
+        fruta.setLayout(null);
+        fruta.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+        fruta.setOpaque(false);
 
         PanelTablero tablero = new PanelTablero(principal.getHeight(), 20, 30);
         vistaJugarSingle.add(tablero, "Tablero");
@@ -234,5 +246,10 @@ public class SnOOPeGUI extends JFrame {
         SnOOPeGUI gui = new SnOOPeGUI();
         gui.setVisible(true);
     }
+    /*
+    - Comerse frutas
+    - Reaparezcan frutas
+    - Desaparecen frutas
+     */
 
 }

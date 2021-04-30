@@ -1,7 +1,7 @@
 package Aplicacion;
 
 public class Speed extends PowerUp{
-    public Speed(Integer[] coordenadas) {
-        super(coordenadas);
+    public Speed(SnOOPe partida) {
+        super(partida);
     }
 }

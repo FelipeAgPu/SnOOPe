@@ -16,14 +16,14 @@ public class PanelSnake extends JPanel {
     Movimiento movimiento;
     Thread hilo;
 
-    public PanelSnake(int max, int nFilas, int nColumnas){
+    public PanelSnake(int max, int nFilas, int nColumnas, Snake snake){
         this.max = max;
         this.nFilas = nFilas;
         this.nColumnas = nColumnas;
         this.size = max/nFilas;
         this.res = max % nFilas;
 
-        this.snake = new Jugador(new Color(0x1F1FA8), new Color(0x7DCE2B),new SnOOPe(20,40));
+        this.snake = snake;
 
         this.movimiento = new Movimiento(this);
         this.hilo = new Thread(movimiento);

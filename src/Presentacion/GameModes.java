@@ -16,11 +16,13 @@ public class GameModes extends JPanel {
     private JComboBox iAMode;
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
-    private Color colorCabeza1,colorCabeza2,colorCuerpo1,colorCuerpo2;
+    private Color colorCabeza1 = Color.RED,colorCabeza2,colorCuerpo1 = Color.GREEN,colorCuerpo2;
     public PanelSnake snake;
+    public SnOOPe snoope;
 
-    public GameModes(SnOOPeGUI gui){
+    public GameModes(SnOOPeGUI gui, SnOOPe snoope){
         this.gui=gui;
+        this.snoope = snoope;
         prepareElementosMenu();
         prepareAccionesMenu();
     }
@@ -30,7 +32,7 @@ public class GameModes extends JPanel {
         vistaGameMode=new JPanel();
         this.gui.principal.add(vistaGameMode,"GameMode");
         vistaGameMode.setLayout(null);
-        vistaGameMode.setBounds(gui.width / 4, gui.height / 4,gui.width / 2, gui.height / 2);
+        vistaGameMode.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaGameMode.setBackground(new Color(56, 87, 53));
 
 
@@ -59,7 +61,7 @@ public class GameModes extends JPanel {
         vistaSingle = new JPanel();
         this.gui.principal.add(vistaSingle,"SinglePlayer");
         vistaSingle.setLayout(null);
-        vistaSingle.setBounds(gui.width / 4, gui.height / 4,gui.width / 2, gui.height / 2);
+        vistaSingle.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaSingle.setBackground(new Color(56, 87, 53));
 
         // Nombre Jugador
@@ -93,7 +95,7 @@ public class GameModes extends JPanel {
         vistaMulti = new JPanel();
         this.gui.principal.add(vistaMulti,"MultiPlayer");
         vistaMulti.setLayout(null);
-        vistaMulti.setBounds(gui.width / 4, gui.height / 4,gui.width / 2, gui.height / 2);
+        vistaMulti.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaMulti.setBackground(new Color(56, 87, 53));
 
         //Nombre Jugador1
@@ -142,7 +144,7 @@ public class GameModes extends JPanel {
         vistaIA = new JPanel();
         this.gui.principal.add(vistaIA,"IA");
         vistaIA.setLayout(null);
-        vistaIA.setBounds(gui.width / 4, gui.height / 4,gui.width / 2, gui.height / 2);
+        vistaIA.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaIA.setBackground(new Color(56, 87, 53));
 
         //Nombre Jugador
@@ -234,6 +236,7 @@ public class GameModes extends JPanel {
         singleJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                snoope.jugar(singleName.getText(), colorCabeza1, colorCuerpo1);
                 gui.jugarSingle();
             }
         });
