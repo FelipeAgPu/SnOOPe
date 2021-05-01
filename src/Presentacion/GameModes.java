@@ -8,7 +8,8 @@ import java.awt.event.*;
 import java.io.File;
 
 public class GameModes extends JPanel {
-    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver;
+    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver,vistaPausa;
+    private JButton volverMenuPpal,reiniciarPausa;
     private JButton restart,menuPpal;
     private JButton menuSingle,menuMulti,menuIA,menuVolver;
     private JButton singleColorCuerpo,singleColorCabeza,singleJugar,singleVolver;
@@ -204,6 +205,24 @@ public class GameModes extends JPanel {
 
     }
 
+    private void prepareElementosPausa(){
+        vistaPausa = new JPanel();
+        this.gui.principal.add(vistaPausa,"Pausa");
+        vistaPausa.setLayout(null);
+        vistaPausa.setBounds(gui.x, gui.y,gui.width, gui.height);
+        vistaPausa.setBackground(new Color(56, 87, 53));
+
+        //boton restart
+        reiniciarPausa = new JButton("Reiniciar");
+        reiniciarPausa.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*4,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
+        vistaPausa.add(reiniciarPausa);
+
+        //boton restart
+        volverMenuPpal = new JButton("Menu Principal");
+        volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*6,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
+        vistaPausa.add(volverMenuPpal);
+    }
+
 
     public void prepareAccionesMenu(){
         menuSingle.addActionListener(new ActionListener() {
@@ -332,6 +351,22 @@ public class GameModes extends JPanel {
             }
         });
         menuPpal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volverPpal();
+            }
+        });
+    }
+
+    private void prepareAccionesPausa(){
+        reiniciarPausa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volverGameMode();
+
+            }
+        });
+        volverMenuPpal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 volverPpal();
