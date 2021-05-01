@@ -10,7 +10,7 @@ public class Snake{
     protected ArrayList<Integer[]> snake;
     protected Color colorBody, colorHead;
     protected String direccion="UP";
-    protected String nuevaDireccion="";
+    protected String nuevaDireccion="RIGHT";
     protected SnOOPe partida;
 
     public Snake(Color colorBody, Color colorHead, SnOOPe partida){
@@ -33,9 +33,11 @@ public class Snake{
     }
 
     public void comer() throws SnOOPeException {
+        boolean isFruta = false;
         for (int i = 0; i < 2; i++) {
             if (snake.get(snake.size() - 1)[0].equals(partida.getFrutas()[i].getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getFrutas()[i].getCoordenadas()[1])){
                 partida.getFrutas()[i].esComida(this);
+                isFruta = true;
                 partida.getFrutas()[i] = partida.crearFrutaAleatoria();
 
                 partida.getTimers()[i].cancel();
@@ -48,7 +50,11 @@ public class Snake{
                     }
                 };
                 partida.getTimers()[i].schedule(task, 8000, 8000);
-
+            }
+            for (int j = 0; j<snake.size()-1;j++){
+                if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta){
+                    throw new SnOOPeException(SnOOPeException.GAME_OVER);
+                }
             }
         }
     }
