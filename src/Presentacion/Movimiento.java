@@ -23,7 +23,7 @@ public class Movimiento implements Runnable{
             }
             snake.repaint();
             try {
-                Thread.sleep(250);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
 
             }

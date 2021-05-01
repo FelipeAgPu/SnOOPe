@@ -8,7 +8,8 @@ import java.awt.event.*;
 import java.io.File;
 
 public class GameModes extends JPanel {
-    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle;
+    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver;
+    private JButton restart,menuPpal;
     private JButton menuSingle,menuMulti,menuIA,menuVolver;
     private JButton singleColorCuerpo,singleColorCabeza,singleJugar,singleVolver;
     private JButton multiColorCuerpo1,multiColorCabeza1,multiColorCuerpo2,multiColorCabeza2,multiJugar,multiVolver;
@@ -25,6 +26,8 @@ public class GameModes extends JPanel {
         this.snoope = snoope;
         prepareElementosMenu();
         prepareAccionesMenu();
+        prepareElementosGameOver();
+        prepareAccionesGameOver();
     }
 
     public void prepareElementosMenu(){
@@ -182,6 +185,24 @@ public class GameModes extends JPanel {
 
     }
 
+    private void prepareElementosGameOver(){
+        vistaGameOver = new JPanel();
+        this.gui.principal.add(vistaGameOver,"GameOver");
+        vistaGameOver.setLayout(null);
+        vistaGameOver.setBounds(gui.x, gui.y,gui.width, gui.height);
+        vistaGameOver.setBackground(new Color(56, 87, 53));
+
+        //boton restart
+        restart = new JButton("Reiniciar");
+        restart.setBounds((vistaGameOver.getWidth()/8)*2,(vistaGameOver.getHeight()/12)*4,(vistaGameOver.getWidth()/8)*2,vistaGameOver.getHeight()/8);
+        vistaGameOver.add(restart);
+
+        //boton restart
+        menuPpal = new JButton("Menu Principal");
+        menuPpal.setBounds((vistaGameOver.getWidth()/8)*2,(vistaGameOver.getHeight()/12)*6,(vistaGameOver.getWidth()/8)*2,vistaGameOver.getHeight()/8);
+        vistaGameOver.add(menuPpal);
+
+    }
 
 
     public void prepareAccionesMenu(){
@@ -298,6 +319,22 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 volverGameMode();
+            }
+        });
+    }
+
+    private void prepareAccionesGameOver(){
+        restart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volverGameMode();
+
+            }
+        });
+        menuPpal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volverPpal();
             }
         });
     }
