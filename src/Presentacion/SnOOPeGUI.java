@@ -205,6 +205,9 @@ public class SnOOPeGUI extends JFrame {
         tablero.setLayout(null);
         tablero.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
 
+
+
+
         keys();
 
         cd.show(principal, "JuegoSingle");

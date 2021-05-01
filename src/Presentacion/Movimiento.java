@@ -1,15 +1,20 @@
 package Presentacion;
 
+import Aplicacion.SnOOPe;
 import Aplicacion.SnOOPeException;
+import Aplicacion.Snake;
 
 import javax.swing.*;
 
 public class Movimiento implements Runnable{
     PanelSnake snake;
+    int velocidad, multiplicador;
     boolean estado=true;
 
     public Movimiento(PanelSnake snake){
+
         this.snake = snake;
+        this.velocidad= 80;
     }
 
     @Override
@@ -23,7 +28,12 @@ public class Movimiento implements Runnable{
             }
             snake.repaint();
             try {
-                Thread.sleep(50);
+                if (snake.getSnake().getSnake().size()%5==0){
+                    multiplicador=snake.getSnake().getSnake().size()/5;
+                    int aumentador = 50*multiplicador;
+                }
+
+                Thread.sleep(velocidad+multiplicador);
             } catch (InterruptedException e) {
 
             }

@@ -36,14 +36,14 @@ public class Jugador extends Snake{
 
         //Tablero finito
         if (nuevoX>= partida.getnColumnas()){
-            throw new SnOOPeException(SnOOPeException.GAME_OVER);
+            throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
         }else if (nuevoX<0){
-            throw new SnOOPeException(SnOOPeException.GAME_OVER);
+            throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
         }
         if (nuevoY>= partida.getnFilas()){
-            throw new SnOOPeException(SnOOPeException.GAME_OVER);
+            throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
         }else if (nuevoY<0){
-            throw new SnOOPeException(SnOOPeException.GAME_OVER);
+            throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
         }
 
         Integer[] nuevaCabeza = {nuevoX, nuevoY};

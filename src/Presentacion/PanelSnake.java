@@ -25,7 +25,7 @@ public class PanelSnake extends JPanel {
 
         this.snake = snake;
 
-        this.movimiento = new Movimiento(this);
+        this.movimiento = new Movimiento(this );
         this.hilo = new Thread(movimiento);
         hilo.start();
 
@@ -44,5 +44,9 @@ public class PanelSnake extends JPanel {
                 pintor.fillRect(res / 2 + coordenadas[0] * size, res / 2 + coordenadas[1] * size, size - 1, size - 1);
             }
         }
+    }
+
+    public Snake getSnake() {
+        return snake;
     }
 }

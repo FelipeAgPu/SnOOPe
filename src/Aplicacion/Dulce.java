@@ -10,12 +10,10 @@ public class Dulce extends Fruta{
     }
 
     @Override
-    public void esComida(Snake snake){
-        if (snake.getColorHead() == this.color || snake.getColorBody() == this.color){
-            snake.snake.remove(0);
-            snake.snake.remove(0);
-        }else {
-            snake.snake.remove(0);
+    public void esComida(Snake snake) throws SnOOPeException {
+        if (snake.getSnake().size()==1){
+            throw new SnOOPeException(SnOOPeException.GAME_OVER_DULCES);
         }
+        snake.snake.remove(0);
     }
 }

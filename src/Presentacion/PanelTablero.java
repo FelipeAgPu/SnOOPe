@@ -16,6 +16,8 @@ public class PanelTablero extends JPanel {
         this.res = max % nFilas;
     }
 
+
+
     @Override
     public void paint(Graphics pintor){
         super.paint(pintor);

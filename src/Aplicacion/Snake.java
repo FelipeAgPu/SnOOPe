@@ -53,7 +53,7 @@ public class Snake{
             }
             for (int j = 0; j<snake.size()-1;j++){
                 if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta){
-                    throw new SnOOPeException(SnOOPeException.GAME_OVER);
+                    throw new SnOOPeException(SnOOPeException.GAME_OVER_SUICIDIO);
                 }
             }
         }
