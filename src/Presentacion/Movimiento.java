@@ -8,18 +8,20 @@ import javax.swing.*;
 
 public class Movimiento implements Runnable{
     PanelSnake snake;
-    int velocidad, multiplicador;
+    int velocidad, multiplicador, aumentador;
     boolean estado=true;
+
 
     public Movimiento(PanelSnake snake){
 
         this.snake = snake;
         this.velocidad= 80;
+        this.aumentador = 1;
     }
 
     @Override
     public void run() {
-        while(estado) {
+        while(estado && !snake.isPaused) {
             try {
                 snake.snake.avanzar();
             } catch (SnOOPeException e) {
@@ -30,10 +32,10 @@ public class Movimiento implements Runnable{
             try {
                 if (snake.getSnake().getSnake().size()%5==0){
                     multiplicador=snake.getSnake().getSnake().size()/5;
-                    int aumentador = 50*multiplicador;
+                    aumentador = 50*multiplicador;
                 }
 
-                Thread.sleep(velocidad+multiplicador);
+                Thread.sleep(velocidad+aumentador);
             } catch (InterruptedException e) {
 
             }

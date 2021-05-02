@@ -177,6 +177,7 @@ public class SnOOPeGUI extends JFrame {
     public void jugarSingle(){
         prepareElementosJuego();
         prepareAccionesJuego();
+        gameMode.snake = this.snake;
     }
 
     private void prepareElementosJuego(){
@@ -187,7 +188,7 @@ public class SnOOPeGUI extends JFrame {
         vistaJugarSingle.setBackground(new Color(246, 246, 246));
     }
 
-    private void prepareAccionesJuego(){
+    public void prepareAccionesJuego(){
         snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes().get(0));
         vistaJugarSingle.add(snake, "Snake");
         snake.setLayout(null);
@@ -200,12 +201,15 @@ public class SnOOPeGUI extends JFrame {
         fruta.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
         fruta.setOpaque(false);
 
+        PanelStats stats = new PanelStats(snoope.getSnakes().get(0), this);
+        stats.setLayout(null);
+        stats.setBounds(snake.res/2+snake.nColumnas*snake.size, 0, principal.getWidth()-snake.res/2+snake.nColumnas*snake.size, principal.getHeight());
+        vistaJugarSingle.add(stats);
+
         PanelTablero tablero = new PanelTablero(principal.getHeight(), 20, 30);
         vistaJugarSingle.add(tablero, "Tablero");
         tablero.setLayout(null);
         tablero.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
-
-
 
 
         keys();
@@ -225,7 +229,6 @@ public class SnOOPeGUI extends JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                System.out.println(e.getKeyCode());
                 if (e.getKeyCode() == KeyEvent.VK_W) {
                     snake.snake.cambiarDireccion("UP");
                 } else if (e.getKeyCode() == KeyEvent.VK_S) {

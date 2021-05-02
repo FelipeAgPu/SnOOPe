@@ -9,6 +9,7 @@ public class Dulce extends Fruta{
         this.img = new ImageIcon("./images/dulce.png").getImage();
     }
 
+    //Diagrama
     @Override
     public void esComida(Snake snake) throws SnOOPeException {
         if (snake.getSnake().size()==1){

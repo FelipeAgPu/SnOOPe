@@ -12,6 +12,7 @@ public class PanelSnake extends JPanel {
 
     int max, size, nFilas, nColumnas, res;
     Snake snake;
+    boolean isPaused = false;
 
     Movimiento movimiento;
     Thread hilo;

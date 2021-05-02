@@ -10,6 +10,7 @@ public class Normal extends Fruta{
         this.img = new ImageIcon("./images/normal.png").getImage();
     }
 
+    //Diagrama
     @Override
     public void esComida(Snake snake){
         if (snake.getColorHead() == this.color || snake.getColorBody() == this.color){

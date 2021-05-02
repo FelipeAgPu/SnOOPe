@@ -9,6 +9,7 @@ public class Arcoiris extends Fruta{
         this.img = new ImageIcon("./images/arcoiris.png").getImage();
     }
 
+    //Diagrama
     @Override
     public void esComida(Snake snake){
         snake.snake.add(getCoordenadas());

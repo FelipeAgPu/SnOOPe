@@ -12,6 +12,7 @@ public class Snake{
     protected String direccion="UP";
     protected String nuevaDireccion="RIGHT";
     protected SnOOPe partida;
+    protected int puntos;
 
     public Snake(Color colorBody, Color colorHead, SnOOPe partida){
         this.colorBody = colorBody;
@@ -32,6 +33,7 @@ public class Snake{
 
     }
 
+    //Diagrama
     public void comer() throws SnOOPeException {
         boolean isFruta = false;
         for (int i = 0; i < 2; i++) {
@@ -57,6 +59,7 @@ public class Snake{
                 }
             }
         }
+        puntos = snake.size();
     }
 
     public void cambiarDireccion(String direccion){
@@ -97,5 +100,13 @@ public class Snake{
 
     public void setPartida(SnOOPe partida) {
         this.partida = partida;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public String getNombre() {
+        return null;
     }
 }

@@ -29,6 +29,8 @@ public class GameModes extends JPanel {
         prepareAccionesMenu();
         prepareElementosGameOver();
         prepareAccionesGameOver();
+        prepareElementosPausa();
+        prepareAccionesPausa();
     }
 
     public void prepareElementosMenu(){
@@ -362,8 +364,7 @@ public class GameModes extends JPanel {
         reiniciarPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                volverGameMode();
-
+                reanudar();
             }
         });
         volverMenuPpal.addActionListener(new ActionListener() {
@@ -398,6 +399,11 @@ public class GameModes extends JPanel {
 
     private void volverGameMode(){
         gui.cd.show(gui.principal,"GameMode");
+    }
+
+    private void reanudar(){
+        snake.isPaused = false;
+        gui.prepareAccionesJuego();
     }
 
     private void single(){

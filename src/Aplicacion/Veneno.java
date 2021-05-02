@@ -9,6 +9,7 @@ public class Veneno extends Fruta{
         this.img = new ImageIcon("./images/veneno.png").getImage();
     }
 
+    //Diagrama
     @Override
     public void esComida(Snake snake) throws SnOOPeException {
         throw new SnOOPeException(SnOOPeException.GAME_OVER);

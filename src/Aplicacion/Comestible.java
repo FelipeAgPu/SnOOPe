@@ -13,6 +13,7 @@ public abstract class Comestible {
         generarCoordenadas();
     }
 
+    //Diagrama
     public void generarCoordenadas(){
         boolean existe = false;
 

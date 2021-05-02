@@ -10,6 +10,7 @@ public class Jugador extends Snake{
         this.nombre = nombre;
     }
 
+    //Diagrama
     @Override
     public void avanzar() throws SnOOPeException {
         igualarDireccion();
@@ -52,5 +53,10 @@ public class Jugador extends Snake{
 
         this.snake.add(nuevaCabeza);
         this.snake.remove(0);
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
     }
 }
