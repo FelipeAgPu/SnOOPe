@@ -8,6 +8,12 @@ public class PanelTablero extends JPanel {
     Color color = new Color(56, 87, 53);
     int max, size, nFilas, nColumnas, res;
 
+    /**
+     * Constructor del panel de tablero
+     * @param max Ancho máximo de la ventana
+     * @param nFilas Cantidad de filas
+     * @param nColumnas Cantidad de columnas
+     */
     public PanelTablero(int max, int nFilas, int nColumnas){
         this.max = max;
         this.nFilas = nFilas;
@@ -16,9 +22,10 @@ public class PanelTablero extends JPanel {
         this.res = max % nFilas;
     }
 
-
-
     @Override
+    /**
+     * Método que pinta  el panel de tablero
+     */
     public void paint(Graphics pintor){
         super.paint(pintor);
         pintor.setColor(color);

@@ -19,12 +19,17 @@ public class SnOOPeGUI extends JFrame {
     int width,height, x, y;
     SnOOPe snoope;
 
-
+    /**
+     * Constructor del GUI
+     */
     public SnOOPeGUI(){
         prepareElementos();
         prepareAcciones();
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú Principal
+     */
     public void prepareElementos(){
         this.setTitle("SnOOPe");
 
@@ -49,6 +54,9 @@ public class SnOOPeGUI extends JFrame {
         cd.show(principal,"MenuPpal");
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú Inicial
+     */
     public void prepareElementosMenu(){
 
         //vista del Menu Principal
@@ -63,6 +71,9 @@ public class SnOOPeGUI extends JFrame {
         vistaMenuPrincipal.add(jugarBoton);
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú de Barra
+     */
     public void prepareElementosMenuBarra(){
         //Menu de barra
         menuBar = new JMenuBar();
@@ -89,6 +100,9 @@ public class SnOOPeGUI extends JFrame {
         archivo.add(salirMenu);
     }
 
+    /**
+     * Método que prepara todas las acciones del Menú Principal
+     */
     public void prepareAcciones(){
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
@@ -102,6 +116,9 @@ public class SnOOPeGUI extends JFrame {
         prepareAccionesMenuBarra();
     }
 
+    /**
+     * Método que prepara todas las acciones del Menú Inicial
+     */
     public void prepareAccionesMenu(){
         jugarBoton.addActionListener(new ActionListener() {
             @Override
@@ -111,6 +128,9 @@ public class SnOOPeGUI extends JFrame {
         });
     }
 
+    /**
+     * Método que prepara todas las acciones del Menú de Barra
+     */
     public void prepareAccionesMenuBarra(){
         //Acciones de las opciones de archivo
         abrirMenu.addActionListener(new ActionListener() {
@@ -139,12 +159,18 @@ public class SnOOPeGUI extends JFrame {
         });
     }
 
+    /**
+     * Método que inicia el SnOOPe y pasa a la ventan de selección de modo
+     */
     private void jugar(){
         snoope = new SnOOPe(20,30);
         gameMode = new GameModes(this, this.snoope);
         cd.show(principal, "GameMode");
     }
 
+    /**
+     * Método que abre un archivo
+     */
     private void abrir(){
         JFileChooser fc = new JFileChooser();
         int sel = fc.showOpenDialog(this);
@@ -156,6 +182,9 @@ public class SnOOPeGUI extends JFrame {
         }
     }
 
+    /**
+     * Método que guarda un archivo
+     */
     private void guardar(){
         JFileChooser fc = new JFileChooser();
         int sel =fc.showSaveDialog(this);
@@ -167,6 +196,9 @@ public class SnOOPeGUI extends JFrame {
         }
     }
 
+    /**
+     * Método que cierra el programa
+     */
     private void salir(){
         int res = JOptionPane.showConfirmDialog(this,"Desea salir?", "salir", JOptionPane.YES_NO_OPTION);
         if (res==JOptionPane.YES_OPTION){
@@ -174,12 +206,18 @@ public class SnOOPeGUI extends JFrame {
         }
     }
 
+    /**
+     * Método que inicia una partida individual
+     */
     public void jugarSingle(){
         prepareElementosJuego();
         prepareAccionesJuego();
         gameMode.snake = this.snake;
     }
 
+    /**
+     * Método que inicia el panel de la pantalla de partida individual
+     */
     private void prepareElementosJuego(){
         vistaJugarSingle = new JPanel();
         principal.add(vistaJugarSingle, "JuegoSingle");
@@ -188,6 +226,9 @@ public class SnOOPeGUI extends JFrame {
         vistaJugarSingle.setBackground(new Color(246, 246, 246));
     }
 
+    /**
+     * Método que inicia los paneles que se actualizan y añade los keylisteners
+     */
     public void prepareAccionesJuego(){
         snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes().get(0));
         vistaJugarSingle.add(snake, "Snake");
@@ -217,6 +258,9 @@ public class SnOOPeGUI extends JFrame {
         cd.show(principal, "JuegoSingle");
     }
 
+    /**
+     * Método que crea y añade keylisteners al frame
+     */
     private void keys(){
         KeyListener listener = new KeyListener() {
             @Override
@@ -244,18 +288,8 @@ public class SnOOPeGUI extends JFrame {
         addKeyListener(listener);
     }
 
-    public void jugarMulti(){
-
-    }
-
     public static void main(String[] args) {
         SnOOPeGUI gui = new SnOOPeGUI();
         gui.setVisible(true);
     }
-    /*
-    - Comerse frutas
-    - Reaparezcan frutas
-    - Desaparecen frutas
-     */
-
 }

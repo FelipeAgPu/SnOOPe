@@ -8,12 +8,20 @@ public abstract class Comestible {
     protected String tipo;
     protected SnOOPe partida;
 
+    /**
+     * Constructor de un comestible
+     * @param partida Partida en la que se va a añadir
+     */
     public Comestible(SnOOPe partida){
         this.partida = partida;
         generarCoordenadas();
     }
 
     //Diagrama
+
+    /**
+     * Método que genera un par de coordenadas aleatorias que no esten ocupadas
+     */
     public void generarCoordenadas(){
         boolean existe = false;
 

@@ -11,7 +11,10 @@ public class Movimiento implements Runnable{
     int velocidad, multiplicador, aumentador;
     boolean estado=true;
 
-
+    /**
+     * Creador de la clase encargada del movimiento de la serpiente
+     * @param snake Serpiente a mover
+     */
     public Movimiento(PanelSnake snake){
 
         this.snake = snake;
@@ -19,6 +22,9 @@ public class Movimiento implements Runnable{
         this.aumentador = 1;
     }
 
+    /**
+     * Método que actualiza el estado de la serpiente
+     */
     @Override
     public void run() {
         while(estado && !snake.isPaused) {
@@ -42,6 +48,9 @@ public class Movimiento implements Runnable{
         }
     }
 
+    /**
+     * Método que detiene el movimiento
+     */
     public void stop(){
         this.estado = false;
     }

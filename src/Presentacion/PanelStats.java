@@ -15,6 +15,11 @@ public class PanelStats extends JPanel {
     JButton pausa;
     SnOOPeGUI gui;
 
+    /**
+     * Contructo del panel de estadísticas
+     * @param snake Serpiente que esta jugando
+     * @param gui GUI del programa
+     */
     public PanelStats(Snake snake, SnOOPeGUI gui){
         this.gui = gui;
         this.snake = snake;
@@ -24,6 +29,9 @@ public class PanelStats extends JPanel {
         prepareAccionesStats();
     }
 
+    /**
+     * Método que prepara los elementos visuales del panel
+     */
     private void prepareElementosStats(){
         puntuacion = new JLabel();
         puntuacion.setText("Puntuacion " + snake.getNombre() + ": " + puntos);
@@ -37,6 +45,9 @@ public class PanelStats extends JPanel {
         add(pausa);
     }
 
+    /**
+     * Método que prepara las acciones del panel
+     */
     private void prepareAccionesStats(){
         pausa.addActionListener(new ActionListener() {
             @Override
@@ -46,12 +57,19 @@ public class PanelStats extends JPanel {
         });
     }
 
+    /**
+     * Método que pausa el juego
+     */
     private void pausar(){
         gui.snake.isPaused = true;
 
         gui.cd.show(gui.principal, "Pausa");
     }
 
+    /**
+     * Método que pinta el panel
+     * @param pintor Pintor del panel
+     */
     @Override
     public void paint(Graphics pintor) {
         super.paint(pintor);

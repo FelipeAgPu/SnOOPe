@@ -4,14 +4,19 @@ import Aplicacion.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class PanelFruta extends JPanel {
     private Fruta[] frutas;
     int max, size, nFilas, nColumnas, res;
     SnOOPe snoope;
 
+    /**
+     * Constructor del panel de frutas
+     * @param max Ancho máximo de la ventana
+     * @param nFilas Cantidad de filas
+     * @param nColumnas Cantidad de columnas
+     * @param snoope Partida
+     */
     public PanelFruta(int max, int nFilas, int nColumnas, SnOOPe snoope){
         this.max = max;
         this.nFilas = nFilas;
@@ -23,6 +28,10 @@ public class PanelFruta extends JPanel {
         this.frutas = snoope.getFrutas();
     }
 
+    /**
+     * Método que pinta el panel
+     * @param pintor Pintor del panel
+     */
     @Override
     public void paint(Graphics pintor){
         for (int i = 0; i < 2; i++) {

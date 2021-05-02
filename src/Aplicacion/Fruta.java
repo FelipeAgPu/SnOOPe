@@ -1,23 +1,34 @@
 package Aplicacion;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Fruta extends Comestible{
     Image img;
     Color color;
+
+    /**
+     * Construuctor de una fruta
+     * @param partida Partida a la que se va a agregar
+     */
     public Fruta(SnOOPe partida){
         super(partida);
         this.color = generateRandomColor();
     }
 
+    /**
+     * Método que cambia a la serpiente según lo que haya comido
+     * @param snake Serpiente que se come la fruta
+     * @throws SnOOPeException Si se come un veneno
+     */
     public void esComida(Snake snake) throws SnOOPeException {
 
     }
 
+    /**
+     * Método que genera un color aleatorio
+     * @return Color generado
+     */
     public Color generateRandomColor(){
         Random ran = new Random();
         int x = ran.nextInt(partida.getColores().size());

@@ -1,6 +1,5 @@
 package Aplicacion;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -14,6 +13,12 @@ public class Snake{
     protected SnOOPe partida;
     protected int puntos;
 
+    /**
+     * Constructor de una serpiente de longitud 3
+     * @param colorBody Color del cuerpo
+     * @param colorHead Color de la cabeza
+     * @param partida Partida a la que se va a agregar
+     */
     public Snake(Color colorBody, Color colorHead, SnOOPe partida){
         this.colorBody = colorBody;
         this.colorHead = colorHead;
@@ -27,13 +32,23 @@ public class Snake{
         this.snake.add(a);
         this.snake.add(b);
         this.snake.add(c);
+        this.puntos = snake.size();
     }
 
+    /**
+     * Método que hace que la serpiente avance
+     * @throws SnOOPeException Si la serpiente se estrella
+     */
     public void avanzar() throws SnOOPeException {
 
     }
 
     //Diagrama
+
+    /**
+     * Método que ahce que la serpiente coma
+     * @throws SnOOPeException Si la serpiente se come a sí misma o come veneno
+     */
     public void comer() throws SnOOPeException {
         boolean isFruta = false;
         for (int i = 0; i < 2; i++) {
@@ -62,6 +77,10 @@ public class Snake{
         puntos = snake.size();
     }
 
+    /**
+     * Método que cambia la dirección de la serpiente
+     * @param direccion String de la dirección
+     */
     public void cambiarDireccion(String direccion){
         if (direccion.equals("UP") && !this.direccion.equals("DOWN")){
             this.nuevaDireccion = direccion;
@@ -74,6 +93,9 @@ public class Snake{
         }
     }
 
+    /**
+     * Método que actualiza la dirección de la serpiente
+     */
     public void igualarDireccion(){
         this.direccion = this.nuevaDireccion;
     }

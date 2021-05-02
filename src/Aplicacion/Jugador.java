@@ -1,16 +1,28 @@
 package Aplicacion;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Jugador extends Snake{
     String nombre;
+
+    /**
+     * Constructor de la serpiente de un jugador
+     * @param nombre Nombre de la serpiente
+     * @param colorBody Color del cuerpo
+     * @param colorHead Color de la cabeza
+     * @param partida Partida a añadir
+     */
     public Jugador(String nombre, Color colorBody, Color colorHead, SnOOPe partida){
         super(colorBody,colorHead, partida);
         this.nombre = nombre;
     }
 
     //Diagrama
+
+    /**
+     * @See Aplicacion.Snake.avanzar
+     * @throws SnOOPeException Si la serpiente se estrella
+     */
     @Override
     public void avanzar() throws SnOOPeException {
         igualarDireccion();

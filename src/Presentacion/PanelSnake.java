@@ -17,6 +17,13 @@ public class PanelSnake extends JPanel {
     Movimiento movimiento;
     Thread hilo;
 
+    /**
+     * Creador del panel Snake
+     * @param max Ancho máximo de la ventana
+     * @param nFilas Cantidad de filas
+     * @param nColumnas Cantidad de columnas
+     * @param snake Serpiente a dibujar
+     */
     public PanelSnake(int max, int nFilas, int nColumnas, Snake snake){
         this.max = max;
         this.nFilas = nFilas;
@@ -33,6 +40,10 @@ public class PanelSnake extends JPanel {
 
     }
 
+    /**
+     * Método que pinta el panel
+     * @param pintor Pintor del panel
+     */
     @Override
     public void paint(Graphics pintor){
         super.paint(pintor);

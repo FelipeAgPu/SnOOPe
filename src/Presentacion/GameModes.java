@@ -22,17 +22,23 @@ public class GameModes extends JPanel {
     public PanelSnake snake;
     public SnOOPe snoope;
 
+    /**
+     * Creador de las clases encargadas de las vistas de menus para cada modo de juego
+     * @param gui GUI del programa
+     * @param snoope Partida
+     */
     public GameModes(SnOOPeGUI gui, SnOOPe snoope){
         this.gui=gui;
         this.snoope = snoope;
         prepareElementosMenu();
         prepareAccionesMenu();
-        prepareElementosGameOver();
-        prepareAccionesGameOver();
         prepareElementosPausa();
         prepareAccionesPausa();
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú de selección de modo
+     */
     public void prepareElementosMenu(){
         //Menu de modos de juego
         vistaGameMode=new JPanel();
@@ -62,6 +68,9 @@ public class GameModes extends JPanel {
         vistaGameMode.add(menuVolver);
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú de single player
+     */
     private void prepareElementosMenuSingle(){
         //Menu de Single player
         vistaSingle = new JPanel();
@@ -96,6 +105,9 @@ public class GameModes extends JPanel {
         vistaSingle.add(singleJugar);
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú multijugador
+     */
     private void prepareElementosMenuMulti(){
         //Menu de Multiplayer
         vistaMulti = new JPanel();
@@ -145,6 +157,9 @@ public class GameModes extends JPanel {
         vistaMulti.add(multiJugar);
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del Menú vs IA
+     */
     private void prepareElementosMenuIA(){
         //Menu IA
         vistaIA = new JPanel();
@@ -188,6 +203,9 @@ public class GameModes extends JPanel {
 
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del GameOver
+     */
     private void prepareElementosGameOver(){
         vistaGameOver = new JPanel();
         this.gui.principal.add(vistaGameOver,"GameOver");
@@ -200,13 +218,15 @@ public class GameModes extends JPanel {
         restart.setBounds((vistaGameOver.getWidth()/8)*2,(vistaGameOver.getHeight()/12)*4,(vistaGameOver.getWidth()/8)*2,vistaGameOver.getHeight()/8);
         vistaGameOver.add(restart);
 
-        //boton restart
+        //boton volver
         menuPpal = new JButton("Menu Principal");
         menuPpal.setBounds((vistaGameOver.getWidth()/8)*2,(vistaGameOver.getHeight()/12)*6,(vistaGameOver.getWidth()/8)*2,vistaGameOver.getHeight()/8);
         vistaGameOver.add(menuPpal);
-
     }
 
+    /**
+     * Método que prepara todos los elementos visuales del menu de pausa
+     */
     private void prepareElementosPausa(){
         vistaPausa = new JPanel();
         this.gui.principal.add(vistaPausa,"Pausa");
@@ -214,18 +234,20 @@ public class GameModes extends JPanel {
         vistaPausa.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaPausa.setBackground(new Color(56, 87, 53));
 
-        //boton restart
-        reiniciarPausa = new JButton("Reiniciar");
+        //Boton Reanudar
+        reiniciarPausa = new JButton("Reanudar");
         reiniciarPausa.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*4,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
         vistaPausa.add(reiniciarPausa);
 
-        //boton restart
+        //Boton Volver
         volverMenuPpal = new JButton("Menu Principal");
         volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*6,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
         vistaPausa.add(volverMenuPpal);
     }
 
-
+    /**
+     * Método que prepara todas las acciones del menú de selección de modo
+     */
     public void prepareAccionesMenu(){
         menuSingle.addActionListener(new ActionListener() {
             @Override
@@ -256,6 +278,9 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método que prepara todas las acciones del menú de single player
+     */
     private void prepareAccionesMenuSingle(){
         singleColorCabeza.addActionListener(new ActionListener() {
             @Override
@@ -284,6 +309,9 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método que prepara todas las acciones del menú multijugador
+     */
     private void prepareAccionesMenuMulti(){
         multiColorCuerpo1.addActionListener(new ActionListener() {
             @Override
@@ -321,6 +349,9 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método que prepara todas las acciones del menú vs IA
+     */
     private void prepareAccionesMenuIA(){
         iAColorCabeza.addActionListener(new ActionListener() {
             @Override
@@ -344,6 +375,9 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método que prepara todas las acciones del game over
+     */
     private void prepareAccionesGameOver(){
         restart.addActionListener(new ActionListener() {
             @Override
@@ -360,6 +394,9 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método que prepara todas las acciones del menú de pausa
+     */
     private void prepareAccionesPausa(){
         reiniciarPausa.addActionListener(new ActionListener() {
             @Override
@@ -375,58 +412,86 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método para elegir el color de cabeza
+     */
     private void elegirColorCabeza1(){
         JColorChooser selector = new JColorChooser();
         colorCabeza1 = selector.showDialog(null, "Elige un color para la cabeza",Color.GRAY);
     }
 
+    /**
+     * Método para elegir el color de cuerpo
+     */
     private void elegirColorCuerpo1(){
         JColorChooser selector = new JColorChooser();
         colorCuerpo1 = selector.showDialog(null, "Elige un color para el cuerpo",Color.GRAY);
 
     }
 
+    /**
+     * Método para elegir el color de cabeza
+     */
     private void elegirColorCabeza2(){
         JColorChooser selector = new JColorChooser();
         colorCabeza2 = selector.showDialog(null, "Elige un color para la cabeza",Color.GRAY);
     }
 
+    /**
+     * Método para elegir el color de cuerpo
+     */
     private void elegirColorCuerpo2(){
         JColorChooser selector = new JColorChooser();
         colorCuerpo2 = selector.showDialog(null, "Elige un color para el cuerpo",Color.GRAY);
 
     }
 
+    /**
+     * Método que retorna a la vista de selección de modo
+     */
     private void volverGameMode(){
         gui.cd.show(gui.principal,"GameMode");
     }
 
+    /**
+     * Método que reanuda el juego
+     */
     private void reanudar(){
         snake.isPaused = false;
         gui.prepareAccionesJuego();
     }
 
+    /**
+     * Método que muestra la vista del menú single player
+     */
     private void single(){
         prepareElementosMenuSingle();
         prepareAccionesMenuSingle();
         this.gui.cd.show(gui.principal,"SinglePlayer");
     }
 
+    /**
+     * Método que muestra la vista del menú multijugador
+     */
     private void multi(){
         prepareElementosMenuMulti();
         prepareAccionesMenuMulti();
         this.gui.cd.show(gui.principal,"MultiPlayer");
     }
 
+    /**
+     * Método que muestra la vista del menú vs IA
+     */
     private void iA(){
         prepareElementosMenuIA();
         prepareAccionesMenuIA();
         this.gui.cd.show(gui.principal,"IA");
     }
 
+    /**
+     * Método que retorna a la vista del menú principal
+     */
     private void volverPpal(){
         gui.cd.show(gui.principal, "MenuPpal");
     }
-
-
 }

@@ -14,6 +14,11 @@ public class SnOOPe {
     private Timer[] timers;
     private final String[] tiposFruta = {"Normal", "Arcoiris", "Dulce", "Veneno"};
 
+    /**
+     * Constructor de la clase SnOOPe
+     * @param rows Cantidad de Filas
+     * @param columns Cantidad de Columnas
+     */
     public SnOOPe(int rows, int columns){
         this.nFilas = rows;
         this.nColumnas = columns;
@@ -51,12 +56,22 @@ public class SnOOPe {
 
     }
 
+    /**
+     * Método que inicia una partida single player
+     * @param nombre Nombre del jugador
+     * @param colorHead Color de la cabeza
+     * @param colorBody Color del cuerpo
+     */
     public void jugar(String nombre, Color colorHead, Color colorBody){
         snakes.add(new Jugador(nombre, colorBody, colorHead, this));
         colores.add(colorHead);
         colores.add(colorBody);
     }
 
+    /**
+     * Método que crea una fruta de un tipo aleatorio
+     * @return Fruta de cualquier tipo
+     */
     public Fruta crearFrutaAleatoria(){
         Fruta ans = null;
         Random rn = new Random();
