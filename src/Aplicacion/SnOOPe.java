@@ -12,7 +12,7 @@ public class SnOOPe {
     private ArrayList<Color> colores;
     private Fruta[] frutas;
     private Timer[] timers;
-    private final String[] tiposFruta = {"Normal", "Arcoiris", "Dulce", "Veneno"};
+    private String[] tiposFruta = {"Normal", "Arcoiris", "Dulce", "Veneno"};
 
     /**
      * Constructor de la clase SnOOPe

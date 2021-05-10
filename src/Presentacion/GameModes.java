@@ -8,15 +8,18 @@ import java.awt.event.*;
 import java.io.File;
 
 public class GameModes extends JPanel {
-    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver,vistaPausa;
+    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver,vistaPausa,vistaFrutas;
     private JButton volverMenuPpal,reiniciarPausa;
     private JButton restart,menuPpal;
     private JButton menuSingle,menuMulti,menuIA,menuVolver;
-    private JButton singleColorCuerpo,singleColorCabeza,singleJugar,singleVolver;
-    private JButton multiColorCuerpo1,multiColorCabeza1,multiColorCuerpo2,multiColorCabeza2,multiJugar,multiVolver;
-    private JButton iAColorCuerpo,iAColorCabeza,iAJugar,iAVolver;
+    private JButton singleColorCuerpo,singleColorCabeza,singleJugar,singleVolver,singleFrutas;
+    private JButton multiColorCuerpo1,multiColorCabeza1,multiColorCuerpo2,multiColorCabeza2,multiJugar,multiVolver,multiFrutas;
+    private JButton iAColorCuerpo,iAColorCabeza,iAJugar,iAVolver,iAFrutas;
     private JComboBox iAMode;
-    private ImageIcon imgVolver, imgUnJugador, imgMultiJugador, imgMaquina, imgCabeza,imgCuerpo;
+    private JLabel arcoirisText, venenoText, frutaText, dulceText, fuegoText, tijerasText, bloqueText, speedText, lupaText;
+    private JCheckBox fruta, veneno, arcoiris, dulce, fuego, tijeras, bloque, speed, lupa;
+    private ImageIcon imgVolver, imgUnJugador, imgMultiJugador, imgMaquina, imgCabeza,imgCuerpo,imgFrutas;
+    private ImageIcon imgArcoiris,imgArcoirisNegro,imgVeneno,imgVenenoNegro,imgFruta, imgFrutaNegro, imgBloque,imgBloqueNegro,imgDulce,imgDulceNegro,imgSpeed,imgSpeedNegro,imgTijeras,imgTijerasNegro,imgLupa,imgLupaNegro,imgFuego,imgFuegoNegro;
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
     private Color colorCabeza1 = Color.RED,colorCabeza2 = Color.GREEN,colorCuerpo1 = Color.GREEN,colorCuerpo2 = Color.RED;
@@ -31,6 +34,7 @@ public class GameModes extends JPanel {
     public GameModes(SnOOPeGUI gui, SnOOPe snoope){
         this.gui=gui;
         this.snoope = snoope;
+        prepareImagenes();
         prepareElementosMenu();
         prepareAccionesMenu();
         prepareElementosPausa();
@@ -47,14 +51,6 @@ public class GameModes extends JPanel {
         vistaGameMode.setLayout(null);
         vistaGameMode.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaGameMode.setBackground(new Color(56, 87, 53));
-
-        this.imgVolver = new ImageIcon("./images/volver.png");
-        this.imgUnJugador = new ImageIcon("./images/unJugador.png");
-        this.imgMultiJugador = new ImageIcon("./images/multijugador.png");
-        this.imgMaquina = new ImageIcon("./images/maquina.png");
-        this.imgCabeza = new ImageIcon("./images/cabeza.png");
-        this.imgCuerpo = new ImageIcon("./images/cuerpo.png");
-
 
         //Boton Single Player
         menuSingle = new JButton("Un Jugador");
@@ -95,6 +91,37 @@ public class GameModes extends JPanel {
         vistaGameMode.add(fondo);
     }
 
+    private void prepareImagenes(){
+        this.imgVolver = new ImageIcon("./images/volver.png");
+        this.imgUnJugador = new ImageIcon("./images/unJugador.png");
+        this.imgMultiJugador = new ImageIcon("./images/multijugador.png");
+        this.imgMaquina = new ImageIcon("./images/maquina.png");
+        this.imgCabeza = new ImageIcon("./images/cabeza.png");
+        this.imgCuerpo = new ImageIcon("./images/cuerpo.png");
+        this.imgFrutas = new ImageIcon("./images/frutaypower.png");
+        this.imgArcoiris = new ImageIcon("./images/arcoiris.png");
+        this.imgArcoirisNegro = new ImageIcon("./");
+        this.imgFruta = new ImageIcon("./images/normal.png");
+        this.imgFrutaNegro = new ImageIcon("./");
+        this.imgDulce = new ImageIcon("./images/dulce.png");
+        this.imgDulceNegro = new ImageIcon("./");
+        this.imgVeneno = new ImageIcon("./images/veneno.png");
+        this.imgVenenoNegro = new ImageIcon("./images/venenoNegro.png");
+        this.imgSpeed = new ImageIcon("./images/velocidad.png");
+        this.imgSpeedNegro = new ImageIcon("./images/speedNegro.png");
+        this.imgBloque = new ImageIcon("./images/bloque.jpg");
+        this.imgBloqueNegro = new ImageIcon("./images/bloqueNegro.png");
+        this.imgFuego = new ImageIcon("./images/fuego.png");
+        this.imgFuegoNegro = new ImageIcon("./images/fuegoNegro.png");
+        this.imgLupa = new ImageIcon("./images/lupa.png");
+        this.imgLupaNegro = new ImageIcon("./images/lupaNegro.png");
+        this.imgTijeras = new ImageIcon("./images/division.png");
+        this.imgTijerasNegro = new ImageIcon("./images/tijerasNegro.png");
+
+
+
+    }
+
     /**
      * Método que prepara todos los elementos visuales del Menú de single player
      */
@@ -108,7 +135,10 @@ public class GameModes extends JPanel {
 
         // Nombre Jugador
         singleName = new JTextField("Jugador");
-        singleName.setBounds((vistaSingle.getWidth()/8)*3,(vistaSingle.getHeight()/10)*2,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleName.setBounds((vistaSingle.getWidth()/8)*3,(vistaSingle.getHeight()/10)*3,(vistaSingle.getWidth()/8)*2,50);
+        singleName.setBackground(new Color(0x4CE546));
+        singleName.setFont(new Font("Monaco",Font.BOLD,30));
+        singleName.setHorizontalAlignment(JTextField.CENTER);
         vistaSingle.add(singleName);
 
         //Boton Color Cabeza
@@ -127,9 +157,17 @@ public class GameModes extends JPanel {
         singleColorCuerpo.setIcon(imgCuerpo);
         vistaSingle.add(singleColorCuerpo);
 
+        //Boton Frutas y powerups
+        singleFrutas = new JButton();
+        singleFrutas.setBounds((vistaSingle.getWidth()/10)*4,(vistaSingle.getHeight()/10)*6,(vistaSingle.getWidth()/10)*2,(vistaSingle.getHeight()/8)*2);
+        singleFrutas.setContentAreaFilled(false);
+        singleFrutas.setBorderPainted(false);
+        singleFrutas.setIcon(imgFrutas);
+        vistaSingle.add(singleFrutas);
+
         //Boton volver
         singleVolver = new JButton("Volver");
-        singleVolver.setBounds((vistaSingle.getWidth()/8)*2,(vistaSingle.getHeight()/10)*6,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleVolver.setBounds(vistaSingle.getWidth()/10,(vistaSingle.getHeight()/10)*7,(vistaSingle.getWidth()/10)*2,vistaSingle.getHeight()/8);
         singleVolver.setContentAreaFilled(false);
         singleVolver.setBorderPainted(false);
         singleVolver.setIcon(imgVolver);
@@ -137,7 +175,7 @@ public class GameModes extends JPanel {
 
         //Boton jugar
         singleJugar = new JButton("");
-        singleJugar.setBounds((vistaSingle.getWidth()/8)*4,(vistaSingle.getHeight()/10)*6,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleJugar.setBounds((vistaSingle.getWidth()/10)*7,(vistaSingle.getHeight()/10)*7,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
         singleJugar.setIcon(gui.imgJugar);
         singleJugar.setBorderPainted(false);
         singleJugar.setContentAreaFilled(false);
@@ -163,7 +201,10 @@ public class GameModes extends JPanel {
 
         //Nombre Jugador1
         multiName1 = new JTextField("Jugador1");
-        multiName1.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*2,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiName1.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*3,(vistaMulti.getWidth()/8)*2,50);
+        multiName1.setBackground(new Color(0x4CE546));
+        multiName1.setFont(new Font("Monaco",Font.BOLD,30));
+        multiName1.setHorizontalAlignment(JTextField.CENTER);
         vistaMulti.add(multiName1);
 
         //Boton Color Cabeza 1
@@ -184,7 +225,10 @@ public class GameModes extends JPanel {
 
         //Nombre Jugador 2
         multiName2 = new JTextField("Jugador2");
-        multiName2.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*6,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiName2.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*7,(vistaMulti.getWidth()/8)*2,50);
+        multiName2.setBackground(new Color(0x337838));
+        multiName2.setFont(new Font("Monaco",Font.BOLD,30));
+        multiName2.setHorizontalAlignment(JTextField.CENTER);
         vistaMulti.add(multiName2);
 
         //Boton Color Cabeza 2
@@ -239,7 +283,10 @@ public class GameModes extends JPanel {
 
         //Nombre Jugador
         iAName = new JTextField("Jugador");
-        iAName.setBounds((vistaIA.getWidth()/8)*3,(vistaIA.getHeight()/12)*2,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
+        iAName.setBounds((vistaIA.getWidth()/8)*3,(vistaIA.getHeight()/12)*3,(vistaIA.getWidth()/8)*2,50);
+        iAName.setBackground(new Color(0x4CE546));
+        iAName.setFont(new Font("Monaco",Font.BOLD,30));
+        iAName.setHorizontalAlignment(JTextField.CENTER);
         vistaIA.add(iAName);
 
         //Color de la cabeza
@@ -264,6 +311,8 @@ public class GameModes extends JPanel {
         iAMode.addItem("Prudente");
         iAMode.addItem("Glotona");
         iAMode.setBounds((vistaIA.getWidth()/8)*3,(vistaIA.getHeight()/12)*6,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/20);
+        iAMode.setBackground(new Color(0x337838));
+        iAMode.setFont(new Font("Monaco",Font.BOLD,30));
         vistaIA.add(iAMode);
 
         //Volver
@@ -288,6 +337,37 @@ public class GameModes extends JPanel {
 
         vistaIA.add(fondo);
 
+    }
+    private void prepareElementosFrutas(){
+        vistaFrutas = new JPanel();
+        this.gui.principal.add(vistaFrutas,"Frutas");
+        vistaFrutas.setLayout(null);
+        vistaFrutas.setBounds(gui.x,gui.y,gui.width,gui.height);
+
+        //CheckBox Fruta
+        fruta = new JCheckBox();
+        fruta.setBounds(vistaFrutas.getWidth()/6,(vistaFrutas.getHeight()/6)*2+20, 65, 65);
+        fruta.setBorderPainted(false);
+        fruta.setContentAreaFilled(false);
+        fruta.setSelected(true);
+        fruta.setIcon(imgArcoiris);
+        vistaFrutas.add(fruta);
+
+        //CheckBox Veneno
+        veneno = new JCheckBox();
+        veneno.setBounds(vistaFrutas.getWidth()/6,(vistaFrutas.getHeight()/6), 65, 65);
+        veneno.setBorderPainted(false);
+        veneno.setContentAreaFilled(false);
+        veneno.setSelected(true);
+        veneno.setIcon(imgVeneno);
+        vistaFrutas.add(veneno);
+
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(gui.imgFondo);
+
+        vistaFrutas.add(fondo);
     }
 
     /**
@@ -389,6 +469,14 @@ public class GameModes extends JPanel {
                 volverGameMode();
             }
         });
+
+        singleFrutas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccionarFrutas();
+            }
+        });
+
         singleJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -489,6 +577,20 @@ public class GameModes extends JPanel {
         });
     }
 
+    private void prepareAccionesFrutas(){
+        fruta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (fruta.isSelected()){
+                    fruta.setIcon(imgArcoiris);
+                }else{
+                    fruta.setIcon(imgCabeza);
+                }
+            }
+        });
+    }
+
+
     /**
      * Método que prepara todas las acciones del menú de pausa
      */
@@ -546,6 +648,12 @@ public class GameModes extends JPanel {
      */
     private void volverGameMode(){
         gui.cd.show(gui.principal,"GameMode");
+    }
+
+    private void seleccionarFrutas(){
+        prepareElementosFrutas();
+        prepareAccionesFrutas();
+        gui.cd.show(gui.principal,"Frutas");
     }
 
     /**
