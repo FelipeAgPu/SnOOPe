@@ -16,9 +16,10 @@ public class GameModes extends JPanel {
     private JButton multiColorCuerpo1,multiColorCabeza1,multiColorCuerpo2,multiColorCabeza2,multiJugar,multiVolver;
     private JButton iAColorCuerpo,iAColorCabeza,iAJugar,iAVolver;
     private JComboBox iAMode;
+    private ImageIcon imgVolver, imgUnJugador, imgMultiJugador, imgMaquina, imgCabeza,imgCuerpo;
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
-    private Color colorCabeza1 = Color.RED,colorCabeza2,colorCuerpo1 = Color.GREEN,colorCuerpo2;
+    private Color colorCabeza1 = Color.RED,colorCabeza2 = Color.GREEN,colorCuerpo1 = Color.GREEN,colorCuerpo2 = Color.RED;
     public PanelSnake snake;
     public SnOOPe snoope;
 
@@ -47,25 +48,51 @@ public class GameModes extends JPanel {
         vistaGameMode.setBounds(gui.x, gui.y,gui.width, gui.height);
         vistaGameMode.setBackground(new Color(56, 87, 53));
 
+        this.imgVolver = new ImageIcon("./images/volver.png");
+        this.imgUnJugador = new ImageIcon("./images/unJugador.png");
+        this.imgMultiJugador = new ImageIcon("./images/multijugador.png");
+        this.imgMaquina = new ImageIcon("./images/maquina.png");
+        this.imgCabeza = new ImageIcon("./images/cabeza.png");
+        this.imgCuerpo = new ImageIcon("./images/cuerpo.png");
+
 
         //Boton Single Player
         menuSingle = new JButton("Un Jugador");
         menuSingle.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*2,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
+        menuSingle.setContentAreaFilled(false);
+        menuSingle.setBorderPainted(false);
+        menuSingle.setIcon(imgUnJugador);
         vistaGameMode.add(menuSingle);
 
         //Boton Multiplayer
         menuMulti = new JButton("Multijugador");
-        menuMulti.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*4,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
+        menuMulti.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*4,(vistaGameMode.getWidth()/8)*2+20,vistaGameMode.getHeight()/8);
+        menuMulti.setBorderPainted(false);
+        menuMulti.setContentAreaFilled(false);
+        menuMulti.setIcon(imgMultiJugador);
         vistaGameMode.add(menuMulti);
 
         //Boton VS IA
         menuIA = new JButton("Vs IA");
         menuIA.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*6,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
+        menuIA.setContentAreaFilled(false);
+        menuIA.setBorderPainted(false);
+        menuIA.setIcon(imgMaquina);
         vistaGameMode.add(menuIA);
+
         //Boton Volver
         menuVolver = new JButton("Volver");
         menuVolver.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*8,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
+        menuVolver.setBorderPainted(false);
+        menuVolver.setContentAreaFilled(false);
+        menuVolver.setIcon(imgVolver);
         vistaGameMode.add(menuVolver);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(gui.imgFondo);
+
+        vistaGameMode.add(fondo);
     }
 
     /**
@@ -85,24 +112,42 @@ public class GameModes extends JPanel {
         vistaSingle.add(singleName);
 
         //Boton Color Cabeza
-        singleColorCabeza = new JButton("Color de la cabeza");
+        singleColorCabeza = new JButton("");
         singleColorCabeza.setBounds((vistaSingle.getWidth()/8)*2,(vistaSingle.getHeight()/10)*4,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleColorCabeza.setBackground(colorCabeza1);
+        singleColorCabeza.setBorderPainted(false);
+        singleColorCabeza.setIcon(imgCabeza);
         vistaSingle.add(singleColorCabeza);
 
         //Boton Color Cuerpo
         singleColorCuerpo = new JButton("Color del cuerpo");
         singleColorCuerpo.setBounds((vistaSingle.getWidth()/8)*4,(vistaSingle.getHeight()/10)*4,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleColorCuerpo.setBackground(colorCuerpo1);
+        singleColorCuerpo.setBorderPainted(false);
+        singleColorCuerpo.setIcon(imgCuerpo);
         vistaSingle.add(singleColorCuerpo);
 
         //Boton volver
         singleVolver = new JButton("Volver");
         singleVolver.setBounds((vistaSingle.getWidth()/8)*2,(vistaSingle.getHeight()/10)*6,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleVolver.setContentAreaFilled(false);
+        singleVolver.setBorderPainted(false);
+        singleVolver.setIcon(imgVolver);
         vistaSingle.add(singleVolver);
 
         //Boton jugar
-        singleJugar = new JButton("Jugar");
+        singleJugar = new JButton("");
         singleJugar.setBounds((vistaSingle.getWidth()/8)*4,(vistaSingle.getHeight()/10)*6,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
+        singleJugar.setIcon(gui.imgJugar);
+        singleJugar.setBorderPainted(false);
+        singleJugar.setContentAreaFilled(false);
         vistaSingle.add(singleJugar);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(gui.imgFondo);
+
+        vistaSingle.add(fondo);
     }
 
     /**
@@ -124,11 +169,17 @@ public class GameModes extends JPanel {
         //Boton Color Cabeza 1
         multiColorCabeza1 = new JButton("Color de la cabeza");
         multiColorCabeza1.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*4,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCabeza1.setBackground(colorCabeza1);
+        multiColorCabeza1.setBorderPainted(false);
+        multiColorCabeza1.setIcon(imgCabeza);
         vistaMulti.add(multiColorCabeza1);
 
         //Boton Color Cuerpo 1
-        multiColorCuerpo1 = new JButton("Color de la cuerpo");
+        multiColorCuerpo1 = new JButton();
         multiColorCuerpo1.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*4,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCuerpo1.setBackground(colorCuerpo1);
+        multiColorCuerpo1.setBorderPainted(false);
+        multiColorCuerpo1.setIcon(imgCuerpo);
         vistaMulti.add(multiColorCuerpo1);
 
         //Nombre Jugador 2
@@ -137,24 +188,42 @@ public class GameModes extends JPanel {
         vistaMulti.add(multiName2);
 
         //Boton Color Cabeza 2
-        multiColorCabeza2 = new JButton("Color de la cabeza");
+        multiColorCabeza2 = new JButton();
         multiColorCabeza2.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*8,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCabeza2.setBackground(colorCabeza2);
+        multiColorCabeza2.setBorderPainted(false);
+        multiColorCabeza2.setIcon(imgCabeza);
         vistaMulti.add(multiColorCabeza2);
 
         //Boton Color Cuerpo 2
-        multiColorCuerpo2 = new JButton("Color del cuerpo");
+        multiColorCuerpo2 = new JButton();
         multiColorCuerpo2.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*8,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCuerpo2.setBackground(colorCuerpo2);
+        multiColorCuerpo2.setBorderPainted(false);
+        multiColorCuerpo2.setIcon(imgCuerpo);
         vistaMulti.add(multiColorCuerpo2);
 
         //Boton volver
-        multiVolver = new JButton("Volver");
+        multiVolver = new JButton();
         multiVolver.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiVolver.setBorderPainted(false);
+        multiVolver.setContentAreaFilled(false);
+        multiVolver.setIcon(imgVolver);
         vistaMulti.add(multiVolver);
 
         //Boton jugar
-        multiJugar = new JButton("Jugar");
+        multiJugar = new JButton();
         multiJugar.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiJugar.setContentAreaFilled(false);
+        multiJugar.setBorderPainted(false);
+        multiJugar.setIcon(gui.imgJugar);
         vistaMulti.add(multiJugar);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(gui.imgFondo);
+
+        vistaMulti.add(fondo);
     }
 
     /**
@@ -176,11 +245,17 @@ public class GameModes extends JPanel {
         //Color de la cabeza
         iAColorCabeza = new JButton("Color de la cabeza");
         iAColorCabeza.setBounds((vistaIA.getWidth()/8)*2,(vistaIA.getHeight()/12)*4,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
+        iAColorCabeza.setBackground(colorCabeza1);
+        iAColorCabeza.setBorderPainted(false);
+        iAColorCabeza.setIcon(imgCabeza);
         vistaIA.add(iAColorCabeza);
 
         //Color del cuerpo
         iAColorCuerpo = new JButton("Color del cuerpo");
         iAColorCuerpo.setBounds((vistaIA.getWidth()/8)*4,(vistaIA.getHeight()/12)*4,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
+        iAColorCuerpo.setBackground(colorCuerpo1);
+        iAColorCuerpo.setBorderPainted(false);
+        iAColorCuerpo.setIcon(imgCuerpo);
         vistaIA.add(iAColorCuerpo);
 
         //Modo de la serpiente
@@ -194,12 +269,24 @@ public class GameModes extends JPanel {
         //Volver
         iAVolver = new JButton("Volver");
         iAVolver.setBounds((vistaIA.getWidth()/8)*2,(vistaIA.getHeight()/12)*7,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
+        iAVolver.setBorderPainted(false);
+        iAVolver.setContentAreaFilled(false);
+        iAVolver.setIcon(imgVolver);
         vistaIA.add(iAVolver);
 
         //Jugar
         iAJugar = new JButton("Jugar");
         iAJugar.setBounds((vistaIA.getWidth()/8)*4,(vistaIA.getHeight()/12)*7,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
+        iAJugar.setContentAreaFilled(false);
+        iAJugar.setBorderPainted(false);
+        iAJugar.setIcon(gui.imgJugar);
         vistaIA.add(iAJugar);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(gui.imgFondo);
+
+        vistaIA.add(fondo);
 
     }
 
@@ -286,12 +373,14 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCabeza1();
+                singleColorCabeza.setBackground(colorCabeza1);
             }
         });
         singleColorCuerpo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCuerpo1();
+                singleColorCuerpo.setBackground(colorCuerpo1);
             }
         });
         singleVolver.addActionListener(new ActionListener() {
@@ -317,6 +406,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCuerpo1();
+                multiColorCuerpo1.setBackground(colorCuerpo1);
             }
         });
 
@@ -324,6 +414,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCuerpo2();
+                multiColorCuerpo2.setBackground(colorCuerpo2);
             }
         });
 
@@ -331,6 +422,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCabeza1();
+                multiColorCabeza1.setBackground(colorCabeza1);
             }
         });
 
@@ -338,6 +430,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCabeza2();
+                multiColorCabeza2.setBackground(colorCabeza2);
             }
         });
 
@@ -357,6 +450,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCabeza1();
+                iAColorCabeza.setBackground(colorCabeza1);
             }
         });
 
@@ -364,6 +458,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elegirColorCuerpo1();
+                iAColorCuerpo.setBackground(colorCuerpo1);
             }
         });
 

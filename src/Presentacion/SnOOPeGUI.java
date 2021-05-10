@@ -15,7 +15,9 @@ public class SnOOPeGUI extends JFrame {
     JMenuBar menuBar;
     JMenuItem abrirMenu, guardarMenu, guardarComoMenu, salirMenu;
     JButton jugarBoton;
+    JLabel fondo;
     GameModes gameMode;
+    ImageIcon imgFondo, imgJugar;
     int width,height, x, y;
     SnOOPe snoope;
 
@@ -64,11 +66,31 @@ public class SnOOPeGUI extends JFrame {
         principal.add(vistaMenuPrincipal, "MenuPpal");
         vistaMenuPrincipal.setLayout(null);
         vistaMenuPrincipal.setBounds(x, y,width,height);
-        vistaMenuPrincipal.setBackground(new Color(56, 87, 53));
 
-        jugarBoton = new JButton("Jugar");
-        jugarBoton.setBounds(vistaMenuPrincipal.getWidth()/4,vistaMenuPrincipal.getHeight()/4,vistaMenuPrincipal.getWidth()/4,vistaMenuPrincipal.getHeight()/4);
+        this.imgJugar = new ImageIcon("./images/jugar.png");
+        jugarBoton = new JButton("");
+        jugarBoton.setBounds(vistaMenuPrincipal.getWidth()/4,vistaMenuPrincipal.getHeight()/4,vistaMenuPrincipal.getWidth()/2,vistaMenuPrincipal.getHeight()/2);
+        jugarBoton.setIcon(imgJugar);
+        jugarBoton.setContentAreaFilled(false);
+        jugarBoton.setBorderPainted(false);
         vistaMenuPrincipal.add(jugarBoton);
+
+
+        ImageIcon imgTitulo = new ImageIcon("./images/titulo.png");
+        this.imgFondo = new ImageIcon("./images/fondo1.png");
+
+        JLabel titulo = new JLabel();
+        titulo.setBounds(vistaMenuPrincipal.getWidth()/4, 0,width,300);
+        titulo.setIcon(imgTitulo);
+        vistaMenuPrincipal.add(titulo);
+
+        this.fondo = new JLabel();
+        fondo.setBounds(0, 0,width,height);
+        fondo.setIcon(imgFondo);
+        vistaMenuPrincipal.add(fondo);
+
+
+
     }
 
     /**
