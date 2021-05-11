@@ -17,8 +17,6 @@ public class Jugador extends Snake{
         this.nombre = nombre;
     }
 
-    //Diagrama
-
     /**
      * @See Aplicacion.Snake.avanzar
      * @throws SnOOPeException Si la serpiente se estrella

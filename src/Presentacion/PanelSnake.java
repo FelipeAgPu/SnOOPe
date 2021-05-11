@@ -37,7 +37,6 @@ public class PanelSnake extends JPanel {
         this.hilo = new Thread(movimiento);
         hilo.start();
 
-
     }
 
     /**

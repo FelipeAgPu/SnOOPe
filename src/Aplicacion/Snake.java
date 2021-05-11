@@ -43,8 +43,6 @@ public class Snake{
 
     }
 
-    //Diagrama
-
     /**
      * Método que ahce que la serpiente coma
      * @throws SnOOPeException Si la serpiente se come a sí misma o come veneno
@@ -130,5 +128,13 @@ public class Snake{
 
     public String getNombre() {
         return null;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getNuevaDireccion() {
+        return nuevaDireccion;
     }
 }
