@@ -91,6 +91,9 @@ public class GameModes extends JPanel {
         vistaGameMode.add(fondo);
     }
 
+    /**
+     * Método que genera todas las imagenes de las frutas y powerups
+     */
     private void prepareImagenes(){
         this.imgVolver = new ImageIcon("./images/volver.png");
         this.imgUnJugador = new ImageIcon("./images/unJugador.png");
@@ -100,7 +103,7 @@ public class GameModes extends JPanel {
         this.imgCuerpo = new ImageIcon("./images/cuerpo.png");
         this.imgFrutas = new ImageIcon("./images/frutaypower.png");
         this.imgArcoiris = new ImageIcon("./images/arcoiris.png");
-        this.imgArcoirisNegro = new ImageIcon("./");
+        this.imgArcoirisNegro = new ImageIcon("./images/arcoirisNegro.png");
         this.imgFruta = new ImageIcon("./images/normal.png");
         this.imgFrutaNegro = new ImageIcon("./");
         this.imgDulce = new ImageIcon("./images/dulce.png");
@@ -117,9 +120,6 @@ public class GameModes extends JPanel {
         this.imgLupaNegro = new ImageIcon("./images/lupaNegro.png");
         this.imgTijeras = new ImageIcon("./images/division.png");
         this.imgTijerasNegro = new ImageIcon("./images/tijerasNegro.png");
-
-
-
     }
 
     /**
@@ -338,29 +338,154 @@ public class GameModes extends JPanel {
         vistaIA.add(fondo);
 
     }
+
+    /**
+     * Método que prepara todos los elementos visuales de la configuración de frutas y power ups
+     */
     private void prepareElementosFrutas(){
         vistaFrutas = new JPanel();
         this.gui.principal.add(vistaFrutas,"Frutas");
         vistaFrutas.setLayout(null);
         vistaFrutas.setBounds(gui.x,gui.y,gui.width,gui.height);
 
-        //CheckBox Fruta
+        //Check Box
+        //CheckBox Normal
         fruta = new JCheckBox();
-        fruta.setBounds(vistaFrutas.getWidth()/6,(vistaFrutas.getHeight()/6)*2+20, 65, 65);
+        fruta.setBounds(vistaFrutas.getWidth()/8,(vistaFrutas.getHeight()/6), 65, 65);
         fruta.setBorderPainted(false);
         fruta.setContentAreaFilled(false);
         fruta.setSelected(true);
-        fruta.setIcon(imgArcoiris);
+        fruta.setIcon(imgFruta);
         vistaFrutas.add(fruta);
 
         //CheckBox Veneno
         veneno = new JCheckBox();
-        veneno.setBounds(vistaFrutas.getWidth()/6,(vistaFrutas.getHeight()/6), 65, 65);
+        veneno.setBounds(vistaFrutas.getWidth()/8,(vistaFrutas.getHeight()/6)*2, 65, 65);
         veneno.setBorderPainted(false);
         veneno.setContentAreaFilled(false);
         veneno.setSelected(true);
         veneno.setIcon(imgVeneno);
         vistaFrutas.add(veneno);
+
+        //CheckBox Dulce
+        dulce = new JCheckBox();
+        dulce.setBounds(vistaFrutas.getWidth()/8,(vistaFrutas.getHeight()/6)*3, 65, 65);
+        dulce.setBorderPainted(false);
+        dulce.setContentAreaFilled(false);
+        dulce.setSelected(true);
+        dulce.setIcon(imgDulce);
+        vistaFrutas.add(dulce);
+
+        //CheckBox Arcoiris
+        arcoiris = new JCheckBox();
+        arcoiris.setBounds(vistaFrutas.getWidth()/8,(vistaFrutas.getHeight()/6)*4, 65, 65);
+        arcoiris.setBorderPainted(false);
+        arcoiris.setContentAreaFilled(false);
+        arcoiris.setSelected(true);
+        arcoiris.setIcon(imgArcoiris);
+        vistaFrutas.add(arcoiris);
+
+        //Labels Frutas
+        //Label Normal
+        frutaText = new JLabel();
+        frutaText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6), 150, 75);
+        frutaText.setText("Normal");
+        vistaFrutas.add(frutaText);
+
+        //Label Veneno
+        venenoText = new JLabel();
+        venenoText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6)*2, 150, 75);
+        venenoText.setText("Veneno");
+        vistaFrutas.add(venenoText);
+
+        //Label Dulce
+        dulceText = new JLabel();
+        dulceText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6)*3, 150, 75);
+        dulceText.setText("Dulce");
+        vistaFrutas.add(dulceText);
+
+        //Label Arcoiris
+        arcoirisText = new JLabel();
+        arcoirisText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6)*4, 150, 75);
+        arcoirisText.setText("Arcoiris");
+        vistaFrutas.add(arcoirisText);
+
+        //PowerUp
+        //CheckBox Tijeras
+        tijeras = new JCheckBox();
+        tijeras.setBounds((vistaFrutas.getWidth()/10)*6,(vistaFrutas.getHeight()/7), 65, 65);
+        tijeras.setBorderPainted(false);
+        tijeras.setContentAreaFilled(false);
+        tijeras.setSelected(true);
+        tijeras.setIcon(imgTijeras);
+        vistaFrutas.add(tijeras);
+
+        //CheckBox Speed
+        speed = new JCheckBox();
+        speed.setBounds((vistaFrutas.getWidth()/10)*6,(vistaFrutas.getHeight()/7)*2, 65, 65);
+        speed.setBorderPainted(false);
+        speed.setContentAreaFilled(false);
+        speed.setSelected(true);
+        speed.setIcon(imgSpeed);
+        vistaFrutas.add(speed);
+
+        //CheckBox Fuego
+        fuego = new JCheckBox();
+        fuego.setBounds((vistaFrutas.getWidth()/10)*6,(vistaFrutas.getHeight()/7)*3, 65, 65);
+        fuego.setBorderPainted(false);
+        fuego.setContentAreaFilled(false);
+        fuego.setSelected(true);
+        fuego.setIcon(imgFuego);
+        vistaFrutas.add(fuego);
+
+        //CheckBox Bloque
+        bloque = new JCheckBox();
+        bloque.setBounds((vistaFrutas.getWidth()/10)*6,(vistaFrutas.getHeight()/7)*4, 65, 65);
+        bloque.setBorderPainted(false);
+        bloque.setContentAreaFilled(false);
+        bloque.setSelected(true);
+        bloque.setIcon(imgBloque);
+        vistaFrutas.add(bloque);
+
+        //CheckBox Lupa
+        lupa = new JCheckBox();
+        lupa.setBounds((vistaFrutas.getWidth()/10)*6,(vistaFrutas.getHeight()/7)*5, 65, 65);
+        lupa.setBorderPainted(false);
+        lupa.setContentAreaFilled(false);
+        lupa.setSelected(true);
+        lupa.setIcon(imgLupa);
+        vistaFrutas.add(lupa);
+
+        //Labels Power Up
+        //Label Tijeras
+        tijerasText = new JLabel();
+        tijerasText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7), 150, 75);
+        tijerasText.setText("División");
+        vistaFrutas.add(tijerasText);
+
+        //Label Speed
+        speedText = new JLabel();
+        speedText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*2, 150, 75);
+        speedText.setText("Speed");
+        vistaFrutas.add(speedText);
+
+        //Label Fuego
+        fuegoText = new JLabel();
+        fuegoText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*3, 150, 75);
+        fuegoText.setText("Fuego");
+        vistaFrutas.add(fuegoText);
+
+        //Label Bloque
+        bloqueText = new JLabel();
+        bloqueText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*4, 150, 75);
+        bloqueText.setText("Bloque");
+        vistaFrutas.add(bloqueText);
+
+        //Label Lupa
+        lupaText = new JLabel();
+        lupaText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*5, 150, 75);
+        lupaText.setText("Lupa");
+        vistaFrutas.add(lupaText);
 
 
         JLabel fondo = new JLabel();
@@ -369,6 +494,7 @@ public class GameModes extends JPanel {
 
         vistaFrutas.add(fondo);
     }
+
 
     /**
      * Método que prepara todos los elementos visuales del GameOver
