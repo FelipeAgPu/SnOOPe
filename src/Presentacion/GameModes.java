@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.HashMap;
 
 public class GameModes extends JPanel {
     public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver,vistaPausa,vistaFrutas;
@@ -18,8 +19,7 @@ public class GameModes extends JPanel {
     private JComboBox iAMode;
     private JLabel arcoirisText, venenoText, frutaText, dulceText, fuegoText, tijerasText, bloqueText, speedText, lupaText;
     private JCheckBox fruta, veneno, arcoiris, dulce, fuego, tijeras, bloque, speed, lupa;
-    private ImageIcon imgVolver, imgUnJugador, imgMultiJugador, imgMaquina, imgCabeza,imgCuerpo,imgFrutas;
-    private ImageIcon imgArcoiris,imgArcoirisNegro,imgVeneno,imgVenenoNegro,imgFruta, imgFrutaNegro, imgBloque,imgBloqueNegro,imgDulce,imgDulceNegro,imgSpeed,imgSpeedNegro,imgTijeras,imgTijerasNegro,imgLupa,imgLupaNegro,imgFuego,imgFuegoNegro;
+    private HashMap<String,ImageIcon> images;
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
     private Color colorCabeza1 = Color.RED,colorCabeza2 = Color.GREEN,colorCuerpo1 = Color.GREEN,colorCuerpo2 = Color.RED;
@@ -92,32 +92,36 @@ public class GameModes extends JPanel {
     }
 
     private void prepareImagenes(){
-        this.imgVolver = new ImageIcon("./images/volver.png");
-        this.imgUnJugador = new ImageIcon("./images/unJugador.png");
-        this.imgMultiJugador = new ImageIcon("./images/multijugador.png");
-        this.imgMaquina = new ImageIcon("./images/maquina.png");
-        this.imgCabeza = new ImageIcon("./images/cabeza.png");
-        this.imgCuerpo = new ImageIcon("./images/cuerpo.png");
-        this.imgFrutas = new ImageIcon("./images/frutaypower.png");
-        this.imgArcoiris = new ImageIcon("./images/arcoiris.png");
-        this.imgArcoirisNegro = new ImageIcon("./");
-        this.imgFruta = new ImageIcon("./images/normal.png");
-        this.imgFrutaNegro = new ImageIcon("./");
-        this.imgDulce = new ImageIcon("./images/dulce.png");
-        this.imgDulceNegro = new ImageIcon("./");
-        this.imgVeneno = new ImageIcon("./images/veneno.png");
-        this.imgVenenoNegro = new ImageIcon("./images/venenoNegro.png");
-        this.imgSpeed = new ImageIcon("./images/velocidad.png");
-        this.imgSpeedNegro = new ImageIcon("./images/speedNegro.png");
-        this.imgBloque = new ImageIcon("./images/bloque.jpg");
-        this.imgBloqueNegro = new ImageIcon("./images/bloqueNegro.png");
-        this.imgFuego = new ImageIcon("./images/fuego.png");
-        this.imgFuegoNegro = new ImageIcon("./images/fuegoNegro.png");
-        this.imgLupa = new ImageIcon("./images/lupa.png");
-        this.imgLupaNegro = new ImageIcon("./images/lupaNegro.png");
-        this.imgTijeras = new ImageIcon("./images/division.png");
-        this.imgTijerasNegro = new ImageIcon("./images/tijerasNegro.png");
 
+        this.images.put("Volver",new ImageIcon("./images/volver.png"));
+        this.images.put("UnJugador",new ImageIcon("./images/unJugador.png"));
+        this.images.put("MultiJugador",new ImageIcon("./images/multijugador.png"));
+        this.images.put("Maquina",new ImageIcon("./images/maquina.png"));
+        this.images.put("Cabeza",new ImageIcon("./images/cabeza.png"));
+        this.images.put("Cuerpo",new ImageIcon("./images/cuerpo.png"));
+        this.images.put("Frutas",new ImageIcon("./images/frutaypower.png"));
+        this.images.put("Arcoiris",new ImageIcon("./images/arcoiris.png"));
+        this.images.put("ArcoirisNegro",new ImageIcon("./images/arcoirisNegro.png"));
+        this.images.put("Fruta",new ImageIcon("./images/normal.png"));
+        this.images.put("FrutaNegro",new ImageIcon("./images/normalNegro.png"));
+        this.images.put("Dulce",new ImageIcon("./images/dulce.png"));
+        this.images.put("DulceNegro",new ImageIcon("./images/dulceNegro.png"));
+        this.images.put("Veneno",new ImageIcon("./images/veneno.png"));
+        this.images.put("VenenoNegro",new ImageIcon("./images/venenoNegro.png"));
+        this.images.put("Speed",new ImageIcon("./images/velocidad.png"));
+        this.images.put("SpeedNegro",new ImageIcon("./images/speedNegro.png"));
+        this.images.put("Bloque",new ImageIcon("./images/bloque.png"));
+        this.images.put("BloqueNegro",new ImageIcon("./images/bloqueNegro.png"));
+        this.images.put("Fuego",new ImageIcon("./images/fuego.png"));
+        this.images.put("FuegoNegro",new ImageIcon("./images/fuegoNegro.png"));
+        this.images.put("Lupa",new ImageIcon("./images/lupa.png"));
+        this.images.put("LupaNegro",new ImageIcon("./images/lupaNegro.png"));
+        this.images.put("Tijeras",new ImageIcon("./images/division.png"));
+        this.images.put("TijerasNegro",new ImageIcon("./images/tijerasNegro.png"));
+        this.images.put("ArcoirisText",new ImageIcon("./images/arcoirisText.png"));
+        this.images.put("FrutaText",new ImageIcon("./images/volver.png"));
+        this.images.put("VenenoText",new ImageIcon("./images/volver.png"));
+        this.images.put("DulceText",new ImageIcon("./images/volver.png"));
 
 
     }
@@ -362,6 +366,11 @@ public class GameModes extends JPanel {
         veneno.setIcon(imgVeneno);
         vistaFrutas.add(veneno);
 
+        arcoirisText = new JLabel(imgArcoirisText);
+        arcoirisText.setBounds(vistaFrutas.getWidth()/6+100,(vistaFrutas.getHeight()/6)*2-50, 300, 200);
+        vistaFrutas.add(arcoirisText);
+
+
 
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0,gui.width,gui.height);
@@ -584,7 +593,7 @@ public class GameModes extends JPanel {
                 if (fruta.isSelected()){
                     fruta.setIcon(imgArcoiris);
                 }else{
-                    fruta.setIcon(imgCabeza);
+                    fruta.setIcon(imgArcoirisNegro);
                 }
             }
         });
