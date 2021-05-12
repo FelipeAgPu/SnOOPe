@@ -19,6 +19,7 @@ public class GameModes extends JPanel {
     private JComboBox iAMode;
     private JLabel arcoirisText, venenoText, frutaText, dulceText, fuegoText, tijerasText, bloqueText, speedText, lupaText;
     private JCheckBox fruta, veneno, arcoiris, dulce, fuego, tijeras, bloque, speed, lupa;
+    private JButton volver, jugar;
     private HashMap<String,ImageIcon> images;
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
@@ -490,6 +491,22 @@ public class GameModes extends JPanel {
         lupaText = new JLabel(images.get("LupaText"));
         lupaText.setBounds((vistaFrutas.getWidth()/10)*6 + 120,(vistaFrutas.getHeight()/7)*5-20, 500, 200);
         vistaFrutas.add(lupaText);
+
+        //Botones
+        //Volver
+        volver = new JButton("Volver");
+        volver.setBounds((vistaFrutas.getWidth()/12),(vistaFrutas.getHeight()/14)*11,(vistaFrutas.getWidth()/8)*2,vistaFrutas.getHeight()/8);
+        volver.setBorderPainted(false);
+        volver.setContentAreaFilled(false);
+        volver.setIcon(images.get("Volver"));
+        vistaFrutas.add(volver);
+
+        jugar = new JButton("Volver");
+        jugar.setBounds((vistaFrutas.getWidth()/12)*9,(vistaFrutas.getHeight()/14)*11,(vistaFrutas.getWidth()/8)*2,vistaFrutas.getHeight()/8);
+        jugar.setBorderPainted(false);
+        jugar.setContentAreaFilled(false);
+        jugar.setIcon(images.get("Jugar"));
+        vistaFrutas.add(jugar);
 
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0,gui.width,gui.height);
