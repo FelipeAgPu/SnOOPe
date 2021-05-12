@@ -57,7 +57,7 @@ public class GameModes extends JPanel {
         menuSingle.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*2,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
         menuSingle.setContentAreaFilled(false);
         menuSingle.setBorderPainted(false);
-        menuSingle.setIcon(imgUnJugador);
+        menuSingle.setIcon(images.get("UnJugador"));
         vistaGameMode.add(menuSingle);
 
         //Boton Multiplayer
@@ -65,7 +65,7 @@ public class GameModes extends JPanel {
         menuMulti.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*4,(vistaGameMode.getWidth()/8)*2+20,vistaGameMode.getHeight()/8);
         menuMulti.setBorderPainted(false);
         menuMulti.setContentAreaFilled(false);
-        menuMulti.setIcon(imgMultiJugador);
+        menuMulti.setIcon(images.get("MultiJugador"));
         vistaGameMode.add(menuMulti);
 
         //Boton VS IA
@@ -73,7 +73,7 @@ public class GameModes extends JPanel {
         menuIA.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*6,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
         menuIA.setContentAreaFilled(false);
         menuIA.setBorderPainted(false);
-        menuIA.setIcon(imgMaquina);
+        menuIA.setIcon(images.get("Maquina"));
         vistaGameMode.add(menuIA);
 
         //Boton Volver
@@ -81,7 +81,7 @@ public class GameModes extends JPanel {
         menuVolver.setBounds((vistaGameMode.getWidth()/8)*3,(vistaGameMode.getHeight()/12)*8,(vistaGameMode.getWidth()/8)*2,vistaGameMode.getHeight()/8);
         menuVolver.setBorderPainted(false);
         menuVolver.setContentAreaFilled(false);
-        menuVolver.setIcon(imgVolver);
+        menuVolver.setIcon(images.get("Volver"));
         vistaGameMode.add(menuVolver);
 
         JLabel fondo = new JLabel();
@@ -95,6 +95,7 @@ public class GameModes extends JPanel {
      * Método que genera todas las imagenes de las frutas y powerups
      */
     private void prepareImagenes(){
+        this.images = new HashMap<>();
         this.images.put("Volver",new ImageIcon("./images/volver.png"));
         this.images.put("UnJugador",new ImageIcon("./images/unJugador.png"));
         this.images.put("MultiJugador",new ImageIcon("./images/multijugador.png"));
@@ -112,7 +113,7 @@ public class GameModes extends JPanel {
         this.images.put("VenenoNegro",new ImageIcon("./images/venenoNegro.png"));
         this.images.put("Speed",new ImageIcon("./images/velocidad.png"));
         this.images.put("SpeedNegro",new ImageIcon("./images/speedNegro.png"));
-        this.images.put("Bloque",new ImageIcon("./images/bloque.png"));
+        this.images.put("Bloque",new ImageIcon("./images/bloque.jpg"));
         this.images.put("BloqueNegro",new ImageIcon("./images/bloqueNegro.png"));
         this.images.put("Fuego",new ImageIcon("./images/fuego.png"));
         this.images.put("FuegoNegro",new ImageIcon("./images/fuegoNegro.png"));
@@ -121,9 +122,14 @@ public class GameModes extends JPanel {
         this.images.put("Tijeras",new ImageIcon("./images/division.png"));
         this.images.put("TijerasNegro",new ImageIcon("./images/tijerasNegro.png"));
         this.images.put("ArcoirisText",new ImageIcon("./images/arcoirisText.png"));
-        this.images.put("FrutaText",new ImageIcon("./images/volver.png"));
-        this.images.put("VenenoText",new ImageIcon("./images/volver.png"));
-        this.images.put("DulceText",new ImageIcon("./images/volver.png"));
+        this.images.put("FrutaText",new ImageIcon("./images/frutaText.png"));
+        this.images.put("VenenoText",new ImageIcon("./images/VenenoText.png"));
+        this.images.put("DulceText",new ImageIcon("./images/DulceText.png"));
+        this.images.put("TijerasText",new ImageIcon("./images/DivisionText.png"));
+        this.images.put("FuegoText",new ImageIcon("./images/FuegoText.png"));
+        this.images.put("SpeedText",new ImageIcon("./images/SpeedText.png"));
+        this.images.put("LupaText",new ImageIcon("./images/LupaText.png"));
+        this.images.put("BloqueText",new ImageIcon("./images/BloqueText.png"));
 
     }
 
@@ -151,7 +157,7 @@ public class GameModes extends JPanel {
         singleColorCabeza.setBounds((vistaSingle.getWidth()/8)*2,(vistaSingle.getHeight()/10)*4,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
         singleColorCabeza.setBackground(colorCabeza1);
         singleColorCabeza.setBorderPainted(false);
-        singleColorCabeza.setIcon(imgCabeza);
+        singleColorCabeza.setIcon(images.get("Cabeza"));
         vistaSingle.add(singleColorCabeza);
 
         //Boton Color Cuerpo
@@ -159,7 +165,7 @@ public class GameModes extends JPanel {
         singleColorCuerpo.setBounds((vistaSingle.getWidth()/8)*4,(vistaSingle.getHeight()/10)*4,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
         singleColorCuerpo.setBackground(colorCuerpo1);
         singleColorCuerpo.setBorderPainted(false);
-        singleColorCuerpo.setIcon(imgCuerpo);
+        singleColorCuerpo.setIcon(images.get("cuerpo"));
         vistaSingle.add(singleColorCuerpo);
 
         //Boton Frutas y powerups
@@ -167,7 +173,7 @@ public class GameModes extends JPanel {
         singleFrutas.setBounds((vistaSingle.getWidth()/10)*4,(vistaSingle.getHeight()/10)*6,(vistaSingle.getWidth()/10)*2,(vistaSingle.getHeight()/8)*2);
         singleFrutas.setContentAreaFilled(false);
         singleFrutas.setBorderPainted(false);
-        singleFrutas.setIcon(imgFrutas);
+        singleFrutas.setIcon(images.get("Frutas"));
         vistaSingle.add(singleFrutas);
 
         //Boton volver
@@ -175,7 +181,7 @@ public class GameModes extends JPanel {
         singleVolver.setBounds(vistaSingle.getWidth()/10,(vistaSingle.getHeight()/10)*7,(vistaSingle.getWidth()/10)*2,vistaSingle.getHeight()/8);
         singleVolver.setContentAreaFilled(false);
         singleVolver.setBorderPainted(false);
-        singleVolver.setIcon(imgVolver);
+        singleVolver.setIcon(images.get("Volver"));
         vistaSingle.add(singleVolver);
 
         //Boton jugar
@@ -217,7 +223,7 @@ public class GameModes extends JPanel {
         multiColorCabeza1.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*4,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCabeza1.setBackground(colorCabeza1);
         multiColorCabeza1.setBorderPainted(false);
-        multiColorCabeza1.setIcon(imgCabeza);
+        multiColorCabeza1.setIcon(images.get("Cabeza"));
         vistaMulti.add(multiColorCabeza1);
 
         //Boton Color Cuerpo 1
@@ -225,8 +231,9 @@ public class GameModes extends JPanel {
         multiColorCuerpo1.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*4,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCuerpo1.setBackground(colorCuerpo1);
         multiColorCuerpo1.setBorderPainted(false);
-        multiColorCuerpo1.setIcon(imgCuerpo);
+        multiColorCuerpo1.setIcon(images.get("Cuerpo"));
         vistaMulti.add(multiColorCuerpo1);
+
 
         //Nombre Jugador 2
         multiName2 = new JTextField("Jugador2");
@@ -241,7 +248,7 @@ public class GameModes extends JPanel {
         multiColorCabeza2.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*8,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCabeza2.setBackground(colorCabeza2);
         multiColorCabeza2.setBorderPainted(false);
-        multiColorCabeza2.setIcon(imgCabeza);
+        multiColorCabeza2.setIcon(images.get("Cabeza"));
         vistaMulti.add(multiColorCabeza2);
 
         //Boton Color Cuerpo 2
@@ -249,7 +256,7 @@ public class GameModes extends JPanel {
         multiColorCuerpo2.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*8,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCuerpo2.setBackground(colorCuerpo2);
         multiColorCuerpo2.setBorderPainted(false);
-        multiColorCuerpo2.setIcon(imgCuerpo);
+        multiColorCuerpo2.setIcon(images.get("Cuerpo"));
         vistaMulti.add(multiColorCuerpo2);
 
         //Boton volver
@@ -257,7 +264,7 @@ public class GameModes extends JPanel {
         multiVolver.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiVolver.setBorderPainted(false);
         multiVolver.setContentAreaFilled(false);
-        multiVolver.setIcon(imgVolver);
+        multiVolver.setIcon(images.get("Volver"));
         vistaMulti.add(multiVolver);
 
         //Boton jugar
@@ -299,7 +306,7 @@ public class GameModes extends JPanel {
         iAColorCabeza.setBounds((vistaIA.getWidth()/8)*2,(vistaIA.getHeight()/12)*4,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
         iAColorCabeza.setBackground(colorCabeza1);
         iAColorCabeza.setBorderPainted(false);
-        iAColorCabeza.setIcon(imgCabeza);
+        iAColorCabeza.setIcon(images.get("Cabeza"));
         vistaIA.add(iAColorCabeza);
 
         //Color del cuerpo
@@ -307,7 +314,7 @@ public class GameModes extends JPanel {
         iAColorCuerpo.setBounds((vistaIA.getWidth()/8)*4,(vistaIA.getHeight()/12)*4,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
         iAColorCuerpo.setBackground(colorCuerpo1);
         iAColorCuerpo.setBorderPainted(false);
-        iAColorCuerpo.setIcon(imgCuerpo);
+        iAColorCuerpo.setIcon(images.get("Cuerpo"));
         vistaIA.add(iAColorCuerpo);
 
         //Modo de la serpiente
@@ -325,7 +332,7 @@ public class GameModes extends JPanel {
         iAVolver.setBounds((vistaIA.getWidth()/8)*2,(vistaIA.getHeight()/12)*7,(vistaIA.getWidth()/8)*2,vistaIA.getHeight()/8);
         iAVolver.setBorderPainted(false);
         iAVolver.setContentAreaFilled(false);
-        iAVolver.setIcon(imgVolver);
+        iAVolver.setIcon(images.get("Volver"));
         vistaIA.add(iAVolver);
 
         //Jugar
@@ -360,7 +367,7 @@ public class GameModes extends JPanel {
         fruta.setBorderPainted(false);
         fruta.setContentAreaFilled(false);
         fruta.setSelected(true);
-        fruta.setIcon(imgFruta);
+        fruta.setIcon(images.get("Fruta"));
         vistaFrutas.add(fruta);
 
         //CheckBox Veneno
@@ -369,7 +376,7 @@ public class GameModes extends JPanel {
         veneno.setBorderPainted(false);
         veneno.setContentAreaFilled(false);
         veneno.setSelected(true);
-        veneno.setIcon(imgVeneno);
+        veneno.setIcon(images.get("Veneno"));
         vistaFrutas.add(veneno);
 
 
@@ -379,7 +386,7 @@ public class GameModes extends JPanel {
         dulce.setBorderPainted(false);
         dulce.setContentAreaFilled(false);
         dulce.setSelected(true);
-        dulce.setIcon(imgDulce);
+        dulce.setIcon(images.get("Dulce"));
         vistaFrutas.add(dulce);
 
         //CheckBox Arcoiris
@@ -388,32 +395,28 @@ public class GameModes extends JPanel {
         arcoiris.setBorderPainted(false);
         arcoiris.setContentAreaFilled(false);
         arcoiris.setSelected(true);
-        arcoiris.setIcon(imgArcoiris);
+        arcoiris.setIcon(images.get("Arcoiris"));
         vistaFrutas.add(arcoiris);
 
         //Labels Frutas
         //Label Normal
-        frutaText = new JLabel();
-        frutaText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6), 150, 75);
-        frutaText.setText("Normal");
+        frutaText = new JLabel(images.get("FrutaText"));
+        frutaText.setBounds(vistaFrutas.getWidth()/8 + 130,(vistaFrutas.getHeight()/6)-50, 500, 200);
         vistaFrutas.add(frutaText);
 
         //Label Veneno
-        venenoText = new JLabel();
-        venenoText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6)*2, 150, 75);
-        venenoText.setText("Veneno");
+        venenoText = new JLabel(images.get("VenenoText"));
+        venenoText.setBounds(vistaFrutas.getWidth()/8 + 120,(vistaFrutas.getHeight()/6)*2-50, 500, 200);
         vistaFrutas.add(venenoText);
 
         //Label Dulce
-        dulceText = new JLabel();
-        dulceText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6)*3, 150, 75);
-        dulceText.setText("Dulce");
+        dulceText = new JLabel(images.get("DulceText"));
+        dulceText.setBounds(vistaFrutas.getWidth()/8 + 120,(vistaFrutas.getHeight()/6)*3-75, 500, 200);
         vistaFrutas.add(dulceText);
 
         //Label Arcoiris
-        arcoirisText = new JLabel();
-        arcoirisText.setBounds(vistaFrutas.getWidth()/8 + 70,(vistaFrutas.getHeight()/6)*4, 150, 75);
-        arcoirisText.setText("Arcoiris");
+        arcoirisText = new JLabel(images.get("ArcoirisText"));
+        arcoirisText.setBounds(vistaFrutas.getWidth()/8 + 120,(vistaFrutas.getHeight()/6)*4-50, 500, 200);
         vistaFrutas.add(arcoirisText);
 
         //PowerUp
@@ -423,7 +426,7 @@ public class GameModes extends JPanel {
         tijeras.setBorderPainted(false);
         tijeras.setContentAreaFilled(false);
         tijeras.setSelected(true);
-        tijeras.setIcon(imgTijeras);
+        tijeras.setIcon(images.get("Tijeras"));
         vistaFrutas.add(tijeras);
 
         //CheckBox Speed
@@ -432,7 +435,7 @@ public class GameModes extends JPanel {
         speed.setBorderPainted(false);
         speed.setContentAreaFilled(false);
         speed.setSelected(true);
-        speed.setIcon(imgSpeed);
+        speed.setIcon(images.get("Speed"));
         vistaFrutas.add(speed);
 
         //CheckBox Fuego
@@ -441,7 +444,7 @@ public class GameModes extends JPanel {
         fuego.setBorderPainted(false);
         fuego.setContentAreaFilled(false);
         fuego.setSelected(true);
-        fuego.setIcon(imgFuego);
+        fuego.setIcon(images.get("Fuego"));
         vistaFrutas.add(fuego);
 
         //CheckBox Bloque
@@ -450,7 +453,7 @@ public class GameModes extends JPanel {
         bloque.setBorderPainted(false);
         bloque.setContentAreaFilled(false);
         bloque.setSelected(true);
-        bloque.setIcon(imgBloque);
+        bloque.setIcon(images.get("Bloque"));
         vistaFrutas.add(bloque);
 
         //CheckBox Lupa
@@ -459,47 +462,38 @@ public class GameModes extends JPanel {
         lupa.setBorderPainted(false);
         lupa.setContentAreaFilled(false);
         lupa.setSelected(true);
-        lupa.setIcon(imgLupa);
+        lupa.setIcon(images.get("Lupa"));
         vistaFrutas.add(lupa);
 
         //Labels Power Up
         //Label Tijeras
-        tijerasText = new JLabel();
-        tijerasText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7), 150, 75);
-        tijerasText.setText("División");
+        tijerasText = new JLabel(images.get("TijerasText"));
+        tijerasText.setBounds((vistaFrutas.getWidth()/10)*6 + 120,(vistaFrutas.getHeight()/7)-50, 500, 200);
         vistaFrutas.add(tijerasText);
 
         //Label Speed
-        speedText = new JLabel();
-        speedText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*2, 150, 75);
-        speedText.setText("Speed");
+        speedText = new JLabel(images.get("SpeedText"));
+        speedText.setBounds((vistaFrutas.getWidth()/10)*6 + 120,(vistaFrutas.getHeight()/7)*2-40, 500, 200);
         vistaFrutas.add(speedText);
 
         //Label Fuego
-        fuegoText = new JLabel();
-        fuegoText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*3, 150, 75);
-        fuegoText.setText("Fuego");
+        fuegoText = new JLabel(images.get("FuegoText"));
+        fuegoText.setBounds((vistaFrutas.getWidth()/10)*6 + 120,(vistaFrutas.getHeight()/7)*3-20, 500, 200);
         vistaFrutas.add(fuegoText);
 
         //Label Bloque
-        bloqueText = new JLabel();
-        bloqueText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*4, 150, 75);
-        bloqueText.setText("Bloque");
+        bloqueText = new JLabel(images.get("BloqueText"));
+        bloqueText.setBounds((vistaFrutas.getWidth()/10)*6 + 120,(vistaFrutas.getHeight()/7)*4-10, 500, 200);
         vistaFrutas.add(bloqueText);
 
         //Label Lupa
-        lupaText = new JLabel();
-        lupaText.setBounds((vistaFrutas.getWidth()/10)*6 + 70,(vistaFrutas.getHeight()/7)*5, 150, 75);
-        lupaText.setText("Lupa");
+        lupaText = new JLabel(images.get("LupaText"));
+        lupaText.setBounds((vistaFrutas.getWidth()/10)*6 + 120,(vistaFrutas.getHeight()/7)*5-20, 500, 200);
         vistaFrutas.add(lupaText);
-
-        arcoirisText = new JLabel(imgArcoirisText);
-        arcoirisText.setBounds(vistaFrutas.getWidth()/6+100,(vistaFrutas.getHeight()/6)*2-50, 300, 200);
-        vistaFrutas.add(arcoirisText);
 
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0,gui.width,gui.height);
-        fondo.setIcon(gui.imgFondo);
+        fondo.setIcon(new ImageIcon("./images/Fondo2.png"));
 
         vistaFrutas.add(fondo);
     }
@@ -717,9 +711,98 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (fruta.isSelected()){
-                    fruta.setIcon(imgArcoiris);
-                }else{
-                    fruta.setIcon(imgArcoirisNegro);
+                    fruta.setIcon(images.get("Fruta"));
+                }
+                else{
+                    fruta.setIcon(images.get("FrutaNegro"));
+                }
+            }
+        });
+        veneno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (veneno.isSelected()){
+                    veneno.setIcon(images.get("Veneno"));
+                }
+                else{
+                    veneno.setIcon(images.get("VenenoNegro"));
+                }
+            }
+        });
+        arcoiris.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (arcoiris.isSelected()){
+                    arcoiris.setIcon(images.get("Arcoiris"));
+                }
+                else{
+                    arcoiris.setIcon(images.get("ArcoirisNegro"));
+                }
+            }
+        });
+        dulce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (dulce.isSelected()){
+                    dulce.setIcon(images.get("Dulce"));
+                }
+                else{
+                    dulce.setIcon(images.get("DulceNegro"));
+                }
+            }
+        });
+        fuego.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (fuego.isSelected()){
+                    fuego.setIcon(images.get("Fuego"));
+                }
+                else{
+                    fuego.setIcon(images.get("FuegoNegro"));
+                }
+            }
+        });
+        speed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (speed.isSelected()){
+                    speed.setIcon(images.get("Speed"));
+                }
+                else{
+                    speed.setIcon(images.get("SpeedNegro"));
+                }
+            }
+        });
+        bloque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (bloque.isSelected()){
+                    bloque.setIcon(images.get("Bloque"));
+                }
+                else{
+                    bloque.setIcon(images.get("BloqueNegro"));
+                }
+            }
+        });
+        lupa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (lupa.isSelected()){
+                    lupa.setIcon(images.get("Lupa"));
+                }
+                else{
+                    lupa.setIcon(images.get("LupaNegro"));
+                }
+            }
+        });
+        tijeras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tijeras.isSelected()){
+                    tijeras.setIcon(images.get("Tijeras"));
+                }
+                else{
+                    tijeras.setIcon(images.get("TijerasNegro"));
                 }
             }
         });
