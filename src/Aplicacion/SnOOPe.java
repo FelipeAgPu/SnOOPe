@@ -12,7 +12,8 @@ public class SnOOPe {
     private ArrayList<Color> colores;
     private Fruta[] frutas;
     private Timer[] timers;
-    private String[] tiposFruta = {"Normal", "Arcoiris", "Dulce", "Veneno"};
+    private ArrayList<String> tiposFruta ;
+    private ArrayList<String> tiposPowerUps;
 
     /**
      * Constructor de la clase SnOOPe
@@ -30,11 +31,27 @@ public class SnOOPe {
         colores.add(Color.ORANGE);
         colores.add(Color.GREEN);
 
+
+
+    }
+
+    /**
+     * Método que inicia una partida single player
+     * @param nombre Nombre del jugador
+     * @param colorHead Color de la cabeza
+     * @param colorBody Color del cuerpo
+     */
+    public void jugar(String nombre, Color colorHead, Color colorBody,ArrayList<String> frutas,ArrayList<String> powerUps){
+        this.tiposFruta = frutas;
+        this.tiposPowerUps = powerUps;
+        snakes.add(new Jugador(nombre, colorBody, colorHead, this));
+        colores.add(colorHead);
+        colores.add(colorBody);
         this.timers = new Timer[2];
 
         this.frutas = new Fruta[2];
-        frutas[0] = crearFrutaAleatoria();
-        frutas[1] = crearFrutaAleatoria();
+        this.frutas[0] = crearFrutaAleatoria();
+        this.frutas[1] = crearFrutaAleatoria();
 
         getTimers()[0] = new Timer();
         TimerTask task = new TimerTask() {
@@ -53,19 +70,6 @@ public class SnOOPe {
             }
         };
         getTimers()[1].schedule(task1, 8000,8000);
-
-    }
-
-    /**
-     * Método que inicia una partida single player
-     * @param nombre Nombre del jugador
-     * @param colorHead Color de la cabeza
-     * @param colorBody Color del cuerpo
-     */
-    public void jugar(String nombre, Color colorHead, Color colorBody){
-        snakes.add(new Jugador(nombre, colorBody, colorHead, this));
-        colores.add(colorHead);
-        colores.add(colorBody);
     }
 
     /**
@@ -75,8 +79,8 @@ public class SnOOPe {
     public Fruta crearFrutaAleatoria(){
         Fruta ans = null;
         Random rn = new Random();
-        int x = rn.nextInt(4);
-        switch (tiposFruta[x]){
+        int x = rn.nextInt(tiposFruta.size());
+        switch (tiposFruta.get(x)){
             case "Normal":
                 ans = new Normal(this);
                 break;

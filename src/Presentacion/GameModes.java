@@ -5,7 +5,7 @@ import Aplicacion.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModes extends JPanel {
@@ -19,13 +19,14 @@ public class GameModes extends JPanel {
     private JComboBox iAMode;
     private JLabel arcoirisText, venenoText, frutaText, dulceText, fuegoText, tijerasText, bloqueText, speedText, lupaText;
     private JCheckBox fruta, veneno, arcoiris, dulce, fuego, tijeras, bloque, speed, lupa;
-    private JButton volver, jugar;
+    private JButton volverFrutas, guardarFrutas;
     private HashMap<String,ImageIcon> images;
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
     private Color colorCabeza1 = Color.RED,colorCabeza2 = Color.GREEN,colorCuerpo1 = Color.GREEN,colorCuerpo2 = Color.RED;
     public PanelSnake snake;
     public SnOOPe snoope;
+    private String anterior;
 
     /**
      * Creador de las clases encargadas de las vistas de menus para cada modo de juego
@@ -131,6 +132,7 @@ public class GameModes extends JPanel {
         this.images.put("SpeedText",new ImageIcon("./images/SpeedText.png"));
         this.images.put("LupaText",new ImageIcon("./images/LupaText.png"));
         this.images.put("BloqueText",new ImageIcon("./images/BloqueText.png"));
+        this.images.put("Guardar",new ImageIcon("./images/Guardar.png"));
 
     }
 
@@ -494,19 +496,19 @@ public class GameModes extends JPanel {
 
         //Botones
         //Volver
-        volver = new JButton("Volver");
-        volver.setBounds((vistaFrutas.getWidth()/12),(vistaFrutas.getHeight()/14)*11,(vistaFrutas.getWidth()/8)*2,vistaFrutas.getHeight()/8);
-        volver.setBorderPainted(false);
-        volver.setContentAreaFilled(false);
-        volver.setIcon(images.get("Volver"));
-        vistaFrutas.add(volver);
+        volverFrutas = new JButton();
+        volverFrutas.setBounds((vistaFrutas.getWidth()/12),(vistaFrutas.getHeight()/14)*11,(vistaFrutas.getWidth()/8)*2,vistaFrutas.getHeight()/8);
+        volverFrutas.setBorderPainted(false);
+        volverFrutas.setContentAreaFilled(false);
+        volverFrutas.setIcon(images.get("Volver"));
+        vistaFrutas.add(volverFrutas);
 
-        jugar = new JButton("Volver");
-        jugar.setBounds((vistaFrutas.getWidth()/12)*9,(vistaFrutas.getHeight()/14)*11,(vistaFrutas.getWidth()/8)*2,vistaFrutas.getHeight()/8);
-        jugar.setBorderPainted(false);
-        jugar.setContentAreaFilled(false);
-        jugar.setIcon(images.get("Jugar"));
-        vistaFrutas.add(jugar);
+        guardarFrutas = new JButton();
+        guardarFrutas.setBounds((vistaFrutas.getWidth()/12)*4,(vistaFrutas.getHeight()/14)*11,(vistaFrutas.getWidth()/8)*2,vistaFrutas.getHeight()/8);
+        guardarFrutas.setBorderPainted(false);
+        guardarFrutas.setContentAreaFilled(false);
+        guardarFrutas.setIcon(images.get("Guardar"));
+        vistaFrutas.add(guardarFrutas);
 
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0,gui.width,gui.height);
@@ -626,7 +628,7 @@ public class GameModes extends JPanel {
         singleJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                snoope.jugar(singleName.getText(), colorCabeza1, colorCuerpo1);
+                snoope.jugar(singleName.getText(), colorCabeza1, colorCuerpo1,getFrutas(),getPowerUps());
                 gui.jugarSingle();
             }
         });
@@ -823,6 +825,18 @@ public class GameModes extends JPanel {
                 }
             }
         });
+        volverFrutas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.cd.show(gui.principal,"GameMode");
+            }
+        });
+        guardarFrutas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.cd.show(gui.principal,anterior);
+            }
+        });
     }
 
 
@@ -886,8 +900,6 @@ public class GameModes extends JPanel {
     }
 
     private void seleccionarFrutas(){
-        prepareElementosFrutas();
-        prepareAccionesFrutas();
         gui.cd.show(gui.principal,"Frutas");
     }
 
@@ -905,6 +917,9 @@ public class GameModes extends JPanel {
     private void single(){
         prepareElementosMenuSingle();
         prepareAccionesMenuSingle();
+        prepareElementosFrutas();
+        prepareAccionesFrutas();
+        anterior="SinglePlayer";
         this.gui.cd.show(gui.principal,"SinglePlayer");
     }
 
@@ -914,6 +929,9 @@ public class GameModes extends JPanel {
     private void multi(){
         prepareElementosMenuMulti();
         prepareAccionesMenuMulti();
+        prepareElementosFrutas();
+        prepareAccionesFrutas();
+        anterior="Multiplayer";
         this.gui.cd.show(gui.principal,"MultiPlayer");
     }
 
@@ -923,7 +941,46 @@ public class GameModes extends JPanel {
     private void iA(){
         prepareElementosMenuIA();
         prepareAccionesMenuIA();
+        prepareElementosFrutas();
+        prepareAccionesFrutas();
+        anterior="IA";
         this.gui.cd.show(gui.principal,"IA");
+    }
+    private ArrayList<String> getFrutas(){
+        ArrayList<String> frutas = new ArrayList<>();
+        if (fruta.isSelected()){
+            frutas.add("Normal");
+        }
+        if (veneno.isSelected()){
+            frutas.add("veneno");
+        }
+        if (arcoiris.isSelected()){
+            frutas.add("Arcoiris");
+        }
+        if (dulce.isSelected()){
+            frutas.add("Dulce");
+        }
+        return frutas;
+    }
+
+    private ArrayList<String> getPowerUps(){
+        ArrayList<String> powerUps = new ArrayList<>();
+        if (bloque.isSelected()){
+            powerUps.add("Bloque");
+        }
+        if (fuego.isSelected()){
+            powerUps.add("Fuego");
+        }
+        if (lupa.isSelected()){
+            powerUps.add("Lupa");
+        }
+        if (tijeras.isSelected()){
+            powerUps.add("Division");
+        }
+        if (speed.isSelected()){
+            powerUps.add("Speed");
+        }
+        return powerUps;
     }
 
     /**

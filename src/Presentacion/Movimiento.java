@@ -36,10 +36,8 @@ public class Movimiento implements Runnable{
             }
             snake.repaint();
             try {
-                if (snake.getSnake().getSnake().size()%5==0){
-                    multiplicador=snake.getSnake().getSnake().size()/5;
-                    aumentador = 50*multiplicador;
-                }
+                multiplicador=snake.getSnake().getSnake().size()/5;
+                aumentador = 10*multiplicador;
 
                 Thread.sleep(velocidad+aumentador);
             } catch (InterruptedException e) {
