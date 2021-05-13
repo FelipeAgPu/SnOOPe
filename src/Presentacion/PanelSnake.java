@@ -13,6 +13,7 @@ public class PanelSnake extends JPanel {
     int max, size, nFilas, nColumnas, res;
     ArrayList<Snake> snakes;
     boolean isPaused = false;
+    SnOOPeGUI gui;
 
     Movimiento movimiento;
     Thread hilo;
@@ -25,7 +26,8 @@ public class PanelSnake extends JPanel {
      * @param nColumnas Cantidad de columnas
      * @param snakes
      */
-    public PanelSnake(int max, int nFilas, int nColumnas, ArrayList<Snake> snakes){
+    public PanelSnake(int max, int nFilas, int nColumnas, ArrayList<Snake> snakes, SnOOPeGUI gui){
+        this.gui = gui;
         this.max = max;
         this.nFilas = nFilas;
         this.nColumnas = nColumnas;
@@ -34,7 +36,7 @@ public class PanelSnake extends JPanel {
 
         this.snakes = snakes;
 
-        this.movimiento = new Movimiento(this );
+        this.movimiento = new Movimiento(this, gui);
         this.hilo = new Thread(movimiento);
         hilo.start();
 

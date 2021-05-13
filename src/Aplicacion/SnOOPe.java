@@ -15,7 +15,7 @@ public class SnOOPe implements Serializable {
     private ArrayList<Color> colores;
     private ArrayList<Integer[]> bloques;
     private Fruta[] frutas;
-    private Timer[] timers;
+    private transient Timer[] timers;
     private PowerUp powerUp;
     private ArrayList<String> tiposFruta;
     private ArrayList<String> tiposPowerUps;
@@ -200,6 +200,24 @@ public class SnOOPe implements Serializable {
         }
     }
 
+    public static SnOOPe abrir(File archivo) throws SnOOPeException {
+        if (!archivo.getAbsolutePath().endsWith(".dat")){
+            throw new SnOOPeException(SnOOPeException.ERROR_TIPO_ABRIR);
+        }
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(archivo.getAbsolutePath()));
+
+            SnOOPe snoope = (SnOOPe) in.readObject();
+
+            in.close();
+
+
+            return snoope;
+        }catch (IOException | ClassNotFoundException e){
+            throw new SnOOPeException(SnOOPeException.ERROR_ABRIR);
+        }
+    }
+
     public int getnFilas() {
         return nFilas;
     }
@@ -227,6 +245,30 @@ public class SnOOPe implements Serializable {
     public Timer[] getTimers() {
         return timers;
     }
+
+    public void setTimers() {
+        this.timers = new Timer[2];
+        getTimers()[0] = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                getFrutas()[0] = crearFrutaAleatoria();
+            }
+        };
+        getTimers()[0].schedule(task, 8000, 8000);
+
+        getTimers()[1] = new Timer();
+        TimerTask task1 = new TimerTask() {
+            @Override
+            public void run() {
+                getFrutas()[1] = crearFrutaAleatoria();
+            }
+        };
+        getTimers()[1].schedule(task1, 8000,8000);
+
+
+    }
+
 
     public void printInfo(){
         System.out.println("Frutas");

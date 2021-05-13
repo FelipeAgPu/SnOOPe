@@ -201,9 +201,16 @@ public class SnOOPeGUI extends JFrame {
 
         if (sel==JFileChooser.APPROVE_OPTION){
             File file = fc.getSelectedFile();
-            String name = file.getName();
-            JOptionPane.showMessageDialog(null,"Funcionalidad Abrir en construccion.\n Archivo a abrir : "+ name);
-        }
+            try {
+                snoope= snoope.abrir(file);
+                snoope.setTimers();
+                prepareElementosJuego();
+                prepareAccionesJuego();
+            }
+            catch (SnOOPeException e){
+                JOptionPane.showMessageDialog(null,e.getMessage());
+            }
+            }
     }
 
     /**
@@ -259,7 +266,7 @@ public class SnOOPeGUI extends JFrame {
      * Método que inicia los paneles que se actualizan y añade los keylisteners
      */
     public void prepareAccionesJuego(){
-        snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes());
+        snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes(),this);
         vistaJugarSingle.add(snake, "Snake");
         snake.setLayout(null);
         snake.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());

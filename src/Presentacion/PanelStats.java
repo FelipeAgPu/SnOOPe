@@ -53,6 +53,7 @@ public class PanelStats extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pausar();
+                gui.abrirMenu.setVisible(false);
             }
         });
     }

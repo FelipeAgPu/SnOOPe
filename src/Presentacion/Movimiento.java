@@ -10,13 +10,14 @@ public class Movimiento implements Runnable{
     PanelSnake snake;
     int velocidad, multiplicador, aumentador;
     boolean estado=true;
+    SnOOPeGUI gui;
 
     /**
      * Creador de la clase encargada del movimiento de la serpiente
      * @param snake Serpiente a mover
      */
-    public Movimiento(PanelSnake snake){
-
+    public Movimiento(PanelSnake snake, SnOOPeGUI gui){
+        this.gui = gui;
         this.snake = snake;
         this.velocidad= 80;
         this.aumentador = 1;
@@ -33,7 +34,7 @@ public class Movimiento implements Runnable{
                     snake.avanzar();
                 } catch (SnOOPeException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                    System.exit(0);
+                    gui.cd.show(gui.principal, "GameOver");
                 }
                 this.snake.repaint();
                 try {
@@ -46,7 +47,6 @@ public class Movimiento implements Runnable{
 
                     Thread.sleep(velocidad+aumentador);
                 } catch (InterruptedException e) {
-
                 }
             }
 

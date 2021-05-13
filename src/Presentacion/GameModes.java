@@ -39,6 +39,8 @@ public class GameModes extends JPanel {
         prepareImagenes();
         prepareElementosMenu();
         prepareAccionesMenu();
+        prepareElementosGameOver();
+        prepareAccionesGameOver();
         prepareElementosPausa();
         prepareAccionesPausa();
     }
@@ -168,7 +170,7 @@ public class GameModes extends JPanel {
         singleColorCuerpo.setBounds((vistaSingle.getWidth()/8)*4,(vistaSingle.getHeight()/10)*4,(vistaSingle.getWidth()/8)*2,vistaSingle.getHeight()/8);
         singleColorCuerpo.setBackground(colorCuerpo1);
         singleColorCuerpo.setBorderPainted(false);
-        singleColorCuerpo.setIcon(images.get("cuerpo"));
+        singleColorCuerpo.setIcon(images.get("Cuerpo"));
         vistaSingle.add(singleColorCuerpo);
 
         //Boton Frutas y powerups
@@ -558,6 +560,7 @@ public class GameModes extends JPanel {
         volverMenuPpal = new JButton("Menu Principal");
         volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*6,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
         vistaPausa.add(volverMenuPpal);
+
     }
 
     /**
@@ -862,6 +865,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 volverPpal();
+                gui.abrirMenu.setVisible(true);
             }
         });
     }

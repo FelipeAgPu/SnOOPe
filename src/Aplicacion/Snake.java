@@ -63,7 +63,6 @@ public class Snake implements Serializable {
 
                 isFruta = true;
                 partida.getFrutas()[i] = partida.crearFrutaAleatoria();
-
                 partida.getTimers()[i].cancel();
                 partida.getTimers()[i] = new Timer();
                 int finalI = i;
