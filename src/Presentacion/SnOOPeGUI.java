@@ -271,7 +271,7 @@ public class SnOOPeGUI extends JFrame {
         fruta.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
         fruta.setOpaque(false);
 
-        PanelStats stats = new PanelStats(snoope.getSnakes().get(0), this);
+        PanelStats stats = new PanelStats(snoope.getSnakes(), this);
         stats.setLayout(null);
         stats.setBounds(snake.res/2+snake.nColumnas*snake.size, 0, principal.getWidth()-snake.res/2+snake.nColumnas*snake.size, principal.getHeight());
         vistaJugarSingle.add(stats);

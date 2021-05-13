@@ -7,23 +7,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PanelStats extends JPanel {
     int puntos;
-    JLabel puntuacion;
-    Snake snake;
+    String poder;
+    JLabel[] puntuaciones, powerUps;
+    ArrayList<Snake> snakes;
     JButton pausa;
     SnOOPeGUI gui;
 
     /**
      * Contructo del panel de estadísticas
-     * @param snake Serpiente que esta jugando
+     * @param snakes Serpiente que esta jugando
      * @param gui GUI del programa
      */
-    public PanelStats(Snake snake, SnOOPeGUI gui){
+    public PanelStats(ArrayList<Snake> snakes, SnOOPeGUI gui){
         this.gui = gui;
-        this.snake = snake;
-        this.puntos = snake.getPuntos();
+        this.snakes = snakes;
+        this.puntuaciones = new JLabel[2];
+        this.powerUps = new  JLabel[2];
+
+        for (int i = 0; i < snakes.size(); i++) {
+            this.puntos = snakes.get(i).getPuntos();
+            try {
+                this.poder = snakes.get(i).getPoder().getTipo();
+            }catch (NullPointerException e){
+                this.poder = "Sin poder";
+            }
+        }
 
         prepareElementosStats();
         prepareAccionesStats();
@@ -33,15 +45,25 @@ public class PanelStats extends JPanel {
      * Método que prepara los elementos visuales del panel
      */
     private void prepareElementosStats(){
-        puntuacion = new JLabel();
-        puntuacion.setText("Puntuacion " + snake.getNombre() + ": " + puntos);
-        puntuacion.setBounds(this.getX()+50, this.getY()+200, 200,75);
-        add(puntuacion);
-        setOpaque(false);
+        int index = 0;
+        for (Snake snake: snakes){
+            puntuaciones[index] = new JLabel();
+            puntuaciones[index].setText("Puntuacion " + snake.getNombre() + ": " + puntos);
+            puntuaciones[index].setBounds(this.getX()+50, this.getY()+200 * (index+1), 200,50);
+            add(puntuaciones[index]);
+
+            powerUps[index] = new JLabel();
+            powerUps[index].setText("Power Up " + snake.getNombre() + ": " + poder);
+            powerUps[index].setBounds(this.getX()+50, this.getY()+225 * (index+1), 200,50);
+            add(powerUps[index]);
+            setOpaque(false);
+
+            index++;
+        }
 
         pausa = new JButton();
         pausa.setText("Pausa");
-        pausa.setBounds(this.getX()+50, this.getY()+300, 200,75);
+        pausa.setBounds(this.getX()+50, this.getY()+600, 200,75);
         add(pausa);
     }
 
@@ -73,7 +95,18 @@ public class PanelStats extends JPanel {
     @Override
     public void paint(Graphics pintor) {
         super.paint(pintor);
-        this.puntos = snake.getPuntos();
-        puntuacion.setText("Puntuacion " + snake.getNombre() + ": " + puntos);
+
+        for (int i = 0; i < snakes.size(); i++) {
+            this.puntos = snakes.get(i).getPuntos();
+            try {
+                this.poder = snakes.get(i).getPoder().getTipo();
+            }catch (NullPointerException e){
+                this.poder = "Sin poder";
+            }
+            puntuaciones[i].setText("Puntuacion " + snakes.get(i).getNombre() + ": " + puntos);
+            powerUps[i].setText("Power Up " + snakes.get(i).getNombre() + ": " + poder);
+        }
+
+
     }
 }
