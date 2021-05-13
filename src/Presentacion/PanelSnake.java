@@ -20,11 +20,10 @@ public class PanelSnake extends JPanel {
 
     /**
      * Creador del panel Snake
-     * @param snake Serpiente a dibujar
+     * @param snakes Serpientes a dibujar
      * @param max Ancho máximo de la ventana
      * @param nFilas Cantidad de filas
      * @param nColumnas Cantidad de columnas
-     * @param snakes
      */
     public PanelSnake(int max, int nFilas, int nColumnas, ArrayList<Snake> snakes, SnOOPeGUI gui){
         this.gui = gui;
