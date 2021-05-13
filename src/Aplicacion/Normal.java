@@ -2,8 +2,9 @@ package Aplicacion;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class Normal extends Fruta{
+public class Normal extends Fruta implements Serializable {
     /**
      * Constructor fruta Arcoiris
      * @param partida Partida a la se va a agregar
@@ -11,7 +12,7 @@ public class Normal extends Fruta{
     public Normal(SnOOPe partida) {
         super(partida);
         this.tipo = "Normal";
-        this.img = new ImageIcon("./images/normal.png").getImage();
+        this.img = "./images/normal.png";
     }
 
     /**

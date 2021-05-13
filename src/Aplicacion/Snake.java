@@ -1,17 +1,21 @@
 package Aplicacion;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Snake{
+public class Snake implements Serializable {
     protected ArrayList<Integer[]> snake;
     protected Color colorBody, colorHead;
     protected String direccion="UP";
     protected String nuevaDireccion="RIGHT";
     protected SnOOPe partida;
     protected int puntos;
+    protected PowerUp poder;
+    protected boolean speed = false;
+    protected boolean efecto = false;
 
     /**
      * Constructor de una serpiente de longitud 3
@@ -44,14 +48,19 @@ public class Snake{
     }
 
     /**
-     * Método que ahce que la serpiente coma
+     * Método que hace que la serpiente coma
      * @throws SnOOPeException Si la serpiente se come a sí misma o come veneno
      */
     public void comer() throws SnOOPeException {
         boolean isFruta = false;
         for (int i = 0; i < 2; i++) {
             if (snake.get(snake.size() - 1)[0].equals(partida.getFrutas()[i].getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getFrutas()[i].getCoordenadas()[1])){
-                partida.getFrutas()[i].esComida(this);
+                if (efecto){
+                    efecto = false;
+                }else {
+                    partida.getFrutas()[i].esComida(this);
+                }
+
                 isFruta = true;
                 partida.getFrutas()[i] = partida.crearFrutaAleatoria();
 
@@ -66,13 +75,40 @@ public class Snake{
                 };
                 partida.getTimers()[i].schedule(task, 8000, 8000);
             }
+
             for (int j = 0; j<snake.size()-1;j++){
                 if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta){
                     throw new SnOOPeException(SnOOPeException.GAME_OVER_SUICIDIO);
                 }
             }
+
+            for (Integer[] coor: partida.getBloques()){
+                if (snake.get(snake.size() - 1)[0].equals(coor[0]) && snake.get(snake.size() - 1)[1].equals(coor[1])){
+                    throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
+                }
+            }
         }
         puntos = snake.size();
+    }
+
+    public void recoge() {
+        if (snake.get(snake.size() - 1)[0].equals(partida.getPowerUp().getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getPowerUp().getCoordenadas()[1])){
+            this.poder = partida.getPowerUp();
+            PowerUp aux = new PowerUp(partida);
+            aux.setCoordenadas(this.poder.getCoordenadas());
+            partida.setPowerUp(aux);
+        }
+
+        puntos = snake.size();
+    }
+
+    public void usaPowerUp(){
+        if (poder != null){
+            this.poder.esUsada(this);
+            partida.setPowerUp(partida.crearPowerUpAleatorio());
+            puntos = snake.size();
+            poder = null;
+        }
     }
 
     /**
@@ -136,5 +172,15 @@ public class Snake{
 
     public String getNuevaDireccion() {
         return nuevaDireccion;
+    }
+
+    public boolean getSpeed() {
+        return speed;
+    }
+
+    public PowerUp getPoder(){return poder;}
+
+    public void setSpeed(boolean speed){
+        this.speed = speed;
     }
 }

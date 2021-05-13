@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SnOOPeGUI extends JFrame {
 
@@ -209,12 +211,17 @@ public class SnOOPeGUI extends JFrame {
      */
     private void guardar(){
         JFileChooser fc = new JFileChooser();
-        int sel =fc.showSaveDialog(this);
+        fc.setDialogTitle("Guardar");
+        fc.setApproveButtonText("Guardar");
+        int sel = fc.showOpenDialog(this);
 
         if (sel==JFileChooser.APPROVE_OPTION){
             File file = fc.getSelectedFile();
-            String name = file.getName();
-            JOptionPane.showMessageDialog(null,"Funcionalidad Guardar en construccion.\n Archivo a guardar : "+name);
+            try {
+                snoope.guardar(file);
+            }catch (SnOOPeException e){
+                JOptionPane.showMessageDialog(null,e.getMessage());
+            }
         }
     }
 
@@ -231,7 +238,7 @@ public class SnOOPeGUI extends JFrame {
     /**
      * Método que inicia una partida individual
      */
-    public void jugarSingle(){
+    public void jugarPartida(){
         prepareElementosJuego();
         prepareAccionesJuego();
         gameMode.snake = this.snake;
@@ -252,7 +259,7 @@ public class SnOOPeGUI extends JFrame {
      * Método que inicia los paneles que se actualizan y añade los keylisteners
      */
     public void prepareAccionesJuego(){
-        snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes().get(0));
+        snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes());
         vistaJugarSingle.add(snake, "Snake");
         snake.setLayout(null);
         snake.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
@@ -296,13 +303,52 @@ public class SnOOPeGUI extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    snake.snake.cambiarDireccion("UP");
+                    snake.getSnakes().get(0).cambiarDireccion("UP");
                 } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    snake.snake.cambiarDireccion("DOWN");
+                    snake.getSnakes().get(0).cambiarDireccion("DOWN");
                 } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                    snake.snake.cambiarDireccion("RIGHT");
+                    snake.getSnakes().get(0).cambiarDireccion("RIGHT");
                 } else if (e.getKeyCode() == KeyEvent.VK_A) {
-                    snake.snake.cambiarDireccion("LEFT");
+                    snake.getSnakes().get(0).cambiarDireccion("LEFT");
+                } else if (e.getKeyCode() == KeyEvent.VK_E){
+                    if(snake.getSnakes().get(0).getPoder()instanceof Speed){
+                        snake.getSnakes().get(0).usaPowerUp();
+                        Timer timer = new Timer();
+                        TimerTask task = new TimerTask() {
+                            @Override
+                            public void run() {
+                                snake.getSnakes().get(0).setSpeed(false);
+                            }
+                        };
+                        timer.schedule(task, 5000);
+                        
+                    }
+                    else{
+                        snake.getSnakes().get(0).usaPowerUp();
+                    }
+                }else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    snake.getSnakes().get(1).cambiarDireccion("UP");
+                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    snake.getSnakes().get(1).cambiarDireccion("DOWN");
+                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    snake.getSnakes().get(1).cambiarDireccion("RIGHT");
+                } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    snake.getSnakes().get(1).cambiarDireccion("LEFT");
+                } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (snake.getSnakes().get(1).getPoder() instanceof Speed) {
+                        snake.getSnakes().get(0).usaPowerUp();
+                        Timer timer = new Timer();
+                        TimerTask task = new TimerTask() {
+                            @Override
+                            public void run() {
+                                snake.getSnakes().get(0).setSpeed(false);
+                            }
+                        };
+                        timer.schedule(task, 5000);
+
+                    } else {
+                        snake.getSnakes().get(1).usaPowerUp();
+                    }
                 }
             }
         };

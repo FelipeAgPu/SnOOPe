@@ -1,8 +1,9 @@
 package Aplicacion;
 
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Arcoiris extends Fruta{
+public class Arcoiris extends Fruta implements Serializable {
     /**
      * Constructor fruta Arcoiris
      * @param partida Partida a la se va a agregar
@@ -10,7 +11,7 @@ public class Arcoiris extends Fruta{
     public Arcoiris(SnOOPe partida) {
         super(partida);
         this.tipo = "Arcoiris";
-        this.img = new ImageIcon("./images/arcoiris.png").getImage();
+        this.img = "./images/arcoiris.png";
     }
 
     /**

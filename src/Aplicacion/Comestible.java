@@ -1,12 +1,14 @@
 package Aplicacion;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class Comestible {
+public abstract class Comestible implements Serializable {
     protected Integer[] coordenadas;
     protected String tipo;
     protected SnOOPe partida;
+    protected String img;
 
     /**
      * Constructor de un comestible
@@ -56,6 +58,11 @@ public abstract class Comestible {
 
     public void setCoordenadas(Integer[] coordenadas) {
         this.coordenadas = coordenadas;
+    }
+
+    public String coordenadasToString(){
+        String ans = coordenadas[0] + " " + coordenadas[1];
+        return ans;
     }
 
     public String getTipo() {

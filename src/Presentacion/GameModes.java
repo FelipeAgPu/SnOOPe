@@ -629,7 +629,7 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 snoope.jugar(singleName.getText(), colorCabeza1, colorCuerpo1,getFrutas(),getPowerUps());
-                gui.jugarSingle();
+                gui.jugarPartida();
             }
         });
     }
@@ -674,6 +674,14 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 volverGameMode();
+            }
+        });
+
+        multiJugar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snoope.jugar(multiName1.getText(), colorCabeza1, colorCuerpo1,multiName2.getText(), colorCabeza2, colorCuerpo2, getFrutas(),getPowerUps());
+                gui.jugarPartida();
             }
         });
     }
@@ -946,13 +954,14 @@ public class GameModes extends JPanel {
         anterior="IA";
         this.gui.cd.show(gui.principal,"IA");
     }
+
     private ArrayList<String> getFrutas(){
         ArrayList<String> frutas = new ArrayList<>();
         if (fruta.isSelected()){
             frutas.add("Normal");
         }
         if (veneno.isSelected()){
-            frutas.add("veneno");
+            frutas.add("Veneno");
         }
         if (arcoiris.isSelected()){
             frutas.add("Arcoiris");

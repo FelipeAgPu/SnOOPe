@@ -1,10 +1,10 @@
 package Aplicacion;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Fruta extends Comestible{
-    Image img;
+public class Fruta extends Comestible implements Serializable {
     Color color;
 
     /**
@@ -35,7 +35,7 @@ public class Fruta extends Comestible{
         return partida.getColores().get(x);
     }
 
-    public Image getImg(){
+    public String getImg(){
         return img;
     }
 

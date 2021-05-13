@@ -28,21 +28,28 @@ public class Movimiento implements Runnable{
     @Override
     public void run() {
         while(estado && !snake.isPaused) {
-            try {
-                snake.snake.avanzar();
-            } catch (SnOOPeException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-                System.exit(0);
-            }
-            snake.repaint();
-            try {
-                multiplicador=snake.getSnake().getSnake().size()/5;
-                aumentador = 10*multiplicador;
+            for (Snake snake: snake.getSnakes()){
+                try {
+                    snake.avanzar();
+                } catch (SnOOPeException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    System.exit(0);
+                }
+                this.snake.repaint();
+                try {
+                    if (snake.getSpeed()){
+                        aumentador = 0;
+                    }else {
+                        multiplicador = snake.getSnake().size() / 5;
+                        aumentador = 10 * multiplicador;
+                    }
 
-                Thread.sleep(velocidad+aumentador);
-            } catch (InterruptedException e) {
+                    Thread.sleep(velocidad+aumentador);
+                } catch (InterruptedException e) {
 
+                }
             }
+
         }
     }
 

@@ -9,6 +9,7 @@ public class PanelFruta extends JPanel {
     private Fruta[] frutas;
     int max, size, nFilas, nColumnas, res;
     SnOOPe snoope;
+    PowerUp powerUp;
 
     /**
      * Constructor del panel de frutas
@@ -26,6 +27,7 @@ public class PanelFruta extends JPanel {
         this.snoope = snoope;
 
         this.frutas = snoope.getFrutas();
+        this.powerUp = snoope.getPowerUp();
     }
 
     /**
@@ -34,11 +36,26 @@ public class PanelFruta extends JPanel {
      */
     @Override
     public void paint(Graphics pintor){
+        this.powerUp = snoope.getPowerUp();
+        //Pintar frutas
         for (int i = 0; i < 2; i++) {
             pintor.setColor(frutas[i].getColor());
             pintor.fillRect(res/2+frutas[i].getCoordenadas()[0] * size, res/2+frutas[i].getCoordenadas()[1] * size, size-1,size-1);
-            pintor.drawImage(frutas[i].getImg(),res/2+frutas[i].getCoordenadas()[0] * size, res/2+frutas[i].getCoordenadas()[1] * size,size-1,size-1, null);
+            pintor.drawImage(new ImageIcon(frutas[i].getImg()).getImage(),res/2+frutas[i].getCoordenadas()[0] * size, res/2+frutas[i].getCoordenadas()[1] * size,size-1,size-1, null);
         }
+        //Pintar PowerUp
+        if (powerUp.getTipo() == null){
+            pintor.setColor(new Color(56, 87, 53));
+            pintor.fillRect(res/2+powerUp.getCoordenadas()[0] * size, res/2+powerUp.getCoordenadas()[1] * size, size-1,size-1);
+        }else {
+            pintor.drawImage(new ImageIcon(powerUp.getImg()).getImage(), res / 2 + powerUp.getCoordenadas()[0] * size, res / 2 + powerUp.getCoordenadas()[1] * size, size - 1, size - 1, null);
+        }
+
+        //Pintar Bloques Trampa
+        for (Integer[] coor: snoope.getBloques()){
+            pintor.drawImage(new ImageIcon("./images/bloqueNegro.png").getImage(), res / 2 + coor[0] * size, res / 2 + coor[1] * size, size - 1, size - 1, null);
+        }
+
     }
 
 

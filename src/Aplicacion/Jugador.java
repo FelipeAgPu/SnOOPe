@@ -1,8 +1,9 @@
 package Aplicacion;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Jugador extends Snake{
+public class Jugador extends Snake implements Serializable {
     String nombre;
 
     /**
@@ -60,6 +61,7 @@ public class Jugador extends Snake{
         Integer[] nuevaCabeza = {nuevoX, nuevoY};
 
         comer();
+        recoge();
 
         this.snake.add(nuevaCabeza);
         this.snake.remove(0);
