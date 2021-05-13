@@ -18,6 +18,7 @@ public class SnOOPeGUI extends JFrame {
     JMenuItem abrirMenu, guardarMenu, guardarComoMenu, salirMenu;
     JButton jugarBoton;
     JLabel fondo;
+    String lastGame;
     GameModes gameMode;
     ImageIcon imgFondo, imgJugar;
     int width,height, x, y;
@@ -192,6 +193,24 @@ public class SnOOPeGUI extends JFrame {
         cd.show(principal, "GameMode");
     }
 
+    public void restart(){
+        lastGame=gameMode.getAnterior();
+        snoope = new SnOOPe(20,30);
+        gameMode = new GameModes(this,this.snoope);
+        switch (lastGame){
+            case "SinglePlayer":
+                gameMode.single();
+                break;
+            case "MultiPlayer":
+                gameMode.multi();
+                break;
+            case "IA":
+                gameMode.iA();
+                break;
+        }
+    }
+
+
     /**
      * Método que abre un archivo
      */
@@ -280,7 +299,7 @@ public class SnOOPeGUI extends JFrame {
 
         PanelStats stats = new PanelStats(snoope.getSnakes(), this);
         stats.setLayout(null);
-        stats.setBounds(snake.res/2+snake.nColumnas*snake.size, 0, principal.getWidth()-snake.res/2+snake.nColumnas*snake.size, principal.getHeight());
+        stats.setBounds(snake.res/2+snake.nColumnas*snake.size+10, 0, principal.getWidth()-snake.res/2+snake.nColumnas*snake.size, principal.getHeight());
         vistaJugarSingle.add(stats);
 
         PanelTablero tablero = new PanelTablero(principal.getHeight(), 20, 30);

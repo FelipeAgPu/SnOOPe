@@ -57,7 +57,8 @@ public class Snake implements Serializable {
             if (snake.get(snake.size() - 1)[0].equals(partida.getFrutas()[i].getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getFrutas()[i].getCoordenadas()[1])){
                 if (efecto){
                     efecto = false;
-                }else {
+                }
+                else {
                     partida.getFrutas()[i].esComida(this);
                 }
 

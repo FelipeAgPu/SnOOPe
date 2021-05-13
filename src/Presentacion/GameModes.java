@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModes extends JPanel {
-    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA, vistaJugarSingle, vistaGameOver,vistaPausa,vistaFrutas;
+    public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA,  vistaGameOver,vistaPausa,vistaFrutas;
     private JButton volverMenuPpal,reiniciarPausa;
     private JButton restart,menuPpal;
     private JButton menuSingle,menuMulti,menuIA,menuVolver;
@@ -135,6 +135,10 @@ public class GameModes extends JPanel {
         this.images.put("LupaText",new ImageIcon("./images/LupaText.png"));
         this.images.put("BloqueText",new ImageIcon("./images/BloqueText.png"));
         this.images.put("Guardar",new ImageIcon("./images/Guardar.png"));
+        this.images.put("Reanudar",new ImageIcon("./images/Reanudar.png"));
+        this.images.put("Reiniciar",new ImageIcon("./images/Reiniciar.png"));
+        this.images.put("Menu",new ImageIcon("./images/Menu.png"));
+        this.images.put("Pausa",new ImageIcon("./images/Pausa.png"));
 
     }
 
@@ -217,7 +221,7 @@ public class GameModes extends JPanel {
 
         //Nombre Jugador1
         multiName1 = new JTextField("Jugador1");
-        multiName1.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*3,(vistaMulti.getWidth()/8)*2,50);
+        multiName1.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*2,(vistaMulti.getWidth()/8)*2,50);
         multiName1.setBackground(new Color(0x4CE546));
         multiName1.setFont(new Font("Monaco",Font.BOLD,30));
         multiName1.setHorizontalAlignment(JTextField.CENTER);
@@ -225,7 +229,7 @@ public class GameModes extends JPanel {
 
         //Boton Color Cabeza 1
         multiColorCabeza1 = new JButton("Color de la cabeza");
-        multiColorCabeza1.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*4,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCabeza1.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*3,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCabeza1.setBackground(colorCabeza1);
         multiColorCabeza1.setBorderPainted(false);
         multiColorCabeza1.setIcon(images.get("Cabeza"));
@@ -233,7 +237,7 @@ public class GameModes extends JPanel {
 
         //Boton Color Cuerpo 1
         multiColorCuerpo1 = new JButton();
-        multiColorCuerpo1.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*4,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCuerpo1.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*3,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCuerpo1.setBackground(colorCuerpo1);
         multiColorCuerpo1.setBorderPainted(false);
         multiColorCuerpo1.setIcon(images.get("Cuerpo"));
@@ -242,7 +246,7 @@ public class GameModes extends JPanel {
 
         //Nombre Jugador 2
         multiName2 = new JTextField("Jugador2");
-        multiName2.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*7,(vistaMulti.getWidth()/8)*2,50);
+        multiName2.setBounds((vistaMulti.getWidth()/8)*3,(vistaMulti.getHeight()/14)*6,(vistaMulti.getWidth()/8)*2,50);
         multiName2.setBackground(new Color(0x337838));
         multiName2.setFont(new Font("Monaco",Font.BOLD,30));
         multiName2.setHorizontalAlignment(JTextField.CENTER);
@@ -250,7 +254,7 @@ public class GameModes extends JPanel {
 
         //Boton Color Cabeza 2
         multiColorCabeza2 = new JButton();
-        multiColorCabeza2.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*8,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCabeza2.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*7,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCabeza2.setBackground(colorCabeza2);
         multiColorCabeza2.setBorderPainted(false);
         multiColorCabeza2.setIcon(images.get("Cabeza"));
@@ -258,15 +262,22 @@ public class GameModes extends JPanel {
 
         //Boton Color Cuerpo 2
         multiColorCuerpo2 = new JButton();
-        multiColorCuerpo2.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*8,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiColorCuerpo2.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*7,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
         multiColorCuerpo2.setBackground(colorCuerpo2);
         multiColorCuerpo2.setBorderPainted(false);
         multiColorCuerpo2.setIcon(images.get("Cuerpo"));
         vistaMulti.add(multiColorCuerpo2);
 
+        //Boton PowerUps y frutas
+        multiFrutas = new JButton(images.get("Frutas"));
+        multiFrutas.setBounds((vistaMulti.getWidth()/10)*4,(vistaMulti.getHeight()/14)*9,(vistaMulti.getWidth()/10)*2,(vistaMulti.getHeight()/8)*2);
+        multiFrutas.setContentAreaFilled(false);
+        multiFrutas.setBorderPainted(false);
+        vistaMulti.add(multiFrutas);
+
         //Boton volver
         multiVolver = new JButton();
-        multiVolver.setBounds((vistaMulti.getWidth()/8)*2,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiVolver.setBounds(vistaMulti.getWidth()/10,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/10)*2,vistaMulti.getHeight()/8);
         multiVolver.setBorderPainted(false);
         multiVolver.setContentAreaFilled(false);
         multiVolver.setIcon(images.get("Volver"));
@@ -274,7 +285,7 @@ public class GameModes extends JPanel {
 
         //Boton jugar
         multiJugar = new JButton();
-        multiJugar.setBounds((vistaMulti.getWidth()/8)*4,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/8)*2,vistaMulti.getHeight()/8);
+        multiJugar.setBounds((vistaMulti.getWidth()/10)*7,(vistaMulti.getHeight()/14)*10,(vistaMulti.getWidth()/10)*2,vistaMulti.getHeight()/8);
         multiJugar.setContentAreaFilled(false);
         multiJugar.setBorderPainted(false);
         multiJugar.setIcon(gui.imgJugar);
@@ -531,14 +542,24 @@ public class GameModes extends JPanel {
         vistaGameOver.setBackground(new Color(56, 87, 53));
 
         //boton restart
-        restart = new JButton("Reiniciar");
-        restart.setBounds((vistaGameOver.getWidth()/8)*2,(vistaGameOver.getHeight()/12)*4,(vistaGameOver.getWidth()/8)*2,vistaGameOver.getHeight()/8);
+        restart = new JButton(images.get("Reiniciar"));
+        restart.setBounds((vistaGameOver.getWidth()/8)*3,(vistaGameOver.getHeight()/12)*3,500,200);
+        restart.setBorderPainted(false);
+        restart.setContentAreaFilled(false);
         vistaGameOver.add(restart);
 
         //boton volver
-        menuPpal = new JButton("Menu Principal");
-        menuPpal.setBounds((vistaGameOver.getWidth()/8)*2,(vistaGameOver.getHeight()/12)*6,(vistaGameOver.getWidth()/8)*2,vistaGameOver.getHeight()/8);
+        menuPpal = new JButton(images.get("Menu"));
+        menuPpal.setBounds((vistaGameOver.getWidth()/8)*3,(vistaGameOver.getHeight()/12)*6,500,200);
+        menuPpal.setContentAreaFilled(false);
+        menuPpal.setBorderPainted(false);
         vistaGameOver.add(menuPpal);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(new ImageIcon("./images/fondo1.png"));
+
+        vistaGameOver.add(fondo);
     }
 
     /**
@@ -552,14 +573,24 @@ public class GameModes extends JPanel {
         vistaPausa.setBackground(new Color(56, 87, 53));
 
         //Boton Reanudar
-        reiniciarPausa = new JButton("Reanudar");
-        reiniciarPausa.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*4,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
+        reiniciarPausa = new JButton(images.get("Reanudar"));
+        reiniciarPausa.setBounds((vistaPausa.getWidth()/8)*3,(vistaPausa.getHeight()/12)*3,500,200);
+        reiniciarPausa.setContentAreaFilled(false);
+        reiniciarPausa.setBorderPainted(false);
         vistaPausa.add(reiniciarPausa);
 
         //Boton Volver
-        volverMenuPpal = new JButton("Menu Principal");
-        volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*2,(vistaPausa.getHeight()/12)*6,(vistaPausa.getWidth()/8)*2,vistaPausa.getHeight()/8);
+        volverMenuPpal = new JButton(images.get("Menu"));
+        volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*3,(vistaPausa.getHeight()/12)*6,500,200);
+        volverMenuPpal.setBorderPainted(false);
+        volverMenuPpal.setContentAreaFilled(false);
         vistaPausa.add(volverMenuPpal);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(new ImageIcon("./images/fondo1.png"));
+
+        vistaPausa.add(fondo);
 
     }
 
@@ -687,6 +718,14 @@ public class GameModes extends JPanel {
                 gui.jugarPartida();
             }
         });
+
+        multiFrutas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccionarFrutas();
+            }
+        });
+
     }
 
     /**
@@ -724,7 +763,7 @@ public class GameModes extends JPanel {
         restart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                volverGameMode();
+                gui.restart();
 
             }
         });
@@ -926,7 +965,7 @@ public class GameModes extends JPanel {
     /**
      * Método que muestra la vista del menú single player
      */
-    private void single(){
+    public void single(){
         prepareElementosMenuSingle();
         prepareAccionesMenuSingle();
         prepareElementosFrutas();
@@ -938,25 +977,29 @@ public class GameModes extends JPanel {
     /**
      * Método que muestra la vista del menú multijugador
      */
-    private void multi(){
+    public void multi(){
         prepareElementosMenuMulti();
         prepareAccionesMenuMulti();
         prepareElementosFrutas();
         prepareAccionesFrutas();
-        anterior="Multiplayer";
+        anterior="MultiPlayer";
         this.gui.cd.show(gui.principal,"MultiPlayer");
     }
 
     /**
      * Método que muestra la vista del menú vs IA
      */
-    private void iA(){
+    public void iA(){
         prepareElementosMenuIA();
         prepareAccionesMenuIA();
         prepareElementosFrutas();
         prepareAccionesFrutas();
         anterior="IA";
         this.gui.cd.show(gui.principal,"IA");
+    }
+
+    public String getAnterior() {
+        return anterior;
     }
 
     private ArrayList<String> getFrutas(){

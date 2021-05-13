@@ -34,6 +34,7 @@ public class Movimiento implements Runnable{
                     snake.avanzar();
                 } catch (SnOOPeException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
+                    estado = false;
                     gui.cd.show(gui.principal, "GameOver");
                 }
                 this.snake.repaint();

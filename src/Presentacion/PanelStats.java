@@ -15,6 +15,7 @@ public class PanelStats extends JPanel {
     JLabel[] puntuaciones, powerUps;
     ArrayList<Snake> snakes;
     JButton pausa;
+    Font fuente;
     SnOOPeGUI gui;
 
     /**
@@ -27,6 +28,7 @@ public class PanelStats extends JPanel {
         this.snakes = snakes;
         this.puntuaciones = new JLabel[2];
         this.powerUps = new  JLabel[2];
+        this.fuente = new Font("OCR A Extended",Font.PLAIN,30);
 
         for (int i = 0; i < snakes.size(); i++) {
             this.puntos = snakes.get(i).getPuntos();
@@ -48,23 +50,32 @@ public class PanelStats extends JPanel {
         int index = 0;
         for (Snake snake: snakes){
             puntuaciones[index] = new JLabel();
-            puntuaciones[index].setText("Puntuacion " + snake.getNombre() + ": " + puntos);
-            puntuaciones[index].setBounds(this.getX()+50, this.getY()+200 * (index+1), 200,50);
+            puntuaciones[index].setText("<html><div style='text-align: center;'> Puntuación"+snake.getNombre()+"<br>"+puntos +"</div></html>");
+            puntuaciones[index].setBounds(this.getX()+50, this.getY()+200 + (index)*250, 300,100);
+            puntuaciones[index].setFont(fuente);
             add(puntuaciones[index]);
 
             powerUps[index] = new JLabel();
-            powerUps[index].setText("Power Up " + snake.getNombre() + ": " + poder);
-            powerUps[index].setBounds(this.getX()+50, this.getY()+225 * (index+1), 200,50);
+            powerUps[index].setText("<html><div style='text-align: center;'> Poder "+snake.getNombre()+"<br>"+poder +"</div></html>");
+            powerUps[index].setBounds(this.getX()+80, this.getY()+300 + (index)*250, 300,100);
+            powerUps[index].setFont(fuente);
             add(powerUps[index]);
             setOpaque(false);
 
             index++;
         }
 
-        pausa = new JButton();
-        pausa.setText("Pausa");
-        pausa.setBounds(this.getX()+50, this.getY()+600, 200,75);
+        pausa = new JButton(new ImageIcon("./images/Pausa.png"));
+        pausa.setBounds(this.getX()+90, this.getY()+850, 200,75);
+        pausa.setBorderPainted(false);
+        pausa.setContentAreaFilled(false);
         add(pausa);
+
+        JLabel fondo = new JLabel();
+        fondo.setBounds(0, 0,gui.width,gui.height);
+        fondo.setIcon(new ImageIcon("./images/fondo1.png"));
+
+        this.add(fondo);
     }
 
     /**
@@ -104,8 +115,8 @@ public class PanelStats extends JPanel {
             }catch (NullPointerException e){
                 this.poder = "Sin poder";
             }
-            puntuaciones[i].setText("Puntuacion " + snakes.get(i).getNombre() + ": " + puntos);
-            powerUps[i].setText("Power Up " + snakes.get(i).getNombre() + ": " + poder);
+            puntuaciones[i].setText("<html><div style='text-align: center;'> Puntuación "+snakes.get(i).getNombre()+"<br>"+puntos +"</div></html>");
+            powerUps[i].setText("<html><div style='text-align: center;'> Poder "+snakes.get(i).getNombre()+"<br>"+poder +"</div></html>");
         }
 
 
