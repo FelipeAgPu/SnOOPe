@@ -3,6 +3,7 @@ package Aplicacion;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +17,7 @@ public class Snake implements Serializable {
     protected PowerUp poder;
     protected boolean speed = false;
     protected boolean efecto = false;
+    protected boolean noSpeed =false;
 
     /**
      * Constructor de una serpiente de longitud 3
@@ -90,10 +92,14 @@ public class Snake implements Serializable {
         }
         puntos = snake.size();
     }
-
+    /**
+     * Metodo que recoge los powerUps en el tablero
+     */
     public void recoge() {
         if (snake.get(snake.size() - 1)[0].equals(partida.getPowerUp().getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getPowerUp().getCoordenadas()[1])){
             this.poder = partida.getPowerUp();
+            Timer timerpow=partida.getTimerPower();
+            timerpow.cancel();
             PowerUp aux = new PowerUp(partida);
             aux.setCoordenadas(this.poder.getCoordenadas());
             partida.setPowerUp(aux);
@@ -101,11 +107,22 @@ public class Snake implements Serializable {
 
         puntos = snake.size();
     }
-
+    /**
+     * Metodo que usa el powerUp de la serpiente y genera otra aleatoriamente en un rango de 8 segundos
+     */
     public void usaPowerUp(){
         if (poder != null){
             this.poder.esUsada(this);
-            partida.setPowerUp(partida.crearPowerUpAleatorio());
+            partida.setTimerPower(new Timer());
+            TimerTask taskPower = new TimerTask() {
+                @Override
+                public void run() {
+                    partida.setPowerUp(partida.crearPowerUpAleatorio());
+                }
+            };
+            Random rand = new Random();
+            int x = rand.nextInt(9);
+            partida.getTimerPower().schedule(taskPower,x*1000);
             puntos = snake.size();
             poder = null;
         }
@@ -158,9 +175,7 @@ public class Snake implements Serializable {
         this.partida = partida;
     }
 
-    public int getPuntos() {
-        return puntos;
-    }
+    public int getPuntos() { return puntos; }
 
     public String getNombre() {
         return null;
@@ -182,5 +197,9 @@ public class Snake implements Serializable {
 
     public void setSpeed(boolean speed){
         this.speed = speed;
+    }
+
+    public boolean getNoSpeed() {
+        return noSpeed;
     }
 }

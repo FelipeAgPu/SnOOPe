@@ -193,6 +193,10 @@ public class SnOOPeGUI extends JFrame {
         cd.show(principal, "GameMode");
     }
 
+
+    /**
+     * Método que reinicia el Juego pasando a la ventana de configuracion del modo en el que estaba el usuario
+     */
     public void restart(){
         lastGame=gameMode.getAnterior();
         snoope = new SnOOPe(20,30);
@@ -225,6 +229,7 @@ public class SnOOPeGUI extends JFrame {
                 snoope.setTimers();
                 prepareElementosJuego();
                 prepareAccionesJuego();
+                lastGame=gameMode.getAnterior();
             }
             catch (SnOOPeException e){
                 JOptionPane.showMessageDialog(null,e.getMessage());

@@ -40,7 +40,11 @@ public class Movimiento implements Runnable{
                 this.snake.repaint();
                 try {
                     if (snake.getSpeed()){
-                        aumentador = 0;
+                        if(snake.getNoSpeed()){
+                            aumentador = 500;
+                        }else{
+                            aumentador = 0;
+                        }
                     }else {
                         multiplicador = snake.getSnake().size() / 5;
                         aumentador = 10 * multiplicador;

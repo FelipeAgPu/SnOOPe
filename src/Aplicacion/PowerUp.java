@@ -10,6 +10,10 @@ public class PowerUp extends Comestible implements Serializable {
         super(partida);
     }
 
+    /**
+     * Metodo que usa el powerUp obtenido de la serpiente, si esta no tiene powerUp no hace nada
+     * @param snake serpiente con el powerUp
+     */
     public void esUsada(Snake snake){
 
     }

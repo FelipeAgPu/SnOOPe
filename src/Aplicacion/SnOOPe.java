@@ -16,6 +16,7 @@ public class SnOOPe implements Serializable {
     private ArrayList<Integer[]> bloques;
     private Fruta[] frutas;
     private transient Timer[] timers;
+    private transient Timer timerPower;
     private PowerUp powerUp;
     private ArrayList<String> tiposFruta;
     private ArrayList<String> tiposPowerUps;
@@ -76,6 +77,8 @@ public class SnOOPe implements Serializable {
         getTimers()[1].schedule(task1, 8000,8000);
 
         this.powerUp = crearPowerUpAleatorio();
+
+        this.timerPower = new Timer();
     }
 
     /**
@@ -122,6 +125,17 @@ public class SnOOPe implements Serializable {
         getTimers()[1].schedule(task1, 8000,8000);
 
         this.powerUp = crearPowerUpAleatorio();
+
+        this.timerPower = new Timer();
+        TimerTask taskPower = new TimerTask() {
+            @Override
+            public void run() {
+                setPowerUp(crearPowerUpAleatorio());
+            }
+        };
+        Random rand = new Random();
+        int x = rand.nextInt(9);
+        timerPower.schedule(taskPower,x*1000);
     }
 
     /**
@@ -200,6 +214,11 @@ public class SnOOPe implements Serializable {
         }
     }
 
+    /**
+     * Método que abre un archivo y toma la informacíon del archivo para reanudar un juego guardado
+     * @param archivo Archivo a abrir
+     * @throws SnOOPeException
+     */
     public static SnOOPe abrir(File archivo) throws SnOOPeException {
         if (!archivo.getAbsolutePath().endsWith(".dat")){
             throw new SnOOPeException(SnOOPeException.ERROR_TIPO_ABRIR);
@@ -228,10 +247,6 @@ public class SnOOPe implements Serializable {
 
     public ArrayList<Snake> getSnakes() {
         return snakes;
-    }
-
-    public void addSnakes(Snake snake) {
-        this.snakes.add(snake);
     }
 
     public ArrayList<Color> getColores() {
@@ -266,9 +281,18 @@ public class SnOOPe implements Serializable {
         };
         getTimers()[1].schedule(task1, 8000,8000);
 
+        this.timerPower = new Timer();
+        TimerTask taskPower = new TimerTask() {
+            @Override
+            public void run() {
+                setPowerUp(crearPowerUpAleatorio());
+            }
+        };
+        Random rand = new Random();
+        int x = rand.nextInt(9);
+        timerPower.schedule(taskPower,x*1000);
 
     }
-
 
     public void printInfo(){
         System.out.println("Frutas");
@@ -289,11 +313,22 @@ public class SnOOPe implements Serializable {
         return powerUp;
     }
 
+    public Timer getTimerPower() {
+        return timerPower;
+    }
+
+    public void setTimerPower(Timer timerPower) {
+        this.timerPower = timerPower;
+    }
 
     public void setPowerUp(PowerUp powerUp) {
         this.powerUp = powerUp;
     }
 
+    /**
+     * Método que agrega un bloque del powerUp Bloque
+     * @param bloque coordenadas del bloque
+     */
     public void addBloque(Integer[] bloque){
         this.bloques.add(bloque);
     }

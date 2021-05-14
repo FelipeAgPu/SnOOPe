@@ -9,7 +9,9 @@ public class Division extends PowerUp implements Serializable {
         this.tipo = "Division";
         this.img = "./images/division.png";
     }
-
+    /**
+     * @see Aplicacion.PowerUp.esUsada
+     */
     @Override
     public void esUsada(Snake snake){
         int times = snake.getSnake().size()/2;

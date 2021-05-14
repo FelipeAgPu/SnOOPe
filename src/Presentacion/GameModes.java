@@ -775,6 +775,9 @@ public class GameModes extends JPanel {
         });
     }
 
+    /**
+     * Método que prepara las acciones del paner para seleccionar frutas
+     */
     private void prepareAccionesFrutas(){
         fruta.addActionListener(new ActionListener() {
             @Override
@@ -950,6 +953,9 @@ public class GameModes extends JPanel {
         gui.cd.show(gui.principal,"GameMode");
     }
 
+    /**
+     * Método que retorna a la vista de selección de frutas
+     */
     private void seleccionarFrutas(){
         gui.cd.show(gui.principal,"Frutas");
     }
