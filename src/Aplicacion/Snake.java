@@ -183,4 +183,6 @@ public class Snake implements Serializable {
     public void setSpeed(boolean speed){
         this.speed = speed;
     }
+
+
 }

@@ -40,11 +40,11 @@ public class SnOOPeGUI extends JFrame {
 
         //Dimensiones de la pantalla para que quede centralizado y con dimensiones de 1/4 de la pantalla
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        this.width = (int) ((size.getWidth()/4)*3);
-        this.height = (int) ((size.getHeight()/4)*3);
+        this.width = (int) ((2560/4)*3);
+        this.height = (int) ((1440/4)*3);
 
-        this.x = (int) ((size.getWidth()/8));
-        this.y = (int) ((size.getHeight()/8));
+        this.x = (int) ((2560/8));
+        this.y = (int) ((1440/8));
 
         this.setBounds(x, y, width, height);
 
