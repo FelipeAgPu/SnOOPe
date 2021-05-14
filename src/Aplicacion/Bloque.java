@@ -11,7 +11,9 @@ public class Bloque extends PowerUp implements Serializable {
         this.img = "./images/bloque.jpg";
 
     }
-
+    /**
+     * @see Aplicacion.PowerUp.esUsada
+     */
     @Override
     public void esUsada(Snake snake){
         partida.addBloque(generarTrampa());

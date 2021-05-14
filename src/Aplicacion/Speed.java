@@ -2,18 +2,33 @@ package Aplicacion;
 
 import javax.swing.*;
 import java.io.Serializable;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Speed extends PowerUp implements Serializable {
+    boolean noVel;
+    String[] images;
+
     public Speed(SnOOPe partida) {
         super(partida);
         this.tipo = "Speed";
-        this.img ="./images/velocidad.png";
+        noVel=false;
+        images = new String[]{"./images/velocidad.png", "./images/NoVelocidad.png"};
+        Random rand = new Random();
+        int x =rand.nextInt(2);
+        if(images[x]=="./images/NoVelocidad.png") {
+            noVel = true;
+        }
+        this.img = images[x];
     }
 
+    /**
+     * @see Aplicacion.PowerUp.esUsada
+     */
     @Override
     public void esUsada(Snake snake){
         snake.speed = true;
+        snake.noSpeed = noVel;
     }
 }
