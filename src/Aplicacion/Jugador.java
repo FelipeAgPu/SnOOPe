@@ -60,6 +60,7 @@ public class Jugador extends Snake implements Serializable {
 
         Integer[] nuevaCabeza = {nuevoX, nuevoY};
 
+
         comer();
         recoge();
 

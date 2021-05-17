@@ -9,6 +9,7 @@ public class SnOOPeException extends Exception{
     public static final String ERROR_GUARDAR = "Ocurrio un error al guardar el archivo";
     public static final String ERROR_TIPO_ABRIR = "Los archivos a abrir deben ser '.dat'";
     public static final String ERROR_ABRIR = "Ocurrio un error al abrir el archivo";
+    public static final String LA_MATO = "Las serpientes se han chocado";
 
     public SnOOPeException(String message) {
         super(message);

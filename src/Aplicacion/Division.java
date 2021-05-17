@@ -14,9 +14,21 @@ public class Division extends PowerUp implements Serializable {
      */
     @Override
     public void esUsada(Snake snake){
-        int times = snake.getSnake().size()/2;
-        for (int i = 0; i < times; i++) {
-            snake.snake.remove(0);
+        if (partida.getSnakes().size()>1) {
+            for (Snake snakes : partida.getSnakes()) {
+                if (!(snakes == snake)) {
+                    int times = snakes.getSnake().size() / 2;
+                    for (int i = 0; i < times; i++) {
+                        snakes.snake.remove(0);
+                    }
+                }
+            }
+        }
+        else {
+            int times = snake.getSnake().size()/2;
+            for (int i = 0; i < times; i++) {
+                snake.snake.remove(0);
+            }
         }
     }
 }

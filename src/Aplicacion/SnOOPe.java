@@ -127,15 +127,6 @@ public class SnOOPe implements Serializable {
         this.powerUp = crearPowerUpAleatorio();
 
         this.timerPower = new Timer();
-        TimerTask taskPower = new TimerTask() {
-            @Override
-            public void run() {
-                setPowerUp(crearPowerUpAleatorio());
-            }
-        };
-        Random rand = new Random();
-        int x = rand.nextInt(9);
-        timerPower.schedule(taskPower,x*1000);
     }
 
     /**

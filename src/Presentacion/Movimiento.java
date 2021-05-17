@@ -19,7 +19,7 @@ public class Movimiento implements Runnable{
     public Movimiento(PanelSnake snake, SnOOPeGUI gui){
         this.gui = gui;
         this.snake = snake;
-        this.velocidad= 80;
+        this.velocidad= 300;
         this.aumentador = 1;
     }
 
@@ -29,31 +29,32 @@ public class Movimiento implements Runnable{
     @Override
     public void run() {
         while(estado && !snake.isPaused) {
-            for (Snake snake: snake.getSnakes()){
-                try {
-                    snake.avanzar();
-                } catch (SnOOPeException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                    estado = false;
-                    gui.cd.show(gui.principal, "GameOver");
+            try {
+                snake.getSnake().avanzar();
+            } catch (SnOOPeException e) {
+                for (PanelSnake panelSnake:gui.snakes) {
+                    panelSnake.movimiento.estado=false;
                 }
-                this.snake.repaint();
-                try {
-                    if (snake.getSpeed()){
-                        if(snake.getNoSpeed()){
-                            aumentador = 500;
-                        }else{
-                            aumentador = 0;
-                        }
-                    }else {
-                        multiplicador = snake.getSnake().size() / 5;
-                        aumentador = 10 * multiplicador;
-                    }
-
-                    Thread.sleep(velocidad+aumentador);
-                } catch (InterruptedException e) {
-                }
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                gui.cd.show(gui.principal, "GameOver");
             }
+            this.snake.repaint();
+            try {
+                if (snake.getSnake().getSpeed()){
+                    if(snake.getSnake().getNoSpeed()){
+                        aumentador = 500;
+                    }else{
+                        aumentador = 0;
+                    }
+                }else {
+                    multiplicador = snake.getSnake().getSnake().size() / 5;
+                    aumentador = 10 * multiplicador;
+                }
+
+                Thread.sleep(velocidad+aumentador);
+            } catch (InterruptedException e) {
+            }
+
 
         }
     }

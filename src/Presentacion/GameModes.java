@@ -24,7 +24,7 @@ public class GameModes extends JPanel {
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
     private Color colorCabeza1 = Color.RED,colorCabeza2 = Color.GREEN,colorCuerpo1 = Color.GREEN,colorCuerpo2 = Color.RED;
-    public PanelSnake snake;
+    public ArrayList<PanelSnake> snakes;
     public SnOOPe snoope;
     private String anterior;
 
@@ -560,6 +560,7 @@ public class GameModes extends JPanel {
         fondo.setIcon(new ImageIcon("./images/fondo1.png"));
 
         vistaGameOver.add(fondo);
+        gui.snakes.clear();
     }
 
     /**
@@ -908,6 +909,7 @@ public class GameModes extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 volverPpal();
                 gui.abrirMenu.setVisible(true);
+                gui.snakes.clear();
             }
         });
     }
@@ -964,7 +966,10 @@ public class GameModes extends JPanel {
      * Método que reanuda el juego
      */
     private void reanudar(){
-        snake.isPaused = false;
+        snakes.get(0).isPaused = false;
+        if(snakes.size()>1){
+            snakes.get(1).isPaused=false;
+        }
         gui.prepareAccionesJuego();
     }
 

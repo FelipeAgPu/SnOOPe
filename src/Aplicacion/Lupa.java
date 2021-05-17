@@ -14,6 +14,15 @@ public class Lupa extends PowerUp implements Serializable {
      */
     @Override
     public void esUsada(Snake snake){
-        snake.efecto = true;
+        if (partida.getSnakes().size()>1){
+            for (Snake snakes:partida.getSnakes()) {
+                if (!(snakes ==snake)){
+                    snakes.efecto=true;
+                }
+            }
+        }
+        else{
+            snake.efecto=true;
+        }
     }
 }

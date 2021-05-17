@@ -28,7 +28,18 @@ public class Speed extends PowerUp implements Serializable {
      */
     @Override
     public void esUsada(Snake snake){
-        snake.speed = true;
-        snake.noSpeed = noVel;
+        if(partida.getSnakes().size()>1) {
+            for (Snake snakes : partida.getSnakes()) {
+                if (!(snakes == snake) && noVel) {
+                    snakes.speed = true;
+                    snakes.noSpeed = noVel;
+                }
+            }
+        }
+        else{
+            snake.speed = true;
+            snake.noSpeed = noVel;
+        }
+
     }
 }

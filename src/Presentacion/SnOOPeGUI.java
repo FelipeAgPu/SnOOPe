@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,7 +14,7 @@ public class SnOOPeGUI extends JFrame {
 
     CardLayout cd;
     JPanel principal, vistaMenuPrincipal, vistaJugarSingle;
-    PanelSnake snake;
+    ArrayList<PanelSnake> snakes = new ArrayList<>();
     JMenuBar menuBar;
     JMenuItem abrirMenu, guardarMenu, guardarComoMenu, salirMenu;
     JButton jugarBoton;
@@ -272,7 +273,7 @@ public class SnOOPeGUI extends JFrame {
     public void jugarPartida(){
         prepareElementosJuego();
         prepareAccionesJuego();
-        gameMode.snake = this.snake;
+        gameMode.snakes = this.snakes;
     }
 
     /**
@@ -290,11 +291,20 @@ public class SnOOPeGUI extends JFrame {
      * Método que inicia los paneles que se actualizan y añade los keylisteners
      */
     public void prepareAccionesJuego(){
-        snake = new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes(),this);
-        vistaJugarSingle.add(snake, "Snake");
-        snake.setLayout(null);
-        snake.setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
-        snake.setOpaque(false);
+        snakes.clear();
+        snakes.add(new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes().get(0),this));
+        vistaJugarSingle.add(snakes.get(0), "Snake1");
+        snakes.get(0).setLayout(null);
+        snakes.get(0).setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+        snakes.get(0).setOpaque(false);
+        if(snoope.getSnakes().size()>1){
+            snakes.add(new PanelSnake(principal.getHeight(), 20, 30, snoope.getSnakes().get(1),this));
+            vistaJugarSingle.add(snakes.get(1), "Snake2");
+            snakes.get(1).setLayout(null);
+            snakes.get(1).setBounds(0, 0, vistaJugarSingle.getWidth(), vistaJugarSingle.getHeight());
+            snakes.get(1).setOpaque(false);
+        }
+
 
         PanelFruta fruta = new PanelFruta(principal.getHeight(), 20, 30, snoope);
         vistaJugarSingle.add(fruta, "Fruta");
@@ -304,7 +314,7 @@ public class SnOOPeGUI extends JFrame {
 
         PanelStats stats = new PanelStats(snoope.getSnakes(), this);
         stats.setLayout(null);
-        stats.setBounds(snake.res/2+snake.nColumnas*snake.size+10, 0, principal.getWidth()-snake.res/2+snake.nColumnas*snake.size, principal.getHeight());
+        stats.setBounds(snakes.get(0).res/2+snakes.get(0).nColumnas*snakes.get(0).size+10, 0, principal.getWidth()-snakes.get(0).res/2+snakes.get(0).nColumnas*snakes.get(0).size, principal.getHeight());
         vistaJugarSingle.add(stats);
 
         PanelTablero tablero = new PanelTablero(principal.getHeight(), 20, 30);
@@ -334,51 +344,53 @@ public class SnOOPeGUI extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    snake.getSnakes().get(0).cambiarDireccion("UP");
+                    snakes.get(0).getSnake().cambiarDireccion("UP");
                 } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    snake.getSnakes().get(0).cambiarDireccion("DOWN");
+                    snakes.get(0).getSnake().cambiarDireccion("DOWN");
                 } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                    snake.getSnakes().get(0).cambiarDireccion("RIGHT");
+                    snakes.get(0).getSnake().cambiarDireccion("RIGHT");
                 } else if (e.getKeyCode() == KeyEvent.VK_A) {
-                    snake.getSnakes().get(0).cambiarDireccion("LEFT");
-                } else if (e.getKeyCode() == KeyEvent.VK_E){
-                    if(snake.getSnakes().get(0).getPoder()instanceof Speed){
-                        snake.getSnakes().get(0).usaPowerUp();
+                    snakes.get(0).getSnake().cambiarDireccion("LEFT");
+                } else if (e.getKeyCode() == KeyEvent.VK_E) {
+                    if (snakes.get(0).getSnake().getPoder() instanceof Speed) {
+                        snakes.get(0).getSnake().usaPowerUp();
                         Timer timer = new Timer();
                         TimerTask task = new TimerTask() {
                             @Override
                             public void run() {
-                                snake.getSnakes().get(0).setSpeed(false);
-                            }
-                        };
-                        timer.schedule(task, 5000);
-                        
-                    }
-                    else{
-                        snake.getSnakes().get(0).usaPowerUp();
-                    }
-                }else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    snake.getSnakes().get(1).cambiarDireccion("UP");
-                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    snake.getSnakes().get(1).cambiarDireccion("DOWN");
-                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    snake.getSnakes().get(1).cambiarDireccion("RIGHT");
-                } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    snake.getSnakes().get(1).cambiarDireccion("LEFT");
-                } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (snake.getSnakes().get(1).getPoder() instanceof Speed) {
-                        snake.getSnakes().get(0).usaPowerUp();
-                        Timer timer = new Timer();
-                        TimerTask task = new TimerTask() {
-                            @Override
-                            public void run() {
-                                snake.getSnakes().get(0).setSpeed(false);
+                                snakes.get(0).getSnake().setSpeed(false);
                             }
                         };
                         timer.schedule(task, 5000);
 
                     } else {
-                        snake.getSnakes().get(1).usaPowerUp();
+                        snakes.get(0).getSnake().usaPowerUp();
+                    }
+                }
+                if (snakes.size() > 1) {
+                    if (e.getKeyCode() == KeyEvent.VK_UP) {
+                        snakes.get(1).getSnake().cambiarDireccion("UP");
+                    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                        snakes.get(1).getSnake().cambiarDireccion("DOWN");
+                    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        snakes.get(1).getSnake().cambiarDireccion("RIGHT");
+                    } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                        snakes.get(1).getSnake().cambiarDireccion("LEFT");
+                    } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        if (snakes.get(1).getSnake().getPoder() instanceof Speed) {
+                            snakes.get(1).getSnake().usaPowerUp();
+                            Timer timer = new Timer();
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    snakes.get(1).getSnake().setSpeed(false);
+                                }
+                            };
+                            timer.schedule(task, 5000);
+
+                        } else {
+                            snakes.get(1).getSnake().usaPowerUp();
+                        }
                     }
                 }
             }

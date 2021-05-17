@@ -31,14 +31,22 @@ public class Snake implements Serializable {
         this.partida = partida;
 
         this.snake = new ArrayList<>();
-
-        Integer[] a={10,10};
-        Integer[] b={10,11};
-        Integer[] c={10,12};
-        this.snake.add(a);
-        this.snake.add(b);
-        this.snake.add(c);
-        this.puntos = snake.size();
+        if(partida.getSnakes().size()==1){
+            Integer[] a = {29, 19};
+            Integer[] b = {28, 19};
+            Integer[] c = {27, 19};
+            this.snake.add(a);
+            this.snake.add(b);
+            this.snake.add(c);
+            this.nuevaDireccion="LEFT";
+        }else {
+            Integer[] a = {0, 0};
+            Integer[] b = {1, 0};
+            Integer[] c = {2, 0};
+            this.snake.add(a);
+            this.snake.add(b);
+            this.snake.add(c);
+        }
     }
 
     /**
@@ -89,6 +97,27 @@ public class Snake implements Serializable {
                     throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
                 }
             }
+            if (partida.getSnakes().size()>1){
+                for (Snake snakes:partida.getSnakes()) {
+                    if (partida.getSnakes().get(0)==this){
+                        Snake snakeEnemiga = partida.getSnakes().get(1);
+                        for (int j = 0; j<snakeEnemiga.getSnake().size();j++){
+                            if(snake.get(snake.size() - 1)[0].equals(snakeEnemiga.getSnake().get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snakeEnemiga.getSnake().get(j)[1]) && !isFruta){
+                                throw new SnOOPeException(SnOOPeException.LA_MATO);
+                            }
+                        }
+                    }
+                    else {
+                        Snake snakeEnemiga = partida.getSnakes().get(0);
+                        for (int j = 0; j < snakeEnemiga.getSnake().size(); j++) {
+                            if(snake.get(snake.size() - 1)[0].equals(snakeEnemiga.getSnake().get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snakeEnemiga.getSnake().get(j)[1]) && !isFruta){
+                                throw new SnOOPeException(SnOOPeException.LA_MATO);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
         puntos = snake.size();
     }

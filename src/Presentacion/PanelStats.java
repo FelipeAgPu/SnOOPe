@@ -95,7 +95,10 @@ public class PanelStats extends JPanel {
      * Método que pausa el juego
      */
     private void pausar(){
-        gui.snake.isPaused = true;
+        gui.snakes.get(0).isPaused = true;
+        if (gui.snakes.size()>1){
+            gui.snakes.get(1).isPaused = true;
+        }
 
         gui.cd.show(gui.principal, "Pausa");
     }
