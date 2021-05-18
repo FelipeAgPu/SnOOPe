@@ -44,8 +44,13 @@ public class SnOOPeGUI extends JFrame {
         this.width = (int) ((2560/4)*3);
         this.height = (int) ((1440/4)*3);
 
-        this.x = (int) ((2560/8));
-        this.y = (int) ((1440/8));
+        //Aguas
+        this.x = 0;
+        this.y = 0;
+
+        //Diego
+        //this.x = (int) ((2560/8));
+        //this.y = (int) ((1440/8));
 
         this.setBounds(x, y, width, height);
 
@@ -230,12 +235,13 @@ public class SnOOPeGUI extends JFrame {
                 snoope.setTimers();
                 prepareElementosJuego();
                 prepareAccionesJuego();
+                System.out.println(snoope.getSnakes().get(0).getPoder().getImg());
                 lastGame=gameMode.getAnterior();
             }
             catch (SnOOPeException e){
                 JOptionPane.showMessageDialog(null,e.getMessage());
             }
-            }
+        }
     }
 
     /**

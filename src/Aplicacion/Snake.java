@@ -66,67 +66,72 @@ public class Snake implements Serializable {
      * @throws SnOOPeException Si la serpiente se come a sí misma o come veneno
      */
     public void comer() throws SnOOPeException {
-        boolean isFruta = false;
-        for (int i = 0; i < 2; i++) {
-            if (snake.get(snake.size() - 1)[0].equals(partida.getFrutas()[i].getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getFrutas()[i].getCoordenadas()[1])){
-                if (efecto){
-                    efecto = false;
-                }
-                else {
-                    partida.getFrutas()[i].esComida(this);
-                }
-
-                isFruta = true;
-                partida.getFrutas()[i] = partida.crearFrutaAleatoria();
-                partida.getTimers()[i].cancel();
-                partida.getTimers()[i] = new Timer();
-                int finalI = i;
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        partida.getFrutas()[finalI] = partida.crearFrutaAleatoria();
-                    }
-                };
-                partida.getTimers()[i].schedule(task, 8000, 8000);
-            }
-            if (newSize==snake.size()){
-                FuegoVsBloque=false;
-            }
-            for (int j = 0; j<snake.size()-1;j++){
-                if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta && !FuegoVsBloque){
-                    throw new SnOOPeException(SnOOPeException.GAME_OVER_SUICIDIO);
-                }
-            }
-
-            for (Integer[] coor: partida.getBloques()){
-                if (snake.get(snake.size() - 1)[0].equals(coor[0]) && snake.get(snake.size() - 1)[1].equals(coor[1])){
-                    throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
-                }
-            }
-            if (partida.getSnakes().size()>1){
-                for (Snake snakes:partida.getSnakes()) {
-                    if (partida.getSnakes().get(0)==this){
-                        Snake snakeEnemiga = partida.getSnakes().get(1);
-                        for (int j = 0; j<snakeEnemiga.getSnake().size();j++){
-                            if(snake.get(snake.size() - 1)[0].equals(snakeEnemiga.getSnake().get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snakeEnemiga.getSnake().get(j)[1]) && !isFruta){
-                                throw new SnOOPeException(SnOOPeException.LA_MATO);
-                            }
-                        }
+        try{
+            boolean isFruta = false;
+            for (int i = 0; i < 2; i++) {
+                if (snake.get(snake.size() - 1)[0].equals(partida.getFrutas()[i].getCoordenadas()[0]) && snake.get(snake.size() - 1)[1].equals(partida.getFrutas()[i].getCoordenadas()[1])){
+                    if (efecto){
+                        efecto = false;
                     }
                     else {
-                        Snake snakeEnemiga = partida.getSnakes().get(0);
-                        for (int j = 0; j < snakeEnemiga.getSnake().size(); j++) {
-                            if(snake.get(snake.size() - 1)[0].equals(snakeEnemiga.getSnake().get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snakeEnemiga.getSnake().get(j)[1]) && !isFruta){
-                                throw new SnOOPeException(SnOOPeException.LA_MATO);
+                        partida.getFrutas()[i].esComida(this);
+                    }
+
+                    isFruta = true;
+                    partida.getFrutas()[i] = partida.crearFrutaAleatoria();
+                    partida.getTimers()[i].cancel();
+                    partida.getTimers()[i] = new Timer();
+                    int finalI = i;
+                    TimerTask task = new TimerTask() {
+                        @Override
+                        public void run() {
+                            partida.getFrutas()[finalI] = partida.crearFrutaAleatoria();
+                        }
+                    };
+                    partida.getTimers()[i].schedule(task, 8000, 8000);
+                }
+                if (newSize==snake.size()){
+                    FuegoVsBloque=false;
+                }
+                for (int j = 0; j<snake.size()-1;j++){
+                    if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta && !FuegoVsBloque){
+                        throw new SnOOPeException(SnOOPeException.GAME_OVER_SUICIDIO);
+                    }
+                }
+
+                for (Integer[] coor: partida.getBloques()){
+                    if (snake.get(snake.size() - 1)[0].equals(coor[0]) && snake.get(snake.size() - 1)[1].equals(coor[1])){
+                        throw new SnOOPeException(SnOOPeException.GAME_OVER_WALL);
+                    }
+                }
+                if (partida.getSnakes().size()>1){
+                    for (Snake snakes:partida.getSnakes()) {
+                        if (partida.getSnakes().get(0)==this){
+                            Snake snakeEnemiga = partida.getSnakes().get(1);
+                            for (int j = 0; j<snakeEnemiga.getSnake().size();j++){
+                                if(snake.get(snake.size() - 1)[0].equals(snakeEnemiga.getSnake().get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snakeEnemiga.getSnake().get(j)[1]) && !isFruta){
+                                    throw new SnOOPeException(SnOOPeException.LA_MATO);
+                                }
+                            }
+                        }
+                        else {
+                            Snake snakeEnemiga = partida.getSnakes().get(0);
+                            for (int j = 0; j < snakeEnemiga.getSnake().size(); j++) {
+                                if(snake.get(snake.size() - 1)[0].equals(snakeEnemiga.getSnake().get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snakeEnemiga.getSnake().get(j)[1]) && !isFruta){
+                                    throw new SnOOPeException(SnOOPeException.LA_MATO);
+                                }
                             }
                         }
                     }
                 }
-            }
 
+            }
+            puntos = snake.size();
+            newSize++;
+        }catch (IndexOutOfBoundsException | NullPointerException e){
+            System.out.println("F");
         }
-        puntos = snake.size();
-        newSize++;
+
     }
     /**
      * Metodo que recoge los powerUps en el tablero

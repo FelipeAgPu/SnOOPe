@@ -47,16 +47,16 @@ class SnoopeTest {
         }catch (SnOOPeException e){
 
         }
-        assertEquals(11, snnope.getSnakes().get(0).getSnake().get(2)[0]);
-        assertEquals(12, snnope.getSnakes().get(0).getSnake().get(2)[1]);
+        assertEquals(3, snnope.getSnakes().get(0).getSnake().get(2)[0]);
+        assertEquals(0, snnope.getSnakes().get(0).getSnake().get(2)[1]);
 
         try {
             snnope.getSnakes().get(0).avanzar();
         }catch (SnOOPeException e){
 
         }
-        assertEquals(12, snnope.getSnakes().get(0).getSnake().get(2)[0]);
-        assertEquals(12, snnope.getSnakes().get(0).getSnake().get(2)[1]);
+        assertEquals(4, snnope.getSnakes().get(0).getSnake().get(2)[0]);
+        assertEquals(0, snnope.getSnakes().get(0).getSnake().get(2)[1]);
     }
 
     @Test
@@ -102,11 +102,11 @@ class SnoopeTest {
     @Test
     void esComidaNormalTest() {
         snnope.getFrutas()[0] = new Normal(snnope);
-        Integer[] coordPrueba1 = {11,12};
+        Integer[] coordPrueba1 = {4,0};
         snnope.getFrutas()[0].setCoordenadas(coordPrueba1);
 
         snnope.getFrutas()[1] = new Normal(snnope);
-        Integer[] coordPrueba2 = {0,0};
+        Integer[] coordPrueba2 = {15,15};
         snnope.getFrutas()[1].setCoordenadas(coordPrueba2);
 
         for (int i = 0; i < 4; i++) {
@@ -124,10 +124,10 @@ class SnoopeTest {
     @Test
     void esComidaDulceTest() {
         snnope.getFrutas()[0] = new Dulce(snnope);
-        Integer[] coordPrueba1 = {11,12};
+        Integer[] coordPrueba1 = {4,0};
         snnope.getFrutas()[0].setCoordenadas(coordPrueba1);
 
-        Integer[] coordPrueba2 = {0,0};
+        Integer[] coordPrueba2 = {15,15};
         snnope.getFrutas()[1].setCoordenadas(coordPrueba2);
 
         for (int i = 0; i < 4; i++) {
@@ -144,10 +144,10 @@ class SnoopeTest {
     @Test
     void esComidaVenenoTest() {
         snnope.getFrutas()[0] = new Veneno(snnope);
-        Integer[] coordPrueba1 = {11,12};
+        Integer[] coordPrueba1 = {4,0};
         snnope.getFrutas()[0].setCoordenadas(coordPrueba1);
 
-        Integer[] coordPrueba2 = {0,0};
+        Integer[] coordPrueba2 = {15,15};
         snnope.getFrutas()[1].setCoordenadas(coordPrueba2);
 
         for (int i = 0; i < 4; i++) {
@@ -162,10 +162,10 @@ class SnoopeTest {
     @Test
     void esComidaArcoirisTest() {
         snnope.getFrutas()[0] = new Arcoiris(snnope);
-        Integer[] coordPrueba1 = {11,12};
+        Integer[] coordPrueba1 = {4,0};
         snnope.getFrutas()[0].setCoordenadas(coordPrueba1);
 
-        Integer[] coordPrueba2 = {0,0};
+        Integer[] coordPrueba2 = {15,15};
         snnope.getFrutas()[1].setCoordenadas(coordPrueba2);
 
         for (int i = 0; i < 6; i++) {
@@ -184,7 +184,7 @@ class SnoopeTest {
     @Test
     void esRecogidaSpeedFastTest() {
         snnope.setPowerUp(new Speed(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -201,7 +201,7 @@ class SnoopeTest {
     @Test
     void esRecogidaSpeedSlowTest() {
         snnope.setPowerUp(new Speed(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -218,7 +218,7 @@ class SnoopeTest {
     @Test
     void esRecogidaBloqueTest() {
         snnope.setPowerUp(new Bloque(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -235,7 +235,7 @@ class SnoopeTest {
     @Test
     void esRecogidaDivisionTest() {
         snnope.setPowerUp(new Division(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -252,7 +252,7 @@ class SnoopeTest {
     @Test
     void esRecogidaLupaTest() {
         snnope.setPowerUp(new Lupa(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -266,11 +266,28 @@ class SnoopeTest {
         assertEquals("Lupa", snnope.getSnakes().get(0).getPoder().getTipo());
     }
 
+    @Test
+    void esRecogidaFuegoTest() {
+        snnope.setPowerUp(new Estrella(snnope));
+        Integer[] coordPrueba = {4,0};
+        snnope.getPowerUp().setCoordenadas(coordPrueba);
+
+        for (int i = 0; i < 5; i++) {
+            try {
+                snnope.getSnakes().get(0).avanzar();
+            }catch (SnOOPeException e){
+
+            }
+        }
+
+        assertEquals("Fuego", snnope.getSnakes().get(0).getPoder().getTipo());
+    }
+
 
     @Test
     void esUsadaSpeedFastTest() {
         snnope.setPowerUp(new Speed(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -289,7 +306,7 @@ class SnoopeTest {
     @Test
     void esUsadaSpeedSlowTest() {
         snnope.setPowerUp(new Speed(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -308,7 +325,7 @@ class SnoopeTest {
     @Test
     void esUsadaBloqueTest() {
         snnope.setPowerUp(new Bloque(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -328,7 +345,7 @@ class SnoopeTest {
     @Test
     void esUsadaDivisionTest() {
         snnope.setPowerUp(new Division(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
 
         for (int i = 0; i < 4; i++) {
@@ -348,8 +365,29 @@ class SnoopeTest {
     @Test
     void esUsadaLupaTest() {
         snnope.setPowerUp(new Lupa(snnope));
-        Integer[] coordPrueba = {11,12};
+        Integer[] coordPrueba = {4,0};
         snnope.getPowerUp().setCoordenadas(coordPrueba);
+
+        for (int i = 0; i < 4; i++) {
+            try {
+                snnope.getSnakes().get(0).avanzar();
+            }catch (SnOOPeException e){
+
+            }
+        }
+
+        snnope.getSnakes().get(0).usaPowerUp();
+
+        assertNull(snnope.getSnakes().get(0).getPoder());
+    }
+
+    @Test
+    void esUsadaFuegoTest() {
+        snnope.setPowerUp(new Estrella(snnope));
+        Integer[] coordPrueba = {4,0};
+        snnope.getPowerUp().setCoordenadas(coordPrueba);
+        Integer[] bloque = {6,0};
+        snnope.addBloque(bloque);
 
         for (int i = 0; i < 4; i++) {
             try {
