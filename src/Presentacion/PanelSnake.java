@@ -18,6 +18,7 @@ public class PanelSnake extends JPanel {
     Movimiento movimiento;
     Thread hilo;
 
+
     /**
      * Creador del panel Snake
      * @param snakes Serpientes a dibujar
@@ -56,6 +57,9 @@ public class PanelSnake extends JPanel {
             }else {
                 pintor.fillRect(res / 2 + coordenadas[0] * size, res / 2 + coordenadas[1] * size, size - 1, size - 1);
             }
+        }
+        if (snake.isLanzoFuego()){
+            pintor.drawImage(new ImageIcon("./images/fuegoChikito.png").getImage(),res / 2 +getSnake().getFuego().getCoord()[0]*size,res / 2 + getSnake().getFuego().getCoord()[1]*size,size-1,size-1,null);
         }
 
     }

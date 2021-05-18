@@ -18,6 +18,10 @@ public class Snake implements Serializable {
     protected boolean speed = false;
     protected boolean efecto = false;
     protected boolean noSpeed =false;
+    protected boolean lanzoFuego = false;
+    protected PowerUp fuego;
+    public boolean FuegoVsBloque=false;
+    public int newSize;
 
     /**
      * Constructor de una serpiente de longitud 3
@@ -85,9 +89,11 @@ public class Snake implements Serializable {
                 };
                 partida.getTimers()[i].schedule(task, 8000, 8000);
             }
-
+            if (newSize==snake.size()){
+                FuegoVsBloque=false;
+            }
             for (int j = 0; j<snake.size()-1;j++){
-                if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta){
+                if(snake.get(snake.size() - 1)[0].equals(snake.get(j)[0]) && snake.get(snake.size() - 1)[1].equals(snake.get(j)[1]) && !isFruta && !FuegoVsBloque){
                     throw new SnOOPeException(SnOOPeException.GAME_OVER_SUICIDIO);
                 }
             }
@@ -120,6 +126,7 @@ public class Snake implements Serializable {
 
         }
         puntos = snake.size();
+        newSize++;
     }
     /**
      * Metodo que recoge los powerUps en el tablero
@@ -218,8 +225,24 @@ public class Snake implements Serializable {
         return nuevaDireccion;
     }
 
+    public boolean isLanzoFuego() {
+        return lanzoFuego;
+    }
+
+    public PowerUp getFuego() {
+        return fuego;
+    }
+
+    public void setLanzoFuego(boolean lanzoFuego) {
+        this.lanzoFuego = lanzoFuego;
+    }
+
     public boolean getSpeed() {
         return speed;
+    }
+
+    public void setFuego(PowerUp fuego) {
+        this.fuego = fuego;
     }
 
     public PowerUp getPoder(){return poder;}

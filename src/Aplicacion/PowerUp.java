@@ -18,7 +18,13 @@ public class PowerUp extends Comestible implements Serializable {
 
     }
 
+    public void avanzar(Snake snake){}
+
     public String getImg(){
         return img;
+    }
+
+    public Integer[] getCoord(){
+        return null;
     }
 }

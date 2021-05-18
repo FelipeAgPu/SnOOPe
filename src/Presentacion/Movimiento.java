@@ -30,6 +30,9 @@ public class Movimiento implements Runnable{
     public void run() {
         while(estado && !snake.isPaused) {
             try {
+                if(snake.getSnake().isLanzoFuego()) {
+                    snake.getSnake().getFuego().avanzar(snake.getSnake());
+                }
                 snake.getSnake().avanzar();
             } catch (SnOOPeException e) {
                 for (PanelSnake panelSnake:gui.snakes) {
