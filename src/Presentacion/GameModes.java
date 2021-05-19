@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class GameModes extends JPanel {
     public JPanel vistaGameMode,vistaSingle,vistaMulti,vistaIA,  vistaGameOver,vistaPausa,vistaFrutas;
-    private JButton volverMenuPpal,reiniciarPausa;
+    private JButton volverMenuPpal,reiniciarPausa, guardarPausa;
     private JButton restart,menuPpal;
     private JButton menuSingle,menuMulti,menuIA,menuVolver;
     private JButton singleColorCuerpo,singleColorCabeza,singleJugar,singleVolver,singleFrutas;
@@ -24,7 +24,6 @@ public class GameModes extends JPanel {
     private JTextField singleName, multiName1,multiName2,iAName;
     private SnOOPeGUI gui;
     private Color colorCabeza1 = Color.RED,colorCabeza2 = Color.GREEN,colorCuerpo1 = Color.GREEN,colorCuerpo2 = Color.RED;
-    public ArrayList<PanelSnake> snakes;
     public SnOOPe snoope;
     private String anterior;
 
@@ -560,13 +559,12 @@ public class GameModes extends JPanel {
         fondo.setIcon(new ImageIcon("./images/fondo1.png"));
 
         vistaGameOver.add(fondo);
-        gui.snakes.clear();
     }
 
     /**
      * Método que prepara todos los elementos visuales del menu de pausa
      */
-    private void prepareElementosPausa(){
+    public void prepareElementosPausa(){
         vistaPausa = new JPanel();
         this.gui.principal.add(vistaPausa,"Pausa");
         vistaPausa.setLayout(null);
@@ -582,10 +580,18 @@ public class GameModes extends JPanel {
 
         //Boton Volver
         volverMenuPpal = new JButton(images.get("Menu"));
-        volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*3,(vistaPausa.getHeight()/12)*6,500,200);
+        volverMenuPpal.setBounds((vistaPausa.getWidth()/8)*3,(vistaPausa.getHeight()/12)*6-20,500,200);
         volverMenuPpal.setBorderPainted(false);
         volverMenuPpal.setContentAreaFilled(false);
         vistaPausa.add(volverMenuPpal);
+
+        guardarPausa = new JButton(images.get("Guardar"));
+        guardarPausa.setBounds((vistaPausa.getWidth()/8)*3,(vistaPausa.getHeight()/12)*8,500,200);
+        guardarPausa.setBorderPainted(false);
+        guardarPausa.setContentAreaFilled(false);
+        vistaPausa.add(guardarPausa);
+
+
 
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0,gui.width,gui.height);
@@ -897,7 +903,7 @@ public class GameModes extends JPanel {
     /**
      * Método que prepara todas las acciones del menú de pausa
      */
-    private void prepareAccionesPausa(){
+    public void prepareAccionesPausa(){
         reiniciarPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -910,6 +916,13 @@ public class GameModes extends JPanel {
                 volverPpal();
                 gui.abrirMenu.setVisible(true);
                 gui.snakes.clear();
+            }
+        });
+
+        guardarPausa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.guardar();
             }
         });
     }
@@ -966,9 +979,9 @@ public class GameModes extends JPanel {
      * Método que reanuda el juego
      */
     private void reanudar(){
-        snakes.get(0).isPaused = false;
-        if(snakes.size()>1){
-            snakes.get(1).isPaused=false;
+        gui.snakes.get(0).isPaused = false;
+        if(gui.snakes.size()>1){
+            gui.snakes.get(1).isPaused=false;
         }
         gui.prepareAccionesJuego();
     }
@@ -1049,6 +1062,7 @@ public class GameModes extends JPanel {
         }
         return powerUps;
     }
+
 
     /**
      * Método que retorna a la vista del menú principal

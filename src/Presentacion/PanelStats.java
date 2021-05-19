@@ -95,23 +95,12 @@ public class PanelStats extends JPanel {
         pausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pausar();
+                gui.pausar();
                 gui.abrirMenu.setVisible(false);
             }
         });
     }
 
-    /**
-     * Método que pausa el juego
-     */
-    private void pausar(){
-        gui.snakes.get(0).isPaused = true;
-        if (gui.snakes.size()>1){
-            gui.snakes.get(1).isPaused = true;
-        }
-
-        gui.cd.show(gui.principal, "Pausa");
-    }
 
     /**
      * Método que pinta el panel

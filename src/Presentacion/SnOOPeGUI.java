@@ -17,11 +17,11 @@ public class SnOOPeGUI extends JFrame {
     ArrayList<PanelSnake> snakes = new ArrayList<>();
     JMenuBar menuBar;
     JMenuItem abrirMenu, guardarMenu, guardarComoMenu, salirMenu;
-    JButton jugarBoton;
+    JButton jugarBoton, abrirBoton, puntuacionBoton, salirBoton;
     JLabel fondo;
     String lastGame;
     GameModes gameMode;
-    ImageIcon imgFondo, imgJugar;
+    ImageIcon imgFondo, imgJugar, imgAbrir, imgSalir, imgPuntuacion;
     int width,height, x, y;
     SnOOPe snoope;
 
@@ -77,12 +77,33 @@ public class SnOOPeGUI extends JFrame {
         vistaMenuPrincipal.setBounds(x, y,width,height);
 
         this.imgJugar = new ImageIcon("./images/jugar.png");
+        this.imgAbrir = new ImageIcon("./images/abrir.png");
+        this.imgPuntuacion = new ImageIcon("./images/puntuacion.png");
+        this.imgSalir = new ImageIcon("./images/salir.png");
         jugarBoton = new JButton("");
-        jugarBoton.setBounds(vistaMenuPrincipal.getWidth()/4,vistaMenuPrincipal.getHeight()/4,vistaMenuPrincipal.getWidth()/2,vistaMenuPrincipal.getHeight()/2);
+        jugarBoton.setBounds((vistaMenuPrincipal.getWidth()/10)*4,(vistaMenuPrincipal.getHeight()/14)*5,300,100);
         jugarBoton.setIcon(imgJugar);
         jugarBoton.setContentAreaFilled(false);
         jugarBoton.setBorderPainted(false);
         vistaMenuPrincipal.add(jugarBoton);
+
+        abrirBoton=new JButton(imgAbrir);
+        abrirBoton.setBounds((vistaMenuPrincipal.getWidth()/10)*4,(vistaMenuPrincipal.getHeight()/14)*7,300,100);
+        abrirBoton.setBorderPainted(false);
+        abrirBoton.setContentAreaFilled(false);
+        vistaMenuPrincipal.add(abrirBoton);
+
+        puntuacionBoton = new JButton(imgPuntuacion);
+        puntuacionBoton.setBounds((vistaMenuPrincipal.getWidth()/10)*3,(vistaMenuPrincipal.getHeight()/14)*9,700,100);
+        puntuacionBoton.setBorderPainted(false);
+        puntuacionBoton.setContentAreaFilled(false);
+        vistaMenuPrincipal.add(puntuacionBoton);
+
+        salirBoton = new JButton(imgSalir);
+        salirBoton.setBounds((vistaMenuPrincipal.getWidth()/10)*4,(vistaMenuPrincipal.getHeight()/14)*11,300,100);
+        salirBoton.setContentAreaFilled(false);
+        salirBoton.setBorderPainted(false);
+        vistaMenuPrincipal.add(salirBoton);
 
 
         ImageIcon imgTitulo = new ImageIcon("./images/titulo.png");
@@ -155,6 +176,20 @@ public class SnOOPeGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jugar();
+            }
+        });
+
+        abrirBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrir();
+            }
+        });
+
+        salirBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                salir();
             }
         });
     }
@@ -235,8 +270,12 @@ public class SnOOPeGUI extends JFrame {
                 snoope.setTimers();
                 prepareElementosJuego();
                 prepareAccionesJuego();
-                System.out.println(snoope.getSnakes().get(0).getPoder().getImg());
-                lastGame=gameMode.getAnterior();
+                gameMode = new GameModes(this,snoope);
+                try {
+                    lastGame=gameMode.getAnterior();
+                }catch (NullPointerException e){
+                    lastGame=null;
+                }
             }
             catch (SnOOPeException e){
                 JOptionPane.showMessageDialog(null,e.getMessage());
@@ -247,7 +286,7 @@ public class SnOOPeGUI extends JFrame {
     /**
      * Método que guarda un archivo
      */
-    private void guardar(){
+    public void guardar(){
         JFileChooser fc = new JFileChooser();
         fc.setDialogTitle("Guardar");
         fc.setApproveButtonText("Guardar");
@@ -279,7 +318,6 @@ public class SnOOPeGUI extends JFrame {
     public void jugarPartida(){
         prepareElementosJuego();
         prepareAccionesJuego();
-        gameMode.snakes = this.snakes;
     }
 
     /**
@@ -403,6 +441,19 @@ public class SnOOPeGUI extends JFrame {
         };
         requestFocus(true);
         addKeyListener(listener);
+    }
+
+    /**
+     * Método que pausa el juego
+     */
+    public void pausar(){
+        snakes.get(0).isPaused = true;
+        if (snakes.size()>1){
+            snakes.get(1).isPaused = true;
+        }
+        gameMode.prepareElementosPausa();
+        gameMode.prepareAccionesPausa();
+        cd.show(principal, "Pausa");
     }
 
     public static void main(String[] args) {
