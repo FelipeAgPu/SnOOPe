@@ -53,7 +53,7 @@ public class PanelStats extends JPanel {
         int index = 0;
         for (Snake snake: snakes){
             puntuaciones[index] = new JLabel();
-            puntuaciones[index].setText("<html><div style='text-align: center;'> Puntuación"+snake.getNombre()+"<br>"+puntos +"</div></html>");
+            puntuaciones[index].setText("<html><div style='text-align: center;'> Puntuación "+snake.getNombre()+"<br>"+puntos +"</div></html>");
             puntuaciones[index].setBounds(this.getX()+50, this.getY()+225 + (index)*250, 300,100);
             puntuaciones[index].setFont(fuente);
             add(puntuaciones[index]);

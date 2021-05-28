@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Snake implements Serializable {
+    protected String nombre;
     protected ArrayList<Integer[]> snake;
     protected Color colorBody, colorHead;
     protected String direccion="UP";
@@ -23,16 +24,20 @@ public class Snake implements Serializable {
     public boolean FuegoVsBloque=false;
     public int newSize;
 
+    protected boolean isCongelada = false;
+    protected transient Timer timerCongelada;
+
     /**
      * Constructor de una serpiente de longitud 3
      * @param colorBody Color del cuerpo
      * @param colorHead Color de la cabeza
      * @param partida Partida a la que se va a agregar
      */
-    public Snake(Color colorBody, Color colorHead, SnOOPe partida){
+    public Snake(String nombre, Color colorBody, Color colorHead, SnOOPe partida){
         this.colorBody = colorBody;
         this.colorHead = colorHead;
         this.partida = partida;
+        this.nombre = nombre;
 
         this.snake = new ArrayList<>();
         if(partida.getSnakes().size()==1){
@@ -88,7 +93,11 @@ public class Snake implements Serializable {
                             partida.getFrutas()[finalI] = partida.crearFrutaAleatoria();
                         }
                     };
-                    partida.getTimers()[i].schedule(task, 8000, 8000);
+                    if (partida.getFrutas()[i].getTipo().equals("Golden")){
+                        partida.getTimers()[i].schedule(task, 3000, 3000);
+                    }else {
+                        partida.getTimers()[i].schedule(task, 8000, 8000);
+                    }
                 }
                 if (newSize==snake.size()){
                     FuegoVsBloque=false;
@@ -148,6 +157,7 @@ public class Snake implements Serializable {
 
         puntos = snake.size();
     }
+
     /**
      * Metodo que usa el powerUp de la serpiente y genera otra aleatoriamente en un rango de 8 segundos
      */
@@ -192,6 +202,38 @@ public class Snake implements Serializable {
         this.direccion = this.nuevaDireccion;
     }
 
+    //Métodos refactorización
+
+    /**
+     * Método que aumenta el tamaño de la serpiente
+     * @param coordenadas Coordenas de la posicióna a aumentar
+     */
+    public void crecer(Integer[] coordenadas){
+        this.snake.add(coordenadas);
+    }
+
+    /**
+     * Método que disminuye el tamañao de la serpiente
+     */
+    public void decrecer(){
+        this.snake.remove(0);
+    }
+
+    public void congela(){
+        this.isCongelada = true;
+        this.timerCongelada = new Timer();
+        TimerTask taskCongelada = new TimerTask() {
+            @Override
+            public void run() {
+                isCongelada = false;
+            }
+        };
+        timerCongelada.schedule(taskCongelada, 5000);
+    }
+
+
+    //Getters y Setters
+
     public ArrayList<Integer[]> getSnake() {
         return snake;
     }
@@ -202,6 +244,10 @@ public class Snake implements Serializable {
 
     public void setColorBody(Color colorBody) {
         this.colorBody = colorBody;
+    }
+
+    public void setColorHead(Color colorHead) {
+        this.colorHead = colorHead;
     }
 
     public Color getColorHead() {
@@ -219,7 +265,7 @@ public class Snake implements Serializable {
     public int getPuntos() { return puntos; }
 
     public String getNombre() {
-        return null;
+        return nombre;
     }
 
     public String getDireccion() {
@@ -258,5 +304,9 @@ public class Snake implements Serializable {
 
     public boolean getNoSpeed() {
         return noSpeed;
+    }
+
+    public boolean isCongelada() {
+        return isCongelada;
     }
 }

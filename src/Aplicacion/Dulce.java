@@ -23,10 +23,10 @@ public class Dulce extends Fruta implements Serializable {
             for (int i=0; i<2; i++){
                 if (partida.getSnakes().get(i) != snake){
                     if (partida.getSnakes().get(i).getColorHead() == this.color || partida.getSnakes().get(i).getColorBody() == this.color){
-                        snake.snake.remove(0);
-                        snake.snake.remove(0);
+                        snake.decrecer();
+                        snake.decrecer();
                     }else {
-                        snake.snake.remove(0);
+                        snake.decrecer();
                     }
                 }
             }
@@ -35,10 +35,10 @@ public class Dulce extends Fruta implements Serializable {
                 throw new SnOOPeException(SnOOPeException.GAME_OVER_DULCES);
             }
             if (snake.getColorHead() == this.color || snake.getColorBody() == this.color){
-                snake.snake.remove(0);
-                snake.snake.remove(0);
+                snake.decrecer();
+                snake.decrecer();
             }else {
-                snake.snake.remove(0);
+                snake.decrecer();
             }
 
         }

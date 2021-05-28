@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.Serializable;
 
 public class Jugador extends Snake implements Serializable {
-    String nombre;
 
     /**
      * Constructor de la serpiente de un jugador
@@ -14,12 +13,12 @@ public class Jugador extends Snake implements Serializable {
      * @param partida Partida a añadir
      */
     public Jugador(String nombre, Color colorBody, Color colorHead, SnOOPe partida){
-        super(colorBody,colorHead, partida);
-        this.nombre = nombre;
+        super(nombre, colorBody,colorHead, partida);
     }
 
+
     /**
-     * @See Aplicacion.Snake.avanzar
+     * Método que hace que la serpiente avance
      * @throws SnOOPeException Si la serpiente se estrella
      */
     @Override

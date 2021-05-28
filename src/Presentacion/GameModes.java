@@ -138,6 +138,7 @@ public class GameModes extends JPanel {
         this.images.put("Reiniciar",new ImageIcon("./images/Reiniciar.png"));
         this.images.put("Menu",new ImageIcon("./images/Menu.png"));
         this.images.put("Pausa",new ImageIcon("./images/Pausa.png"));
+        this.images.put("Golden", new ImageIcon("./images/golden.png"));
 
     }
 
@@ -759,6 +760,14 @@ public class GameModes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 volverGameMode();
+            }
+        });
+
+        iAJugar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snoope.jugar(iAName.getText(), colorCabeza1, colorCuerpo1, "Distraida", getFrutas(), getPowerUps());
+                gui.jugarPartida();
             }
         });
     }

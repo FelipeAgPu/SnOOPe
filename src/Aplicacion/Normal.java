@@ -21,11 +21,11 @@ public class Normal extends Fruta implements Serializable {
     @Override
     public void esComida(Snake snake){
         if (snake.getColorHead() == this.color || snake.getColorBody() == this.color){
-            snake.snake.add(getCoordenadas());
-            snake.snake.add(getCoordenadas());
+            snake.crecer(getCoordenadas());
+            snake.crecer(getCoordenadas());
 
         }else {
-            snake.snake.add(getCoordenadas());
+            snake.crecer(getCoordenadas());
         }
     }
 }

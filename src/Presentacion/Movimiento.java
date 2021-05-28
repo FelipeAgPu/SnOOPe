@@ -19,7 +19,7 @@ public class Movimiento implements Runnable{
     public Movimiento(PanelSnake snake, SnOOPeGUI gui){
         this.gui = gui;
         this.snake = snake;
-        this.velocidad= 300;
+        this.velocidad= 200;
         this.aumentador = 1;
     }
 
@@ -29,36 +29,37 @@ public class Movimiento implements Runnable{
     @Override
     public void run() {
         while(estado && !snake.isPaused) {
-            try {
-                if(snake.getSnake().isLanzoFuego()) {
-                    snake.getSnake().getFuego().avanzar(snake.getSnake());
-                }
-                snake.getSnake().avanzar();
-            } catch (SnOOPeException e) {
-                for (PanelSnake panelSnake:gui.snakes) {
-                    panelSnake.movimiento.estado=false;
-                }
-                JOptionPane.showMessageDialog(null, e.getMessage());
-                gui.cd.show(gui.principal, "GameOver");
-            }
-            this.snake.repaint();
-            try {
-                if (snake.getSnake().getSpeed()){
-                    if(snake.getSnake().getNoSpeed()){
-                        aumentador = 400;
-                    }else{
-                        aumentador = -100;
+            if (!snake.getSnake().isCongelada()){
+                try {
+                    if(snake.getSnake().isLanzoFuego()) {
+                        snake.getSnake().getFuego().avanzar(snake.getSnake());
                     }
-                }else {
-                    multiplicador = snake.getSnake().getSnake().size() / 5;
-                    aumentador = 10 * multiplicador;
+                    snake.getSnake().avanzar();
+                } catch (SnOOPeException e) {
+                    for (PanelSnake panelSnake:gui.snakes) {
+                        panelSnake.movimiento.estado=false;
+                    }
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    gui.cd.show(gui.principal, "GameOver");
                 }
+                this.snake.repaint();
+                try {
+                    if (snake.getSnake().getSpeed()){
+                        if(snake.getSnake().getNoSpeed()){
+                            aumentador = 400;
+                        }else{
+                            aumentador = -100;
+                        }
+                    }else {
+                        multiplicador = snake.getSnake().getSnake().size() / 5;
+                        aumentador = 10 * multiplicador;
+                    }
 
-                Thread.sleep(velocidad+aumentador);
-            } catch (InterruptedException e) {
+                    Thread.sleep(velocidad+aumentador);
+                } catch (InterruptedException e) {
+                    System.out.println("Error");
+                }
             }
-
-
         }
     }
 

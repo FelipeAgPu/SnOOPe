@@ -19,8 +19,8 @@ public class Arcoiris extends Fruta implements Serializable {
      */
     @Override
     public void esComida(Snake snake){
-        snake.snake.add(getCoordenadas());
-        snake.snake.add(getCoordenadas());
-        snake.snake.add(getCoordenadas());
+        for (int i = 0; i < 3; i++) {
+            snake.crecer(getCoordenadas());
+        }
     }
 }

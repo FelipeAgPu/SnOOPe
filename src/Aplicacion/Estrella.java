@@ -142,7 +142,7 @@ public class Estrella extends PowerUp implements Serializable {
                 snake.FuegoVsBloque=true;
                 snake.newSize = snake.getSnake().size();
                 for (int j = 0; j < 5; j++) {
-                    snake.snake.add(snake.getSnake().get(snake.getSnake().size()-1));
+                    snake.crecer(snake.getSnake().get(snake.getSnake().size()-1));
                 }
                 destruyoAlgo=true;
             }

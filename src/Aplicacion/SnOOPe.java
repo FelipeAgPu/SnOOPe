@@ -67,6 +67,7 @@ public class SnOOPe implements Serializable {
         };
         getTimers()[0].schedule(task, 8000, 8000);
 
+
         getTimers()[1] = new Timer();
         TimerTask task1 = new TimerTask() {
             @Override
@@ -74,7 +75,8 @@ public class SnOOPe implements Serializable {
                 getFrutas()[1] = crearFrutaAleatoria();
             }
         };
-        getTimers()[1].schedule(task1, 8000,8000);
+        getTimers()[1].schedule(task1, 8000, 8000);
+
 
         this.powerUp = crearPowerUpAleatorio();
 
@@ -115,6 +117,8 @@ public class SnOOPe implements Serializable {
         };
         getTimers()[0].schedule(task, 8000, 8000);
 
+
+
         getTimers()[1] = new Timer();
         TimerTask task1 = new TimerTask() {
             @Override
@@ -122,7 +126,67 @@ public class SnOOPe implements Serializable {
                 getFrutas()[1] = crearFrutaAleatoria();
             }
         };
-        getTimers()[1].schedule(task1, 8000,8000);
+        getTimers()[1].schedule(task1, 8000, 8000);
+
+
+        this.powerUp = crearPowerUpAleatorio();
+
+        this.timerPower = new Timer();
+    }
+
+    /**
+     * Método que inicia una partida single player
+     * @param nombre Nombre del jugador
+     * @param colorHead Color de la cabeza
+     * @param colorBody Color del cuerpo
+     */
+    public void jugar(String nombre, Color colorHead, Color colorBody,String tipoIa, ArrayList<String> frutas,ArrayList<String> powerUps){
+        this.tiposFruta = frutas;
+        this.tiposPowerUps = powerUps;
+
+        //Creación Snakes
+        snakes.add(new Jugador(nombre, colorBody, colorHead, this));
+        colores.add(colorHead);
+        colores.add(colorBody);
+        switch (tipoIa){
+            case "Distraida":
+                snakes.add(new Distraida(colorBody, colorHead, this));
+                break;
+            case "Glotona":
+                snakes.add(new Glotona(colorBody, colorHead, this));
+                break;
+            case "Prudente":
+                snakes.add(new Prudente(colorBody, colorHead, this));
+                break;
+        }
+
+        colores.add(colorHead);
+        colores.add(colorBody);
+
+        this.timers = new Timer[2];
+
+        this.frutas = new Fruta[2];
+        this.frutas[0] = crearFrutaAleatoria();
+        this.frutas[1] = crearFrutaAleatoria();
+
+        getTimers()[0] = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                getFrutas()[0] = crearFrutaAleatoria();
+            }
+        };
+        getTimers()[0].schedule(task, 8000, 8000);
+
+
+        getTimers()[1] = new Timer();
+        TimerTask task1 = new TimerTask() {
+            @Override
+            public void run() {
+                getFrutas()[1] = crearFrutaAleatoria();
+            }
+        };
+        getTimers()[1].schedule(task1, 8000, 8000);
 
         this.powerUp = crearPowerUpAleatorio();
 
